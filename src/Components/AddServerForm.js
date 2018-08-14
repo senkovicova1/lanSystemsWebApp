@@ -9,7 +9,6 @@ class AddServerForm extends React.Component {
   }
 
   createServer(event) {
-
     event.preventDefault();
     this.props.addServer(this.name, this.company);
     this.props.setOpenAdd();

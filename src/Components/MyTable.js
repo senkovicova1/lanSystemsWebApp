@@ -1,15 +1,16 @@
 import base from '../base';
 import React, { Component } from 'react';
 import { Button, Table } from 'react-bootstrap';
-import Server from './Server'
-import AddServerForm from './AddServerForm'
+import App from './App';
+import Server from './Server';
+import AddServerForm from './AddServerForm';
 
 export default class MyTable extends Component{
 
   constructor(){
     super();
     this.state = {
-      servers : [],
+      assets : [],
       openAdd : false,
       serverToEdit : null
     }
@@ -17,9 +18,12 @@ export default class MyTable extends Component{
   }
 
   componentWillMount(){
-    this.ref = base.syncState(`servers`, {
+    const DB = this.props.location.pathname.substr(1).toLowerCase();
+
+
+    this.ref = base.syncState(`${DB}`, {
       context: this,
-      state: 'servers'
+      state: 'assets'
     });
   }
 
@@ -31,7 +35,7 @@ export default class MyTable extends Component{
     if (server.value === ""){
       return;
     }
-    const SRVS = {...this.state.servers};
+    const SRVS = {...this.state.assets};
     let id = 1;
     while (SRVS['server'+id] !== undefined){
       id++;
@@ -42,19 +46,19 @@ export default class MyTable extends Component{
         companyName: company.value
       };
     this.setState({
-        servers: SRVS
+        assets: SRVS
     });
   }
 
   updateServer(id, server, company){
-    const SRVS = {...this.state.servers};
+    const SRVS = {...this.state.assets};
       SRVS['server'+id] = {
         id: id,
         serverName: server.value,
         companyName: company.value
       };
     this.setState({
-        servers: SRVS,
+        assets: SRVS,
         openAdd: false,
         serverToEdit: null
       });
@@ -83,6 +87,7 @@ export default class MyTable extends Component{
   render(){
     return (
       <div>
+        <App />
         {
             !this.state.openAdd && !this.state.openEdit &&
             <Button bsStyle="success"
@@ -103,8 +108,8 @@ export default class MyTable extends Component{
             <tbody>
               {
                 Object
-                .keys(this.state.servers)
-                .map(key => <Server key={key} server={this.state.servers[key]} update={this.helpUpdateServer.bind(this)}/>)
+                .keys(this.state.assets)
+                .map(key => <Server key={key} server={this.state.assets[key]} update={this.helpUpdateServer.bind(this)}/>)
               }
             </tbody>
           </Table>
