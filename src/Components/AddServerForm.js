@@ -1,59 +1,34 @@
 import React from 'react';
+import firebase from 'firebase';
+import { Link } from 'react-router-dom';
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 class AddServerForm extends React.Component {
 
-  constructor(){
-    super();
-    this.createServer = this.createServer.bind(this);
+  constructor(props){
+    super(props);
+
+      this.state = {
+        server : 0,
+      }
+      this.assServer = this.addServer.bind(this);
   }
 
-  createServer(event) {
-    event.preventDefault();
-    this.props.addServer(this.name, this.company);
-    this.props.setOpenAdd();
-    this.serverForm.reset();
-  }
-
-  editServer(event){
-    if (this.name.value === '') { this.name.value = this.props.server.serverName}
-    event.preventDefault();
-    this.props.updateServer(this.props.server.id, this.name, this.company);
-    this.props.setOpenAdd();
-    this.serverForm.reset();
-  }
-
-  renderEdit(){
-    return (
-      <form ref={(input) => this.serverForm = input} className="server-edit" onSubmit={(e) => this.editServer(e)}>
-
-        <FormGroup controlId="formGoupInput">
-          <ControlLabel>Server Name</ControlLabel>
-          <FormControl  inputRef={(input) => this.name = input} type="text" placeholder={this.props.server.serverName}/>
-        </FormGroup>
-
-        <FormGroup controlId="formControlsSelect">
-          <ControlLabel>Select company</ControlLabel>
-            <FormControl componentClass="select" placeholder="select" inputRef={(input) => this.company = input}>
-              <option value="Monsters inc.">Monsters inc.</option>
-              <option value="Company1">Company1</option>
-              <option value="Company2">Company2</option>
-            </FormControl>
-        </FormGroup>
-        <Button type="submit" bsStyle='warning'>Edit this server</Button>
-        <Button type="submit">Cancel</Button>
-      </form>
-    )
+  addServer(e){
+    const ID = Date.now();
+    firebase.database()
+            .ref(`servers/server${ID}`)
+            .set({
+              id: ID,
+              serverName : this.name.value,
+              companyName : this.company.value,
+            });
   }
 
   render() {
-    if (this.props.server != null){
-      return this.renderEdit();
-    } else{
     return (
-      this.props.add &&
 
-        <form ref={(input) => this.serverForm = input} className="server-add" onSubmit={(e) => this.createServer(e)}>
+        <form ref={(input) => this.serverForm = input} className="server-add" onSubmit={(e) => this.addServer(e)}>
 
           <FormGroup controlId="formGoupInput">
             <ControlLabel>Server Name</ControlLabel>
@@ -68,11 +43,11 @@ class AddServerForm extends React.Component {
                 <option value="Company2">Company2</option>
               </FormControl>
           </FormGroup>
-          <Button type="submit" bsStyle='success'>+ Add Server</Button>
-          <Button type="submit">Cancel</Button>
+          <Link to={{pathname : '/servers'}}>
+            <Button type="submit" onClick={() => this.addServer()} bsStyle='success' >+ Add Server</Button>
+          </Link>
         </form>
         );
-      }
     }
 }
 

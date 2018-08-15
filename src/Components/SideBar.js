@@ -1,11 +1,12 @@
 import base from '../base';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 export default class SideBar extends Component{
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
         assets : []
     }
@@ -31,9 +32,11 @@ export default class SideBar extends Component{
           Object
             .keys(this.state.assets)
             .map(asset =>
-                <ListGroupItem  bsStyle='info' key={this.state.assets[asset]} href={`${this.state.assets[asset]}`} onClick={(input) => this.asset = this.state.assets[asset]}>
+              <Link to={{pathname: `/${this.state.assets[asset].toLowerCase()}`}}  key={this.state.assets[asset]}>
+                <ListGroupItem  bsStyle='info' key={this.state.assets[asset]} >
                   {this.state.assets[asset]}
-                </ListGroupItem>)
+                </ListGroupItem>
+              </Link>)
           }
         </ListGroup>
       </div>

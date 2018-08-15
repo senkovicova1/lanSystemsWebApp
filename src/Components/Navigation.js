@@ -16,21 +16,24 @@ export default class Navigation extends Component{
 
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#home">Lan Systems</a>
+            <a href="/home">Lan Systems</a>
           </Navbar.Brand>
         </Navbar.Header>
 
+
         <Nav>
-          <Navbar.Form pullLeft>
-            <FormGroup>
-              <FormControl type="text" placeholder="Here be search" />
-            </FormGroup>{' '}
-            <Button type="submit" >Submit</Button>
-          </Navbar.Form>
+          <NavItem>
+            <Navbar.Form pullLeft>
+              <FormGroup>
+                <FormControl type="text" placeholder="Here be search" />
+              </FormGroup>{' '}
+              <Button type="submit" >Submit</Button>
+            </Navbar.Form>
+          </NavItem>
         </Nav>
 
         <Nav pullRight>
-          <NavItem eventKey={2} href="#home">
+          <NavItem href="/home">
             Here be user
           </NavItem>
         </Nav>

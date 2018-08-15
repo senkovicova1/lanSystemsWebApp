@@ -1,6 +1,7 @@
 //import base from './base';
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export default class Server extends Component{
 
@@ -10,8 +11,9 @@ export default class Server extends Component{
         <td>{this.props.server.serverName}</td>
         <td>{this.props.server.companyName}</td>
         <td>
-          <Button bsStyle='warning'
-          onClick={  ()=>{this.props.update(this.props.server)}  }>Edit</Button>
+          <Link to={{pathname: `servers/edit/${this.props.server.id}`}}>
+            <Button bsStyle='warning'>Edit</Button>
+          </Link>
         </td>
       </tr>
     )

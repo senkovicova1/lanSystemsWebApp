@@ -1,25 +1,21 @@
 import base from '../base';
 import React, { Component } from 'react';
 import { Button, Table } from 'react-bootstrap';
-import App from './App';
+import { Link } from 'react-router-dom';
 import Server from './Server';
-import AddServerForm from './AddServerForm';
+//import AddServerForm from './AddServerForm';
 
 export default class MyTable extends Component{
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       assets : [],
-      openAdd : false,
-      serverToEdit : null
     }
-    this.add = false;
   }
 
   componentWillMount(){
-    const DB = this.props.location.pathname.substr(1).toLowerCase();
-
+    const DB = this.props.location.pathname.substr(1);
 
     this.ref = base.syncState(`${DB}`, {
       context: this,
@@ -31,72 +27,13 @@ export default class MyTable extends Component{
     base.removeBinding(this.ref);
   }
 
-  addServer(server, company) {
-    if (server.value === ""){
-      return;
-    }
-    const SRVS = {...this.state.assets};
-    let id = 1;
-    while (SRVS['server'+id] !== undefined){
-      id++;
-    }
-      SRVS['server'+id] = {
-        id: id,
-        serverName: server.value,
-        companyName: company.value
-      };
-    this.setState({
-        assets: SRVS
-    });
-  }
-
-  updateServer(id, server, company){
-    const SRVS = {...this.state.assets};
-      SRVS['server'+id] = {
-        id: id,
-        serverName: server.value,
-        companyName: company.value
-      };
-    this.setState({
-        assets: SRVS,
-        openAdd: false,
-        serverToEdit: null
-      });
-  }
-
-  helpUpdateServer(server){
-    this.setState(
-      { openAdd: true,
-        serverToEdit : server
-      });
-      console.log(server);
-  }
-
-  setOpenAdd(){
-    this.setState(
-      {openAdd: false}
-    );
-  }
-
-  setOpenEdit(){
-    this.setState(
-      {openEdit: false}
-    );
-  }
-
   render(){
     return (
       <div>
-        <App />
-        {
-            !this.state.openAdd && !this.state.openEdit &&
-            <Button bsStyle="success"
-            onClick={() => this.setState({openAdd : true})}>+ Add Server</Button>
-        }
-            <AddServerForm addServer={this.addServer.bind(this)} updateServer={this.updateServer.bind(this)} add={this.state.openAdd} server={this.state.serverToEdit} setOpenAdd={this.setOpenAdd.bind(this)}/>
+           <Link to={{pathname: `${this.props.location.pathname.substr(1)}/add`}}>
+             <Button bsStyle="success">+ Add</Button>
+           </Link>
 
-      {
-          !this.state.openAdd && !this.state.openEdit &&
           <Table hover>
             <thead>
               <tr>
@@ -109,11 +46,11 @@ export default class MyTable extends Component{
               {
                 Object
                 .keys(this.state.assets)
-                .map(key => <Server key={key} server={this.state.assets[key]} update={this.helpUpdateServer.bind(this)}/>)
+                .map(key => <Server key={key} server={this.state.assets[key]}/>)
               }
             </tbody>
           </Table>
-        }
+
       </div>
     );
   }
