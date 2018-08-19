@@ -1,4 +1,5 @@
 import React from 'react';
+import base from '../base';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
@@ -10,11 +11,23 @@ class AddServerForm extends React.Component {
 
       this.state = {
         server : 0,
+        companies : {}
       }
-      this.assServer = this.addServer.bind(this);
+      this.addServer = this.addServer.bind(this);
+  }
+  componentDidMount(){
+    this.ref = base.syncState(`companies`, {
+      context: this,
+      state: 'companies'
+    });
+  }
+
+  componentWillUnmount() {
+      base.removeBinding(this.ref);
   }
 
   addServer(e){
+    if (this.name.value.length < 1) return;
     const ID = Date.now();
     firebase.database()
             .ref(`servers/server${ID}`)
@@ -38,9 +51,10 @@ class AddServerForm extends React.Component {
           <FormGroup controlId="formControlsSelect">
             <ControlLabel>Select company</ControlLabel>
               <FormControl componentClass="select" placeholder="select" inputRef={(input) => this.company = input}>
-                <option value="Monsters inc.">Monsters inc.</option>
-                <option value="Company1">Company1</option>
-                <option value="Company2">Company2</option>
+                {
+                  Object.keys(this.state.companies)
+                        .map(c => <option key={c} value={this.state.companies[c].companyName}> {this.state.companies[c].companyName} </option> )
+                }
               </FormControl>
           </FormGroup>
           <Link to={{pathname : '/servers'}}>
