@@ -1,9 +1,9 @@
 import base from '../base';
 import React, { Component } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Server from './Server';
-import Company from './Company';
+import ReactTable from 'react-table';
+import 'react-table/react-table.css';
 
 export default class MyTable extends Component{
 
@@ -13,9 +13,7 @@ export default class MyTable extends Component{
       assets : [],
       assetType : this.props.location.pathname.substr(1),
     }
-    this.renderServers.bind(this);
-    this.renderCompanies.bind(this);
-    this.loadAssets.bind(this);
+    this.loadColumnNames.bind(this);
   }
 
   componentWillMount(){
@@ -25,84 +23,78 @@ export default class MyTable extends Component{
       context: this,
       state: 'assets'
     });
-
-
-
   }
 
   componentWillUnmount() {
     base.removeBinding(this.ref);
   }
 
-    loadAssets(){
-      switch (this.state.assetType) {
-        case "servers":
-            return this.renderServers();
-        case "companies":
-            return this.renderCompanies();
-        default:
-            return <p>No asset selected.</p>
-      }
+  loadColumnNames(){
+    switch (this.state.assetType) {
+      case 'servers':
+        return [{
+                  Header: 'Name',
+                  accessor: 'serverName',
+                }, {
+                  Header: 'Company Name',
+                  accessor: 'companyName',
+                },{
+                  Header: '',
+                  accessor: 'edit',
+                  Cell : row => {
+                        return (
+                          <Link to={{pathname: `servers/edit/${row.original.id}`}}>
+                              <Button bsStyle='warning'>Edit</Button>
+                          </Link>
+                      )
+                  },
+                  filterMethod: (filter, row) => true,
+                }];
+
+      case 'companies':
+        return [{
+                  Header: 'Name',
+                  accessor: 'companyName',
+                },{
+                  Header: '',
+                  accessor: 'edit',
+                  Cell : row => {
+                        return (
+                          <Link to={{pathname: `companies/edit/${row.original.id}`}}>
+                              <Button bsStyle='warning'>Edit</Button>
+                          </Link>
+                      )
+                  },
+                  filterMethod: (filter, row) => true,
+                }];
+
+      default:
+        return [];
     }
-
-  renderCompanies(){
-    return(
-      <Table hover>
-        <thead>
-          <tr>
-            <th>Server Name</th>
-            <th>Company Name</th>
-            <th></th>
-          </tr>
-
-        </thead>
-        <tbody>
-          {
-            Object
-            .keys(this.state.assets)
-            .map(key => <Company key={key} asset={this.state.assets[key]}/>)
-          }
-        </tbody>
-      </Table>
-    )
-  }
-
-  renderServers(){
-    return(
-      <Table hover>
-        <thead>
-          <tr>
-            <th>Server Name</th>
-            <th>Company Name</th>
-            <th></th>
-          </tr>
-
-        </thead>
-        <tbody>
-          {
-            Object
-            .keys(this.state.assets)
-            .map(key => <Server key={key} asset={this.state.assets[key]}/>)
-          }
-        </tbody>
-      </Table>
-    )
   }
 
   render(){
+    const DATA = Object.values(this.state.assets);
+    const COLUMNS = this.loadColumnNames();
+
     return (
       <div>
-           <Link to={{pathname: `${this.props.location.pathname.substr(1)}/add`}}>
-             <Button bsStyle="success">+ Add</Button>
-           </Link>
+       <Link to={{pathname: `${this.props.location.pathname.substr(1)}/add`}}>
+         <Button bsStyle="success">+ Add</Button>
+       </Link>
 
-            {
-              this.loadAssets()
-            }
+        <ReactTable
+          data={DATA}
+          filterable
+          defaultFilterMethod={(filter, row) =>
+            row[filter.id].toLowerCase().includes(filter.value.toLowerCase())}
+          columns={COLUMNS}
+          defaultPageSize={20}
+          className="-striped -highlight"
+        />
 
       </div>
-    );
+    )
   }
-
 
 }
