@@ -25,7 +25,7 @@ export default class AddCompanyForm extends React.Component {
   render() {
     return (
 
-        <form ref={(input) => this.companyForm = input} className="company-add" onSubmit={(e) => this.addCompany(e)}>
+        <form ref={(input) => this.companyForm = input} className="companyAdd" onSubmit={(e) => this.addCompany(e)}>
 
           <FormGroup controlId="formGoupInput">
             <ControlLabel>Company Name</ControlLabel>

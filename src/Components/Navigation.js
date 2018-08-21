@@ -20,18 +20,6 @@ export default class Navigation extends Component{
           </Navbar.Brand>
         </Navbar.Header>
 
-
-        <Nav>
-          <NavItem>
-            <Navbar.Form pullLeft>
-              <FormGroup>
-                <FormControl type="text" placeholder="Here be search" />
-              </FormGroup>{' '}
-              <Button type="submit" >Submit</Button>
-            </Navbar.Form>
-          </NavItem>
-        </Nav>
-
         <Nav pullRight>
           <NavItem href="/home">
             Here be user

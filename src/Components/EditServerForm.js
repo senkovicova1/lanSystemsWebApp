@@ -19,7 +19,7 @@ class EditServerForm extends React.Component {
 
   componentDidMount(){
     const SERVER_ID = this.props.match.params.id;
-    const DB = firebase.database().ref(`servers/server${SERVER_ID}`);
+    const DB = firebase.database().ref(`servers/${SERVER_ID}`);
     DB.on('value', snap =>
         this.setState({
           server : snap.val()
@@ -38,10 +38,14 @@ class EditServerForm extends React.Component {
 
   editServer(event){
     firebase.database()
-            .ref(`servers/server${this.state.server.id}`)
+            .ref(`servers/${this.state.server.id}`)
             .update({
               serverName : this.name.value || this.state.server.serverName,
-              companyName : this.company.value,
+              companyName : this.company.value || this.state.server.companyName,
+              description: this.description.value || this.state.server.description,
+              serverFunction: this.serverFunction.value || this.state.server.serverFunction,
+              processor: this.processor.value || this.state.server.processor,
+              hdd: this.hdd.value || this.state.server.hdd,
             });
   }
 
@@ -53,7 +57,7 @@ class EditServerForm extends React.Component {
 
   render() {
     return (
-          <form ref={(input) => this.serverForm = input} className="server-edit" onSubmit={(e) => this.editServer(e)} >
+          <form ref={(input) => this.serverForm = input} className="serverEdit" onSubmit={(e) => this.editServer(e)} >
 
             <FormGroup controlId="formGoupInput">
               <ControlLabel>Server Name</ControlLabel>
@@ -68,6 +72,26 @@ class EditServerForm extends React.Component {
                         .map(c => <option key={c} value={this.state.companies[c].companyName}> {this.state.companies[c].companyName} </option> )
                 }
                 </FormControl>
+            </FormGroup>
+
+            <FormGroup controlId="formGoupInputFunction">
+              <ControlLabel>Function</ControlLabel>
+              <FormControl  inputRef={(input) => this.serverFunction = input} type="text" placeholder={this.state.server.serverFunction}/>
+            </FormGroup>
+
+            <FormGroup controlId="formControlsTextarea">
+              <ControlLabel>Popis</ControlLabel>
+              <FormControl inputRef={(input) => this.description = input} componentClass="textarea" placeholder={this.state.server.description} />
+            </FormGroup>
+
+            <FormGroup controlId="formGoupInputProcessor">
+              <ControlLabel>Processor</ControlLabel>
+              <FormControl  inputRef={(input) => this.processor = input} type="text" placeholder={this.state.server.processor}/>
+            </FormGroup>
+
+            <FormGroup controlId="formControlsTextarea">
+              <ControlLabel>HDD</ControlLabel>
+              <FormControl inputRef={(input) => this.hdd = input} componentClass="textarea" placeholder={this.state.server.hdd} />
             </FormGroup>
 
             <Link to={{ pathname: '/servers'}}>

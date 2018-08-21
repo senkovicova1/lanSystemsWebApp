@@ -1,0 +1,68 @@
+nav {
+  margin-bottom: 0px;
+}
+
+.navbar{
+  margin-bottom: 0px;
+}
+
+div.MyTable{
+  margin-top: 10px;
+  display: inline-block;
+  width: 80%;
+}
+
+div.ReactTable.-striped.-highlight {
+  margin: 10px;
+}
+
+a.MyTableAddButton {
+  margin-left: 10px;
+}
+
+div.sidebar {
+  float: left;
+  display: inline-block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 20%;
+  background-color: rgb(60, 60, 60);
+}
+
+div.list-group {
+  width: 100%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+span.list-group-item {
+    color: white;
+    margin: 0px;
+    background-color: rgb(60, 60, 60);
+    padding: 10px;
+    width: 100%;
+    border: 1px solid rgb(60, 60, 60);
+}
+
+span.list-group-item:hover {
+    background-color: rgb(100, 100, 100);
+    border-left: 5px solid DodgerBlue;
+}
+
+form{
+  display: inline-block;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 80%;
+}
+
+/*
+div.sidebarItem {
+  background-color: rgb(60, 60, 60);
+  border: 1px solid rgb(60, 60, 60);
+  margin-top: 0px;
+  margin: 0px;
+  width: 20%;
+}*/

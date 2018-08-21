@@ -35,7 +35,7 @@ export default class EditCompanyForm extends React.Component {
 
   render() {
     return (
-          <form ref={(input) => this.companyForm = input} className="company-edit" onSubmit={(e) => this.editCompany(e)} >
+          <form ref={(input) => this.companyForm = input} className="companyEdit" onSubmit={(e) => this.editCompany(e)} >
 
             <FormGroup controlId="formGoupInput">
               <ControlLabel>Server Name</ControlLabel>

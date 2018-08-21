@@ -2,7 +2,7 @@ import React from 'react';
 import base from '../base';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
-import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { Form, Col, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 class AddServerForm extends React.Component {
 
@@ -30,22 +30,26 @@ class AddServerForm extends React.Component {
     if (this.name.value.length < 1) return;
     const ID = Date.now();
     firebase.database()
-            .ref(`servers/server${ID}`)
+            .ref(`servers/${ID}`)
             .set({
               id: ID,
               serverName : this.name.value,
               companyName : this.company.value,
+              description: this.description.value,
+              serverFunction: this.serverFunction.value,
+              processor: this.processor.value,
+              hdd: this.hdd.value,
             });
   }
 
   render() {
     return (
 
-        <form ref={(input) => this.serverForm = input} className="server-add" onSubmit={(e) => this.addServer(e)}>
+        <Form ref={(input) => this.serverForm = input} className="serverAdd" onSubmit={(e) => this.addServer(e)}>
 
-          <FormGroup controlId="formGoupInput">
-            <ControlLabel>Server Name</ControlLabel>
-            <FormControl  inputRef={(input) => this.name = input} type="text" placeholder="Enter Server Name"/>
+          <FormGroup controlId="formGoupInputName">
+              <ControlLabel>Server Name</ControlLabel>
+              <FormControl  inputRef={(input) => this.name = input} type="text" placeholder="Enter Server Name"/>
           </FormGroup>
 
           <FormGroup controlId="formControlsSelect">
@@ -57,10 +61,32 @@ class AddServerForm extends React.Component {
                 }
               </FormControl>
           </FormGroup>
+
+          <FormGroup controlId="formGoupInputFunction">
+            <ControlLabel>Function</ControlLabel>
+            <FormControl  inputRef={(input) => this.serverFunction = input} type="text" placeholder="Enter Server Function"/>
+          </FormGroup>
+
+          <FormGroup controlId="formControlsTextarea">
+            <ControlLabel>Popis</ControlLabel>
+            <FormControl inputRef={(input) => this.description = input} componentClass="textarea" placeholder="Enter description of this server" />
+          </FormGroup>
+
+          <FormGroup controlId="formGoupInputProcessor">
+            <ControlLabel>Processor</ControlLabel>
+            <FormControl  inputRef={(input) => this.processor = input} type="text" placeholder="Enter Processor"/>
+          </FormGroup>
+
+          <FormGroup controlId="formControlsTextarea">
+            <ControlLabel>HDD</ControlLabel>
+            <FormControl inputRef={(input) => this.hdd = input} componentClass="textarea" placeholder="Enter HDD" />
+          </FormGroup>
+
+
           <Link to={{pathname : '/servers'}}>
             <Button type="submit" onClick={() => this.addServer()} bsStyle='success' >+ Add Server</Button>
           </Link>
-        </form>
+        </Form>
         );
     }
 }

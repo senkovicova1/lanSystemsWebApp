@@ -26,14 +26,14 @@ export default class SideBar extends Component{
 
   render(){
     return (
-      <div>
+      <div className="sidebar">
         <ListGroup>
           {
           Object
             .keys(this.state.assets)
             .map(asset =>
-              <Link to={{pathname: `/${this.state.assets[asset].toLowerCase()}`}}  key={this.state.assets[asset]}>
-                <ListGroupItem  bsStyle='info' key={this.state.assets[asset]} >
+              <Link className='link' to={{pathname: `/${this.state.assets[asset].toLowerCase()}`}}  key={this.state.assets[asset]}>
+                <ListGroupItem className='sidebarItem' key={this.state.assets[asset]} >
                   {this.state.assets[asset]}
                 </ListGroupItem>
               </Link>)

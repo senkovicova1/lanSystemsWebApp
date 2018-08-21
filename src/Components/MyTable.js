@@ -78,9 +78,9 @@ export default class MyTable extends Component{
     const COLUMNS = this.loadColumnNames();
 
     return (
-      <div>
-       <Link to={{pathname: `${this.props.location.pathname.substr(1)}/add`}}>
-         <Button bsStyle="success">+ Add</Button>
+      <div className='MyTable'>
+       <Link className='MyTableAddButton' to={{pathname: `${this.props.location.pathname.substr(1)}/add`}}>
+         <Button bsStyle="success" className='MyTableAddButton' >+ Add</Button>
        </Link>
 
         <ReactTable
