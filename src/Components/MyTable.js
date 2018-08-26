@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
+import sampleNIC from '../sampleNIC';
+
 export default class MyTable extends Component{
 
   constructor(props){
@@ -12,18 +14,37 @@ export default class MyTable extends Component{
     this.state = {
       assets : [],
       assetType : this.props.location.pathname.substr(1),
+//      nics : sampleNIC,
     }
     this.loadColumnNames.bind(this);
+//    this.addNICs.bind(this);
   }
 
+
+    componentWillMount(){
+      const DB = this.props.location.pathname.substr(1);
+
+      this.ref = base.syncState(`${DB}`, {
+        context: this,
+        state: 'assets'
+      });
+    }
+
+/*
   componentWillMount(){
     const DB = this.props.location.pathname.substr(1);
 
-    this.ref = base.syncState(`${DB}`, {
+    this.ref = base.syncState(`nics`, {
       context: this,
-      state: 'assets'
+      state: 'nics'
     });
   }
+
+  addNICs(){
+      this.setState({
+        nics : sampleNIC,
+      })
+    }*/
 
   componentWillUnmount() {
     base.removeBinding(this.ref);
@@ -82,6 +103,8 @@ export default class MyTable extends Component{
        <Link className='MyTableAddButton' to={{pathname: `${this.props.location.pathname.substr(1)}/add`}}>
          <Button bsStyle="success" className='MyTableAddButton' >+ Add</Button>
        </Link>
+
+  {/*     <Button onClick={this.addNICs.bind(this)}>asdsad</Button> */}
 
         <ReactTable
           data={DATA}

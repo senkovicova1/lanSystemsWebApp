@@ -1,6 +1,9 @@
 import React from 'react';
 import base from '../base';
 import firebase from 'firebase';
+import MiniForm from './MiniForm';
+import ReactTable from 'react-table';
+import 'react-table/react-table.css';
 import { Link } from 'react-router-dom';
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
@@ -12,9 +15,12 @@ class EditServerForm extends React.Component {
         server : 0,
         companies: {},
         chosenCompany: null,
+        nics : [],
       }
-      this.editServer = this.editServer.bind(this);
-      this.handleChange = this.handleChange.bind(this);
+      this.editServer.bind(this);
+      this.handleChange.bind(this);
+      this.renderEditable.bind(this);
+      this.handleDeleteNIC.bind(this);
   }
 
   componentDidMount(){
@@ -26,14 +32,20 @@ class EditServerForm extends React.Component {
         })
       );
 
-    this.ref = base.syncState(`companies`, {
+    this.ref1 = base.syncState(`nics`, {
+        context: this,
+        state: 'nics'
+      });
+
+    this.ref2 = base.syncState(`companies`, {
       context: this,
       state: 'companies'
     });
   }
 
   componentWillUnmount() {
-      base.removeBinding(this.ref);
+      base.removeBinding(this.ref1);
+      base.removeBinding(this.ref2);
   }
 
   editServer(event){
@@ -55,7 +67,84 @@ class EditServerForm extends React.Component {
       });
     }
 
+  handleDeleteNIC(event){
+    firebase.database()
+            .ref(`nics/${event}`)
+            .remove();
+  }
+
+  renderEditable(cellInfo) {
+      return (
+          <div
+            style={{ backgroundColor: "#fafafa" }}
+            contentEditable
+            suppressContentEditableWarning
+            onBlur={e => {
+              let DATA = [...this.state.nics];
+              DATA[cellInfo.original.id][cellInfo.column.id] = e.target.innerHTML;
+              this.setState({
+                nics : DATA
+              });
+            }}
+            dangerouslySetInnerHTML={{
+              __html: this.state.nics[cellInfo.original.id][cellInfo.column.id]
+            }}
+          />
+        );
+      }
+
+
   render() {
+      const DATA = Object
+                    .values(this.state.nics)
+                    .filter(val => val.serverID === this.state.server.id);
+      console.log(DATA);
+      const COLUMNS = [
+              {
+                Header: 'NIC',
+                accessor: 'nic',
+                Cell: this.renderEditable.bind(this)
+              }, {
+                Header: 'IP address',
+                accessor: 'IPaddress',
+                Cell: this.renderEditable.bind(this)
+              },{
+                Header: 'Mask',
+                accessor: 'mask',
+                Cell: this.renderEditable.bind(this)
+              }, {
+                Header: 'Gateway',
+                accessor: 'gateway',
+                Cell: this.renderEditable.bind(this)
+              },{
+                Header: 'DNS1',
+                accessor: 'dns1',
+                Cell: this.renderEditable.bind(this)
+              }, {
+                Header: 'DNS2',
+                accessor: 'dns2',
+                Cell: this.renderEditable.bind(this)
+              },{
+                Header: 'MAC',
+                accessor: 'mac',
+                Cell: this.renderEditable.bind(this)
+              }, {
+                Header: 'DHCP',
+                accessor: 'dhcp',
+                Cell : this.renderEditable.bind(this)
+              },
+              {
+                Header: '',
+                accessor: 'edit',
+                Cell : row => {
+                      return (
+                          <div>
+                            <Button bsSize='small' bsStyle='danger' onClick={(e) => {this.handleDeleteNIC(row.original.id)}}>Delete</Button>
+                          </ div>
+                        )
+                      },
+              },
+            ];
     return (
           <form ref={(input) => this.serverForm = input} className="serverEdit" onSubmit={(e) => this.editServer(e)} >
 
@@ -93,6 +182,17 @@ class EditServerForm extends React.Component {
               <ControlLabel>HDD</ControlLabel>
               <FormControl inputRef={(input) => this.hdd = input} componentClass="textarea" placeholder={this.state.server.hdd} />
             </FormGroup>
+
+            <ReactTable
+              data={DATA}
+              columns={COLUMNS}
+              defaultPageSize={5}
+              className="-striped -highlight"
+            />
+
+            <MiniForm serverId={this.state.server.id}/>
+
+            <p></p>
 
             <Link to={{ pathname: '/servers'}}>
               <Button type="submit" onClick={(e) => this.editServer(e)} bsStyle='warning'>Edit this server</Button>

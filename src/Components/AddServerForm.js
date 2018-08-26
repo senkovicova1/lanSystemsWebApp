@@ -2,18 +2,25 @@ import React from 'react';
 import base from '../base';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
-import { Form, Col, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { Form, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-class AddServerForm extends React.Component {
+export default class AddServerForm extends React.Component {
 
   constructor(props){
     super(props);
 
       this.state = {
-        server : 0,
-        companies : {}
+          serverName : null,
+          companyName  : null,
+          description : null,
+          serverFunction : null,
+          processor : null,
+          hdd : null,
+        companies : {},
+        modalOpen : false,
       }
       this.addServer = this.addServer.bind(this);
+        console.log('aaaa');
   }
   componentDidMount(){
     this.ref = base.syncState(`companies`, {
@@ -42,10 +49,10 @@ class AddServerForm extends React.Component {
             });
   }
 
+
   render() {
     return (
-
-        <Form ref={(input) => this.serverForm = input} className="serverAdd" onSubmit={(e) => this.addServer(e)}>
+       <Form ref={(input) => this.serverForm = input} className="serverAdd" onSubmit={(e) => this.addServer(e)}>
 
           <FormGroup controlId="formGoupInputName">
               <ControlLabel>Server Name</ControlLabel>
@@ -54,7 +61,7 @@ class AddServerForm extends React.Component {
 
           <FormGroup controlId="formControlsSelect">
             <ControlLabel>Select company</ControlLabel>
-              <FormControl componentClass="select" placeholder="select" inputRef={(input) => this.company = input}>
+              <FormControl componentClass="select" placeholder="select" inputRef={(input) => this.company}>
                 {
                   Object.keys(this.state.companies)
                         .map(c => <option key={c} value={this.state.companies[c].companyName}> {this.state.companies[c].companyName} </option> )
@@ -64,24 +71,23 @@ class AddServerForm extends React.Component {
 
           <FormGroup controlId="formGoupInputFunction">
             <ControlLabel>Function</ControlLabel>
-            <FormControl  inputRef={(input) => this.serverFunction = input} type="text" placeholder="Enter Server Function"/>
+            <FormControl  inputRef={(input) => this.serverFunction } type="text" placeholder="Enter Server Function"/>
           </FormGroup>
 
           <FormGroup controlId="formControlsTextarea">
             <ControlLabel>Popis</ControlLabel>
-            <FormControl inputRef={(input) => this.description = input} componentClass="textarea" placeholder="Enter description of this server" />
+            <FormControl inputRef={(input) => this.description } componentClass="textarea" placeholder="Enter description of this server" />
           </FormGroup>
 
           <FormGroup controlId="formGoupInputProcessor">
             <ControlLabel>Processor</ControlLabel>
-            <FormControl  inputRef={(input) => this.processor = input} type="text" placeholder="Enter Processor"/>
+            <FormControl  inputRef={(input) => this.processor } type="text" placeholder="Enter Processor"/>
           </FormGroup>
 
           <FormGroup controlId="formControlsTextarea">
             <ControlLabel>HDD</ControlLabel>
-            <FormControl inputRef={(input) => this.hdd = input} componentClass="textarea" placeholder="Enter HDD" />
+            <FormControl inputRef={(input) => this.hdd } componentClass="textarea" placeholder="Enter HDD" />
           </FormGroup>
-
 
           <Link to={{pathname : '/servers'}}>
             <Button type="submit" onClick={() => this.addServer()} bsStyle='success' >+ Add Server</Button>
@@ -90,5 +96,3 @@ class AddServerForm extends React.Component {
         );
     }
 }
-
-export default AddServerForm;
