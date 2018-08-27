@@ -26,7 +26,8 @@ const Root = () => {
         <Route exact path='/companies' component={MyTable} />
         <Route exact path='/companies/add' component={AddCompanyForm} />
         <Route exact path='/companies/edit/:id' component={EditCompanyForm} />
-      </div>
+        <Route exact path='/tasks' component={MyTable} />
+    </div>
     </BrowserRouter>
   )
 }

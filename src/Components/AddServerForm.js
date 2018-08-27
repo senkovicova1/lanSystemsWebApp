@@ -1,6 +1,8 @@
 import React from 'react';
 import base from '../base';
 import firebase from 'firebase';
+import AddNICModalForm from './AddNICModalForm';
+import ReactTable from 'react-table';
 import { Link } from 'react-router-dom';
 import { Form, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
@@ -8,8 +10,8 @@ export default class AddServerForm extends React.Component {
 
   constructor(props){
     super(props);
-
       this.state = {
+        id : null,
           serverName : null,
           companyName  : null,
           description : null,
@@ -18,28 +20,41 @@ export default class AddServerForm extends React.Component {
           hdd : null,
         companies : {},
         modalOpen : false,
+        nics : {},
       }
       this.addServer = this.addServer.bind(this);
-        console.log('aaaa');
+      this.renderEditable.bind(this);
+      this.handleDeleteNIC.bind(this);
   }
+
   componentDidMount(){
-    this.ref = base.syncState(`companies`, {
+    const ID = Date.now();
+    this.setState({
+      id : ID,
+    })
+
+    this.ref1 = base.syncState(`nics`, {
+        context: this,
+        state: 'nics'
+      });
+
+    this.ref2 = base.syncState(`companies`, {
       context: this,
       state: 'companies'
     });
   }
 
   componentWillUnmount() {
-      base.removeBinding(this.ref);
+      base.removeBinding(this.ref1);
+      base.removeBinding(this.ref2);
   }
 
   addServer(e){
     if (this.name.value.length < 1) return;
-    const ID = Date.now();
     firebase.database()
-            .ref(`servers/${ID}`)
+            .ref(`servers/${this.state.id}`)
             .set({
-              id: ID,
+              id: this.state.id,
               serverName : this.name.value,
               companyName : this.company.value,
               description: this.description.value,
@@ -49,8 +64,83 @@ export default class AddServerForm extends React.Component {
             });
   }
 
+  handleDeleteNIC(event){
+    firebase.database()
+            .ref(`nics/${event}`)
+            .remove();
+  }
+
+  renderEditable(cellInfo) {
+      return (
+          <div
+            style={{ backgroundColor: "#fafafa" }}
+            contentEditable
+            suppressContentEditableWarning
+            onBlur={e => {
+              let DATA = {...this.state.nics};
+              DATA[cellInfo.original.id][cellInfo.column.id] = e.target.innerHTML;
+              this.setState({
+                nics : DATA
+              });
+            }}
+            dangerouslySetInnerHTML={{
+              __html: this.state.nics[cellInfo.original.id][cellInfo.column.id]
+            }}
+          />
+        );
+      }
 
   render() {
+    const DATA = Object
+                  .values(this.state.nics)
+                  .filter(val => val.serverID === this.state.id);
+    const COLUMNS = [
+            {
+              Header: 'NIC',
+              accessor: 'nic',
+              Cell: this.renderEditable.bind(this)
+            }, {
+              Header: 'IP address',
+              accessor: 'IPaddress',
+              Cell: this.renderEditable.bind(this)
+            },{
+              Header: 'Mask',
+              accessor: 'mask',
+              Cell: this.renderEditable.bind(this)
+            }, {
+              Header: 'Gateway',
+              accessor: 'gateway',
+              Cell: this.renderEditable.bind(this)
+            },{
+              Header: 'DNS1',
+              accessor: 'dns1',
+              Cell: this.renderEditable.bind(this)
+            }, {
+              Header: 'DNS2',
+              accessor: 'dns2',
+              Cell: this.renderEditable.bind(this)
+            },{
+              Header: 'MAC',
+              accessor: 'mac',
+              Cell: this.renderEditable.bind(this)
+            }, {
+              Header: 'DHCP',
+              accessor: 'dhcp',
+              Cell : this.renderEditable.bind(this)
+            },
+            {
+              Header: '',
+              accessor: 'edit',
+              Cell : row => {
+                    return (
+                        <div>
+                          <Button bsSize='small' bsStyle='danger' onClick={(e) => {this.handleDeleteNIC(row.original.id)}}>Delete</Button>
+                        </ div>
+                      )
+                    },
+            },
+          ];
+
     return (
        <Form ref={(input) => this.serverForm = input} className="serverAdd" onSubmit={(e) => this.addServer(e)}>
 
@@ -61,7 +151,7 @@ export default class AddServerForm extends React.Component {
 
           <FormGroup controlId="formControlsSelect">
             <ControlLabel>Select company</ControlLabel>
-              <FormControl componentClass="select" placeholder="select" inputRef={(input) => this.company}>
+              <FormControl componentClass="select" placeholder="select" inputRef={(input) => this.company = input}>
                 {
                   Object.keys(this.state.companies)
                         .map(c => <option key={c} value={this.state.companies[c].companyName}> {this.state.companies[c].companyName} </option> )
@@ -71,23 +161,35 @@ export default class AddServerForm extends React.Component {
 
           <FormGroup controlId="formGoupInputFunction">
             <ControlLabel>Function</ControlLabel>
-            <FormControl  inputRef={(input) => this.serverFunction } type="text" placeholder="Enter Server Function"/>
+            <FormControl  inputRef={(input) => this.serverFunction = input } type="text" placeholder="Enter Server Function"/>
           </FormGroup>
 
           <FormGroup controlId="formControlsTextarea">
             <ControlLabel>Popis</ControlLabel>
-            <FormControl inputRef={(input) => this.description } componentClass="textarea" placeholder="Enter description of this server" />
+            <FormControl inputRef={(input) => this.description = input } componentClass="textarea" placeholder="Enter description of this server" />
           </FormGroup>
 
           <FormGroup controlId="formGoupInputProcessor">
             <ControlLabel>Processor</ControlLabel>
-            <FormControl  inputRef={(input) => this.processor } type="text" placeholder="Enter Processor"/>
+            <FormControl  inputRef={(input) => this.processor = input } type="text" placeholder="Enter Processor"/>
           </FormGroup>
 
           <FormGroup controlId="formControlsTextarea">
             <ControlLabel>HDD</ControlLabel>
-            <FormControl inputRef={(input) => this.hdd } componentClass="textarea" placeholder="Enter HDD" />
+            <FormControl inputRef={(input) => this.hdd = input } componentClass="textarea" placeholder="Enter HDD" />
           </FormGroup>
+
+          <ReactTable
+            data={DATA}
+            columns={COLUMNS}
+            defaultPageSize={5}
+            className="-striped -highlight"
+            showPagination={false}
+          />
+
+          <AddNICModalForm serverId={this.state.id}/>
+
+          <p></p>
 
           <Link to={{pathname : '/servers'}}>
             <Button type="submit" onClick={() => this.addServer()} bsStyle='success' >+ Add Server</Button>

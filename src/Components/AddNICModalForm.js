@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-responsive-modal';
 import { Form, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-export default class MiniForm extends React.Component {
+export default class AddNICModalForm extends React.Component {
 
   constructor(props){
     super(props);

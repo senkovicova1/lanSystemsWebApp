@@ -1,7 +1,7 @@
 import React from 'react';
 import base from '../base';
 import firebase from 'firebase';
-import MiniForm from './MiniForm';
+import AddNICModalForm from './AddNICModalForm';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { Link } from 'react-router-dom';
@@ -15,7 +15,7 @@ class EditServerForm extends React.Component {
         server : 0,
         companies: {},
         chosenCompany: null,
-        nics : [],
+        nics : {},
       }
       this.editServer.bind(this);
       this.handleChange.bind(this);
@@ -80,7 +80,7 @@ class EditServerForm extends React.Component {
             contentEditable
             suppressContentEditableWarning
             onBlur={e => {
-              let DATA = [...this.state.nics];
+              let DATA = {...this.state.nics};
               DATA[cellInfo.original.id][cellInfo.column.id] = e.target.innerHTML;
               this.setState({
                 nics : DATA
@@ -98,7 +98,6 @@ class EditServerForm extends React.Component {
       const DATA = Object
                     .values(this.state.nics)
                     .filter(val => val.serverID === this.state.server.id);
-      console.log(DATA);
       const COLUMNS = [
               {
                 Header: 'NIC',
@@ -155,7 +154,7 @@ class EditServerForm extends React.Component {
 
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Select company</ControlLabel>
-                <FormControl value={this.state.chosenCompany || this.state.server.companyName} onChange={this.handleChange} componentClass="select" placeholder="select" inputRef={(input) => this.company = input}>
+                <FormControl value={this.state.chosenCompany || this.state.server.companyName} onChange={this.handleChange.bind(this)} componentClass="select" placeholder="select" inputRef={(input) => this.company = input}>
                 {
                   Object.keys(this.state.companies)
                         .map(c => <option key={c} value={this.state.companies[c].companyName}> {this.state.companies[c].companyName} </option> )
@@ -188,9 +187,10 @@ class EditServerForm extends React.Component {
               columns={COLUMNS}
               defaultPageSize={5}
               className="-striped -highlight"
+              showPagination={false}
             />
 
-            <MiniForm serverId={this.state.server.id}/>
+            <AddNICModalForm serverId={this.state.server.id}/>
 
             <p></p>
 

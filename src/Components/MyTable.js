@@ -4,8 +4,10 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
+import AddTaskModalForm from './AddTaskModalForm';
+import EditTaskModalForm from './EditTaskModalForm';
 
-import sampleNIC from '../sampleNIC';
+//import sampleUsers from '../sampleUsers';
 
 export default class MyTable extends Component{
 
@@ -14,40 +16,34 @@ export default class MyTable extends Component{
     this.state = {
       assets : [],
       assetType : this.props.location.pathname.substr(1),
-//      nics : sampleNIC,
+//      users : sampleUsers,
     }
     this.loadColumnNames.bind(this);
-//    this.addNICs.bind(this);
+//    this.addUsers.bind(this);
   }
 
-
-    componentWillMount(){
+  componentWillMount(){
       const DB = this.props.location.pathname.substr(1);
 
       this.ref = base.syncState(`${DB}`, {
         context: this,
         state: 'assets'
       });
-    }
-
-/*
-  componentWillMount(){
-    const DB = this.props.location.pathname.substr(1);
-
-    this.ref = base.syncState(`nics`, {
-      context: this,
-      state: 'nics'
-    });
+/*      this.ref2 = base.syncState(`users`, {
+        context: this,
+        state: 'users'
+      });
   }
 
-  addNICs(){
+  addUsers(){
       this.setState({
-        nics : sampleNIC,
-      })
-    }*/
+        users : sampleUsers,
+      });*/
+  }
 
   componentWillUnmount() {
     base.removeBinding(this.ref);
+//      base.removeBinding(this.ref2);
   }
 
   loadColumnNames(){
@@ -88,7 +84,34 @@ export default class MyTable extends Component{
                   },
                   filterMethod: (filter, row) => true,
                 }];
-
+      case 'tasks':
+        return [{
+                  Header: 'Title',
+                  accessor: 'title',
+                },{
+                  Header: 'Description',
+                  accessor: 'description',
+                },{
+                  Header: 'Status',
+                  accessor: 'status',
+                },{
+                  Header: 'Made by',
+                  accessor: 'by',
+                },{
+                  Header: 'Solved by',
+                  accessor: 'solves',
+                },{
+                  Header: '',
+                  accessor: 'edit',
+                  Cell : row => {
+                        return (
+                          <div>
+                            <EditTaskModalForm info={row.original} />
+                          </div>
+                      )
+                  },
+                  filterMethod: (filter, row) => true,
+                }];
       default:
         return [];
     }
@@ -100,11 +123,16 @@ export default class MyTable extends Component{
 
     return (
       <div className='MyTable'>
-       <Link className='MyTableAddButton' to={{pathname: `${this.props.location.pathname.substr(1)}/add`}}>
-         <Button bsStyle="success" className='MyTableAddButton' >+ Add</Button>
-       </Link>
-
-  {/*     <Button onClick={this.addNICs.bind(this)}>asdsad</Button> */}
+        {
+          (this.state.assetType === 'tasks')
+            ?
+            <AddTaskModalForm />
+            :
+             <Link className='MyTableAddButton' to={{pathname: `${this.props.location.pathname.substr(1)}/add`}}>
+               <Button bsStyle="success" className='MyTableAddButton' >+ Add</Button>
+             </Link>
+        }
+{/* <Button onClick={this.addUsers.bind(this)}>asdsad</Button> */}
 
         <ReactTable
           data={DATA}
