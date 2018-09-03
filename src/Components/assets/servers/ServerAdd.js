@@ -1,12 +1,12 @@
 import React from 'react';
-import base from '../../../base';
+import base from '../../../firebase';
 import firebase from 'firebase';
 import AddNICModalForm from './AddNICModalForm';
 import ReactTable from 'react-table';
 import { Link } from 'react-router-dom';
 import { Form, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-export default class AddServerForm extends React.Component {
+export default class ServerAdd extends React.Component {
 
   constructor(props){
     super(props);
@@ -142,14 +142,13 @@ export default class AddServerForm extends React.Component {
           ];
 
     return (
-       <Form ref={(input) => this.serverForm = input} className="serverAdd" onSubmit={(e) => this.addServer(e)}>
-
-          <FormGroup controlId="formGoupInputName">
+       <div className='form'>
+          <FormGroup controlId="inputName">
               <ControlLabel>Server Name</ControlLabel>
               <FormControl  inputRef={(input) => this.name = input} type="text" placeholder="Enter Server Name"/>
           </FormGroup>
 
-          <FormGroup controlId="formControlsSelect">
+          <FormGroup controlId="selectCompany">
             <ControlLabel>Select company</ControlLabel>
               <FormControl componentClass="select" placeholder="select" inputRef={(input) => this.company = input}>
                 {
@@ -159,22 +158,22 @@ export default class AddServerForm extends React.Component {
               </FormControl>
           </FormGroup>
 
-          <FormGroup controlId="formGoupInputFunction">
+          <FormGroup controlId="inputFunction">
             <ControlLabel>Function</ControlLabel>
             <FormControl  inputRef={(input) => this.serverFunction = input } type="text" placeholder="Enter Server Function"/>
           </FormGroup>
 
-          <FormGroup controlId="formControlsTextarea">
+          <FormGroup controlId="textareaDescription" >
             <ControlLabel>Popis</ControlLabel>
             <FormControl inputRef={(input) => this.description = input } componentClass="textarea" placeholder="Enter description of this server" />
           </FormGroup>
 
-          <FormGroup controlId="formGoupInputProcessor">
+          <FormGroup controlId="inputProcessor">
             <ControlLabel>Processor</ControlLabel>
             <FormControl  inputRef={(input) => this.processor = input } type="text" placeholder="Enter Processor"/>
           </FormGroup>
 
-          <FormGroup controlId="formControlsTextarea">
+          <FormGroup controlId="textareaHDD">
             <ControlLabel>HDD</ControlLabel>
             <FormControl inputRef={(input) => this.hdd = input } componentClass="textarea" placeholder="Enter HDD" />
           </FormGroup>
@@ -194,7 +193,7 @@ export default class AddServerForm extends React.Component {
           <Link to={{pathname : '/servers'}}>
             <Button type="submit" onClick={() => this.addServer()} bsStyle='success' >+ Add Server</Button>
           </Link>
-        </Form>
+        </div>
         );
     }
 }

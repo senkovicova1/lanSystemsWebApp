@@ -6,7 +6,7 @@ nav {
   margin-bottom: 0px;
 }
 
-div.MyTable{
+div.DataTable{
   margin-top: 10px;
   display: inline-block;
   width: 80%;
@@ -16,7 +16,7 @@ div.ReactTable.-striped.-highlight {
   margin: 10px;
 }
 
-a.MyTableAddButton {
+a.TableAddButton {
   margin-left: 10px;
 }
 
@@ -34,6 +34,14 @@ div.list-group {
   margin-top: 0px;
   margin-bottom: 0px;
   display: inline-block;
+}
+
+div.form{
+  display: inline-block;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 80%;
 }
 
 span.list-group-item {

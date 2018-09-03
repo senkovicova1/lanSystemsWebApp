@@ -1,10 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 import firebase from 'firebase';
-import Autosuggest from 'react-bootstrap-autosuggest'
+import AutoSuggest from 'react-bootstrap-autosuggest';
 import Modal from 'react-responsive-modal';
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-export default class EditTasksModalForm extends React.Component {
+const STATUS_OPTIONS = ['NEW', 'In progress', 'Solved', 'On hold'];
+
+export default class TasksEditModal extends Component {
 
   constructor(props){
     super(props);
@@ -20,9 +22,8 @@ export default class EditTasksModalForm extends React.Component {
     this.onCloseModal.bind(this);
     this.editTasks.bind(this);
 
-    this.handleChangeBy.bind(this);
-    this.handleChangeSolves.bind(this);
-    this.handleChangeStatus.bind(this);
+    this.setAny.bind(this);
+
     this.handleDelete.bind(this);
   }
 
@@ -65,31 +66,19 @@ export default class EditTasksModalForm extends React.Component {
     this.onCloseModal(e);
   }
 
-    handleChangeBy(value) {
-        this.setState({
-          chosenBy: value
-        });
-      }
+  setAny(key, value){
+    let newState={};
+    newState[key]=value;
+    this.setState(newState);
+  }
 
-      handleChangeSolves(value) {
-          this.setState({
-            chosenSolves: value
-          });
-        }
-
-        handleChangeStatus(value) {
-            this.setState({
-              chosenStatus: value
-            });
-          }
-
-        handleDelete(e){
-          e.preventDefault();
-          firebase.database()
-                  .ref(`tasks/${this.props.info.id}`)
-                  .remove();
-          this.onCloseModal(e);
-        }
+    handleDelete(e){
+      e.preventDefault();
+      firebase.database()
+              .ref(`tasks/${this.props.info.id}`)
+              .remove();
+      this.onCloseModal(e);
+    }
 
   render() {
     return (
@@ -119,28 +108,28 @@ export default class EditTasksModalForm extends React.Component {
 
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Select status</ControlLabel>
-                <Autosuggest
-                  datalist={['NEW', 'In progress', 'Solved', 'On hold']}
+                <AutoSuggest
+                  datalist={STATUS_OPTIONS}
                   placeholder={this.state.chosenStatus || this.props.info.status}
-                  onChange={this.handleChangeStatus.bind(this)}
+                  onChange={(value) => this.setAny('chosenStatus', value)}
                   />
             </FormGroup>
 
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Made by</ControlLabel>
-                <Autosuggest
+                <AutoSuggest
                   datalist={Object.values(this.state.users).map(r => r.name)}
                   placeholder={this.state.chosenBy || this.props.info.by}
-                  onChange={this.handleChangeBy.bind(this)}
+                  onChange={(value) => this.setAny('chosenBy', value)}
                   />
             </FormGroup>
 
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Soled by</ControlLabel>
-                <Autosuggest
+                <AutoSuggest
                   datalist={Object.values(this.state.users).map(r => r.name)}
                   placeholder={this.state.chosenSolves || this.props.info.solves}
-                  onChange={this.handleChangeSolves.bind(this)}
+                  onChange={(value) => this.setAny('chosenSolves', value)}
                   />
             </FormGroup>
 
