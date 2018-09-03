@@ -5,8 +5,6 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-import TaskAddModal from './assets/tasks/TaskAddModal';
-import TaskEditModal from './assets/tasks/TaskEditModal';
 
 //import sampleUsers from '../samples/sampleUsers';
 
