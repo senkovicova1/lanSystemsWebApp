@@ -1,26 +1,29 @@
 import React from "react";
 import firebase from 'firebase';
-import ReactDOM from 'react-dom';
 import Autosuggest from 'react-bootstrap-autosuggest'
 import Modal from 'react-responsive-modal';
-import { Form, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-export default class AddTasksModalForm extends React.Component {
+export default class EditTasksModalForm extends React.Component {
 
   constructor(props){
     super(props);
     this.state = {
       open: false,
       users : [],
+      chosenBy : null,
+      chosenSolves : null,
+      chosenStatus : null,
     }
 
     this.onOpenModal.bind(this);
     this.onCloseModal.bind(this);
-    this.addTasks.bind(this);
+    this.editTasks.bind(this);
 
     this.handleChangeBy.bind(this);
     this.handleChangeSolves.bind(this);
     this.handleChangeStatus.bind(this);
+    this.handleDelete.bind(this);
   }
 
   componentDidMount(){
@@ -29,7 +32,7 @@ export default class AddTasksModalForm extends React.Component {
           .then(snap =>
             {
               this.setState({
-              users : snap.val(),
+              users : {...snap.val()},
               });
             }
           );
@@ -45,46 +48,57 @@ export default class AddTasksModalForm extends React.Component {
     this.setState({ open: false });
   };
 
-  addTasks(e){
+  editTasks(e){
     e.preventDefault();
-    const ID = Date.now();
+
     firebase.database()
-            .ref(`tasks/${ID}`)
+            .ref(`tasks/${this.props.info.id}`)
             .set({
-              id : ID,
-              title : this.title.value,
-              description : this.description.value,
-              status : this.state.chosenStatus,
-              by : this.state.chosenBy,
-              solves : this.state.chosenSolves,
+              id : this.props.info.id,
+              title : this.title.value || this.props.info.title,
+              description : this.description.value  || this.props.info.description,
+              status : this.state.chosenStatus || this.props.info.status,
+              by : this.state.chosenBy || this.props.info.by,
+              solves : this.state.chosenSolves || this.props.info.solves,
             });
 
     this.onCloseModal(e);
   }
 
-  handleChangeBy(value) {
-      this.setState({
-        chosenBy: value
-      });
-    }
-
-    handleChangeSolves(value) {
+    handleChangeBy(value) {
         this.setState({
-          chosenSolves: value
+          chosenBy: value
         });
       }
 
-      handleChangeStatus(value) {
+      handleChangeSolves(value) {
           this.setState({
-            chosenStatus: value
+            chosenSolves: value
           });
+        }
+
+        handleChangeStatus(value) {
+            this.setState({
+              chosenStatus: value
+            });
+          }
+
+        handleDelete(e){
+          e.preventDefault();
+          firebase.database()
+                  .ref(`tasks/${this.props.info.id}`)
+                  .remove();
+          this.onCloseModal(e);
         }
 
   render() {
     return (
       <div>
-        <Button bsStyle='success' onClick={this.onOpenModal.bind(this)}>+ Add Task</Button>
-        <Modal
+        <Button bsSize='small' bsStyle='warning' onClick={this.onOpenModal.bind(this)}>Edit</Button>
+
+        <Button bsSize='small' bsStyle='danger' onClick={this.handleDelete.bind(this)}>Remove</Button>
+
+          <Modal
           open={this.state.open}
           onClose={() => {}}
           center
@@ -95,19 +109,19 @@ export default class AddTasksModalForm extends React.Component {
 
             <FormGroup controlId="formGoupInputTasks">
                 <ControlLabel>Title</ControlLabel>
-                <FormControl  inputRef={(input) => this.title = input} type="text" placeholder="Enter title"/>
+                <FormControl  inputRef={(input) => this.title = input} type="text" placeholder={this.props.info.title}/>
             </FormGroup>
 
             <FormGroup controlId="formGoupInputIPAddress">
                 <ControlLabel>Description</ControlLabel>
-                <FormControl  inputRef={(input) => this.description = input} componentClass="textarea" placeholder='Enter task description' />
+                <FormControl  inputRef={(input) => this.description = input} componentClass="textarea" placeholder={this.props.info.description} />
             </FormGroup>
 
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Select status</ControlLabel>
                 <Autosuggest
                   datalist={['NEW', 'In progress', 'Solved', 'On hold']}
-                  placeholder={this.state.chosenStatus}
+                  placeholder={this.state.chosenStatus || this.props.info.status}
                   onChange={this.handleChangeStatus.bind(this)}
                   />
             </FormGroup>
@@ -116,21 +130,21 @@ export default class AddTasksModalForm extends React.Component {
               <ControlLabel>Made by</ControlLabel>
                 <Autosuggest
                   datalist={Object.values(this.state.users).map(r => r.name)}
-                  placeholder={this.state.chosenBy}
+                  placeholder={this.state.chosenBy || this.props.info.by}
                   onChange={this.handleChangeBy.bind(this)}
                   />
             </FormGroup>
 
             <FormGroup controlId="formControlsSelect">
-              <ControlLabel>Solved by</ControlLabel>
+              <ControlLabel>Soled by</ControlLabel>
                 <Autosuggest
                   datalist={Object.values(this.state.users).map(r => r.name)}
-                  placeholder={this.state.chosenSolves}
+                  placeholder={this.state.chosenSolves || this.props.info.solves}
                   onChange={this.handleChangeSolves.bind(this)}
                   />
             </FormGroup>
 
-            <Button bsStyle='success' onClick={this.addTasks.bind(this)}>+ Add Task</Button>
+            <Button bsStyle='warning' onClick={this.editTasks.bind(this)}>Edit Task</Button>
 
             <Button onClick={this.onCloseModal.bind(this)}>Close</Button>
 

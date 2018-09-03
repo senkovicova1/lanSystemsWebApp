@@ -4,10 +4,10 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-import AddTaskModalForm from './AddTaskModalForm';
-import EditTaskModalForm from './EditTaskModalForm';
+import AddTaskModalForm from './assets/tasks/AddTaskModalForm';
+import EditTaskModalForm from './assets/tasks/EditTaskModalForm';
 
-//import sampleUsers from '../sampleUsers';
+//import sampleUsers from '../samples/sampleUsers';
 
 export default class MyTable extends Component{
 

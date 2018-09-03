@@ -28,7 +28,7 @@ export default class EditCompanyForm extends React.Component {
     firebase.database()
             .ref(`companies/${this.state.company.id}`)
             .update({
-              companyName : this.company.value,
+              companyName : this.company.value || this.state.company.companyName,
             });
   }
 

@@ -1,8 +1,7 @@
 import React from "react";
 import firebase from 'firebase';
-import ReactDOM from 'react-dom';
 import Modal from 'react-responsive-modal';
-import { Form, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 export default class AddNICModalForm extends React.Component {
 

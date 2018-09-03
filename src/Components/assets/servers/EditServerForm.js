@@ -1,5 +1,5 @@
 import React from 'react';
-import base from '../base';
+import base from '../../../base';
 import firebase from 'firebase';
 import AddNICModalForm from './AddNICModalForm';
 import ReactTable from 'react-table';
