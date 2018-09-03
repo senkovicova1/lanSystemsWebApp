@@ -1,4 +1,5 @@
 import base from '../base';
+import firebase from 'firebase';
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -19,6 +20,7 @@ export default class MyTable extends Component{
 //      users : sampleUsers,
     }
     this.loadColumnNames.bind(this);
+    this.remove.bind(this);
 //    this.addUsers.bind(this);
   }
 
@@ -46,6 +48,12 @@ export default class MyTable extends Component{
 //      base.removeBinding(this.ref2);
   }
 
+  remove(row){
+    firebase.database()
+            .ref(`${this.state.assetType}/${row.original.id}`)
+            .remove();
+  }
+
   loadColumnNames(){
     switch (this.state.assetType) {
       case 'servers':
@@ -60,9 +68,14 @@ export default class MyTable extends Component{
                   accessor: 'edit',
                   Cell : row => {
                         return (
-                          <Link to={{pathname: `servers/edit/${row.original.id}`}}>
-                              <Button bsStyle='warning'>Edit</Button>
-                          </Link>
+                          <div>
+                            <Link to={{pathname: `servers/edit/${row.original.id}`}}>
+                                <Button bsStyle='warning'>Edit</Button>
+                            </Link>
+                            <Button onClick={() => {
+                                this.remove(row);}
+                              } bsStyle='danger'>Remove</Button>
+                          </div>
                       )
                   },
                   filterMethod: (filter, row) => true,
@@ -77,9 +90,14 @@ export default class MyTable extends Component{
                   accessor: 'edit',
                   Cell : row => {
                         return (
-                          <Link to={{pathname: `companies/edit/${row.original.id}`}}>
-                              <Button bsStyle='warning'>Edit</Button>
-                          </Link>
+                          <div>
+                            <Link to={{pathname: `companies/edit/${row.original.id}`}}>
+                                <Button bsStyle='warning'>Edit</Button>
+                            </Link>                            
+                            <Button onClick={() => {
+                                this.remove(row);}
+                              } bsStyle='danger'>Remove</Button>
+                          </div>
                       )
                   },
                   filterMethod: (filter, row) => true,
