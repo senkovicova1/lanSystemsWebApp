@@ -1,9 +1,9 @@
-import base from '../base';
+import base from '../firebase';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
-export default class SideBar extends Component{
+export default class Sidebar extends Component{
 
   constructor(props){
     super(props);

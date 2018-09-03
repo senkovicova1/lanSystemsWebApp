@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-export default class EditCompanyForm extends React.Component {
+export default class CompanyEdit extends React.Component {
 
   constructor(props){
     super(props);
@@ -35,8 +35,7 @@ export default class EditCompanyForm extends React.Component {
 
   render() {
     return (
-          <form ref={(input) => this.companyForm = input} className="companyEdit" onSubmit={(e) => this.editCompany(e)} >
-
+          <div className='form'>
             <FormGroup controlId="formGoupInput">
               <ControlLabel>Server Name</ControlLabel>
               <FormControl  inputRef={(input) => this.company = input} type="text" placeholder={this.state.company.companyName}/>
@@ -45,7 +44,7 @@ export default class EditCompanyForm extends React.Component {
             <Link to={{ pathname: '/companies'}}>
               <Button type="submit" onClick={(e) => this.editCompany(e)} bsStyle='warning'>Edit this company</Button>
             </Link>
-          </form>
+          </div>
         );
   }
 }

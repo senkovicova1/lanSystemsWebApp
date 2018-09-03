@@ -1,10 +1,12 @@
 import React from "react";
 import firebase from 'firebase';
-import Autosuggest from 'react-bootstrap-autosuggest'
+import AutoSuggest from 'react-bootstrap-autosuggest';
 import Modal from 'react-responsive-modal';
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-export default class AddTasksModalForm extends React.Component {
+const STATUS_OPTIONS = ['NEW', 'In progress', 'Solved', 'On hold'];
+
+export default class TasksAddModal extends React.Component {
 
   constructor(props){
     super(props);
@@ -17,6 +19,7 @@ export default class AddTasksModalForm extends React.Component {
     this.onCloseModal.bind(this);
     this.addTasks.bind(this);
 
+    this.setAny.bind(this);
     this.handleChangeBy.bind(this);
     this.handleChangeSolves.bind(this);
     this.handleChangeStatus.bind(this);
@@ -45,7 +48,6 @@ export default class AddTasksModalForm extends React.Component {
   };
 
   addTasks(e){
-    e.preventDefault();
     const ID = Date.now();
     firebase.database()
             .ref(`tasks/${ID}`)
@@ -59,6 +61,12 @@ export default class AddTasksModalForm extends React.Component {
             });
 
     this.onCloseModal(e);
+  }
+
+  setAny(key, value){
+    let newState={};
+    newState[key]=value;
+    this.setState(newState);
   }
 
   handleChangeBy(value) {
@@ -104,28 +112,28 @@ export default class AddTasksModalForm extends React.Component {
 
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Select status</ControlLabel>
-                <Autosuggest
-                  datalist={['NEW', 'In progress', 'Solved', 'On hold']}
+                <AutoSuggest
+                  datalist={STATUS_OPTIONS}
                   placeholder={this.state.chosenStatus}
-                  onChange={this.handleChangeStatus.bind(this)}
+                  onChange={(value) => this.setAny('chosenStatus', value)}
                   />
             </FormGroup>
 
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Made by</ControlLabel>
-                <Autosuggest
+                <AutoSuggest
                   datalist={Object.values(this.state.users).map(r => r.name)}
                   placeholder={this.state.chosenBy}
-                  onChange={this.handleChangeBy.bind(this)}
+                  onChange={(value) => this.setAny('chosenBy', value)}
                   />
             </FormGroup>
 
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Solved by</ControlLabel>
-                <Autosuggest
+                <AutoSuggest
                   datalist={Object.values(this.state.users).map(r => r.name)}
                   placeholder={this.state.chosenSolves}
-                  onChange={this.handleChangeSolves.bind(this)}
+                  onChange={(value) => this.setAny('chosenSolves', value)}
                   />
             </FormGroup>
 

@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import SideBar from './Components/SideBar';
+import Sidebar from './Components/Sidebar';
 import Header from './Components/Header';
 
-import MyTable from './Components/MyTable';
-import AddServerForm from './Components/assets/servers/AddServerForm';
-import EditServerForm from './Components/assets/servers/EditServerForm';
-import AddCompanyForm from './Components/assets/companies/AddCompanyForm';
-import EditCompanyForm from './Components/assets/companies/EditCompanyForm';
+import ServerList from './Components/assets/servers/ServerList';
+import ServerAdd from './Components/assets/servers/ServerAdd';
+import ServerEdit from './Components/assets/servers/ServerEdit';
+import CompanyList from './Components/assets/companies/CompanyList';
+import CompanyAdd from './Components/assets/companies/CompanyAdd';
+import CompanyEdit from './Components/assets/companies/CompanyEdit';
+import TaskList from './Components/assets/tasks/TaskList';
 import {BrowserRouter, Route} from 'react-router-dom';
 
 import './style.css';
@@ -18,14 +20,14 @@ const Root = () => {
     <BrowserRouter>
       <div>
         <Route path='/' component={Header} />
-        <Route path='/' component={SideBar} />
-        <Route exact path='/servers' component={MyTable} />
-        <Route exact path='/servers/add' component={AddServerForm} />
-        <Route exact path='/servers/edit/:id' component={EditServerForm} />
-        <Route exact path='/companies' component={MyTable} />
-        <Route exact path='/companies/add' component={AddCompanyForm} />
-        <Route exact path='/companies/edit/:id' component={EditCompanyForm} />
-        <Route exact path='/tasks' component={MyTable} />
+        <Route path='/' component={Sidebar} />
+        <Route exact path='/servers' component={ServerList} />
+        <Route exact path='/servers/add' component={ServerAdd } />
+        <Route exact path='/servers/edit/:id' component={ServerEdit }/>
+        <Route exact path='/companies' component={CompanyList} />
+        <Route exact path='/companies/add' component={CompanyAdd} />
+        <Route exact path='/companies/edit/:id' component={CompanyEdit} />
+        <Route exact path='/tasks' component={TaskList} />
     </div>
     </BrowserRouter>
   )

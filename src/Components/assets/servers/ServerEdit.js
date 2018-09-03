@@ -1,5 +1,5 @@
-import React from 'react';
-import base from '../../../base';
+import React, {Component} from 'react';
+import base from '../../../firebase';
 import firebase from 'firebase';
 import AddNICModalForm from './AddNICModalForm';
 import ReactTable from 'react-table';
@@ -7,7 +7,7 @@ import 'react-table/react-table.css';
 import { Link } from 'react-router-dom';
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-class EditServerForm extends React.Component {
+export default class ServerEdit extends Component {
 
   constructor(props){
     super(props);
@@ -145,14 +145,14 @@ class EditServerForm extends React.Component {
               },
             ];
     return (
-          <form ref={(input) => this.serverForm = input} className="serverEdit" onSubmit={(e) => this.editServer(e)} >
+          <div className='form'>
 
-            <FormGroup controlId="formGoupInput">
+            <FormGroup controlId="inputName">
               <ControlLabel>Server Name</ControlLabel>
               <FormControl  inputRef={(input) => this.name = input} type="text" placeholder={this.state.server.serverName}/>
             </FormGroup>
 
-            <FormGroup controlId="formControlsSelect">
+            <FormGroup controlId="selectCompany">
               <ControlLabel>Select company</ControlLabel>
                 <FormControl value={this.state.chosenCompany || this.state.server.companyName} onChange={this.handleChange.bind(this)} componentClass="select" placeholder="select" inputRef={(input) => this.company = input}>
                 {
@@ -162,22 +162,22 @@ class EditServerForm extends React.Component {
                 </FormControl>
             </FormGroup>
 
-            <FormGroup controlId="formGoupInputFunction">
+            <FormGroup controlId="inputFunction">
               <ControlLabel>Function</ControlLabel>
               <FormControl  inputRef={(input) => this.serverFunction = input} type="text" placeholder={this.state.server.serverFunction}/>
             </FormGroup>
 
-            <FormGroup controlId="formControlsTextarea">
+            <FormGroup controlId="textareaDescription">
               <ControlLabel>Popis</ControlLabel>
               <FormControl inputRef={(input) => this.description = input} componentClass="textarea" placeholder={this.state.server.description} />
             </FormGroup>
 
-            <FormGroup controlId="formGoupInputProcessor">
+            <FormGroup controlId="inputProcessor">
               <ControlLabel>Processor</ControlLabel>
               <FormControl  inputRef={(input) => this.processor = input} type="text" placeholder={this.state.server.processor}/>
             </FormGroup>
 
-            <FormGroup controlId="formControlsTextarea">
+            <FormGroup controlId="textareaHDD">
               <ControlLabel>HDD</ControlLabel>
               <FormControl inputRef={(input) => this.hdd = input} componentClass="textarea" placeholder={this.state.server.hdd} />
             </FormGroup>
@@ -197,9 +197,7 @@ class EditServerForm extends React.Component {
             <Link to={{ pathname: '/servers'}}>
               <Button type="submit" onClick={(e) => this.editServer(e)} bsStyle='warning'>Edit this server</Button>
             </Link>
-          </form>
+          </div>
         );
   }
 }
-
-export default EditServerForm;
