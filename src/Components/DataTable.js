@@ -1,10 +1,10 @@
 import base from '../firebase';
-import firebase from 'firebase';
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
+
+//import { Button } from 'react-bootstrap';
+
 
 //import sampleUsers from '../samples/sampleUsers';
 
@@ -50,7 +50,6 @@ export default class DataTable extends Component{
       <div className='DataTable'>
 
         {this.props.loadButton()}
-
 {/* <Button onClick={this.addUsers.bind(this)}>asdsad</Button> */}
 
         <ReactTable

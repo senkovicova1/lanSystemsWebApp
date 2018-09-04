@@ -18,16 +18,12 @@ export default class TasksEditModal extends Component {
       chosenStatus : null,
     }
 
-    this.onOpenModal.bind(this);
-    this.onCloseModal.bind(this);
-    this.editTasks.bind(this);
-
+    this.setModalOpen.bind(this);
     this.setAny.bind(this);
 
+    this.editTasks.bind(this);
     this.handleDelete.bind(this);
-  }
 
-  componentDidMount(){
     const USERS = firebase.database().ref(`users`);
     USERS.once('value')
           .then(snap =>
@@ -39,19 +35,17 @@ export default class TasksEditModal extends Component {
           );
   }
 
-  onOpenModal = (e) => {
-    e.preventDefault();
-    this.setState({ open: true });
+  setModalOpen = (open) => {
+    this.setState({ open });
   };
 
-  onCloseModal = (e) => {
-    e.preventDefault();
-    this.setState({ open: false });
-  };
+  setAny(key, value){
+    let newState={};
+    newState[key]=value;
+    this.setState(newState);
+  }
 
-  editTasks(e){
-    e.preventDefault();
-
+  editTasks(){
     firebase.database()
             .ref(`tasks/${this.props.info.id}`)
             .set({
@@ -63,27 +57,21 @@ export default class TasksEditModal extends Component {
               solves : this.state.chosenSolves || this.props.info.solves,
             });
 
-    this.onCloseModal(e);
+    this.setModalOpen(false);
   }
 
-  setAny(key, value){
-    let newState={};
-    newState[key]=value;
-    this.setState(newState);
+  handleDelete(){
+    firebase.database()
+            .ref(`tasks/${this.props.info.id}`)
+            .remove();
+    this.setModalOpen(false);
   }
-
-    handleDelete(e){
-      e.preventDefault();
-      firebase.database()
-              .ref(`tasks/${this.props.info.id}`)
-              .remove();
-      this.onCloseModal(e);
-    }
 
   render() {
+    const USERS_OPTIONS = Object.values(this.state.users).map(r => r.name);
     return (
       <div>
-        <Button bsSize='small' bsStyle='warning' onClick={this.onOpenModal.bind(this)}>Edit</Button>
+        <Button bsSize='small' bsStyle='warning' onClick={() => this.setModalOpen(true)}>Edit</Button>
 
         <Button bsSize='small' bsStyle='danger' onClick={this.handleDelete.bind(this)}>Remove</Button>
 
@@ -118,7 +106,7 @@ export default class TasksEditModal extends Component {
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Made by</ControlLabel>
                 <AutoSuggest
-                  datalist={Object.values(this.state.users).map(r => r.name)}
+                  datalist={USERS_OPTIONS}
                   placeholder={this.state.chosenBy || this.props.info.by}
                   onChange={(value) => this.setAny('chosenBy', value)}
                   />
@@ -127,7 +115,7 @@ export default class TasksEditModal extends Component {
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Soled by</ControlLabel>
                 <AutoSuggest
-                  datalist={Object.values(this.state.users).map(r => r.name)}
+                  datalist={USERS_OPTIONS}
                   placeholder={this.state.chosenSolves || this.props.info.solves}
                   onChange={(value) => this.setAny('chosenSolves', value)}
                   />
@@ -135,7 +123,7 @@ export default class TasksEditModal extends Component {
 
             <Button bsStyle='warning' onClick={this.editTasks.bind(this)}>Edit Task</Button>
 
-            <Button onClick={this.onCloseModal.bind(this)}>Close</Button>
+            <Button onClick={() => this.setModalOpen(false)}>Close</Button>
 
         </Modal>
       </div>

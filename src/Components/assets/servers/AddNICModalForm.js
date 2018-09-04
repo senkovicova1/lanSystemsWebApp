@@ -11,23 +11,16 @@ export default class AddNICModalForm extends React.Component {
       open: false,
     }
 
-    this.onOpenModal.bind(this);
-    this.onCloseModal.bind(this);
+    this.setModalOpen.bind(this);
     this.addNIC.bind(this);
   }
 
-  onOpenModal = (e) => {
-    e.preventDefault();
-    this.setState({ open: true });
+  setModalOpen = (open) => {
+    this.setState({ open });
   };
 
-  onCloseModal = (e) => {
-    e.preventDefault();
-    this.setState({ open: false });
-  };
-
-  addNIC(e){
-    e.preventDefault();
+  addNIC(){
+    if (this.nic.value === '') return;
     const ID = Date.now();
     firebase.database()
             .ref(`nics/${ID}`)
@@ -44,13 +37,13 @@ export default class AddNICModalForm extends React.Component {
               dhcp : this.dhcp.value,
             });
 
-    this.onCloseModal(e);
+    this.setModalOpen(false);
   }
 
   render() {
     return (
       <div>
-        <Button bsSize="small" bsStyle='success' onClick={this.onOpenModal.bind(this)}>Add NIC</Button>
+        <Button bsSize="small" bsStyle='success' onClick={() => this.setModalOpen(true)}>Add NIC</Button>
         <Modal
           open={this.state.open}
           onClose={() => {}}
@@ -103,7 +96,7 @@ export default class AddNICModalForm extends React.Component {
 
             <Button bsSize='large' bsStyle='success' onClick={this.addNIC.bind(this)}>+ Add NIC</Button>
 
-            <Button onClick={this.onCloseModal.bind(this)}>Close</Button>
+            <Button onClick={() => this.setModalOpen(false)}>Close</Button>
 
         </Modal>
       </div>

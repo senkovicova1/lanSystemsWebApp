@@ -25,18 +25,29 @@ export default class Sidebar extends Component{
 
 
   render(){
+    const PAGE = this.props.location.pathname.substr(1).toLowerCase();
     return (
       <div className="sidebar">
+
         <ListGroup>
           {
           Object
             .keys(this.state.assets)
             .map(asset =>
-              <Link className='link' to={{pathname: `/${this.state.assets[asset].toLowerCase()}`}}  key={this.state.assets[asset]}>
-                <ListGroupItem className='sidebarItem' key={this.state.assets[asset]} >
-                  {this.state.assets[asset]}
-                </ListGroupItem>
-              </Link>)
+              {
+                return (this.state.assets[asset].toLowerCase() === PAGE) ?
+                  <Link className='link' to={{pathname: `/${this.state.assets[asset].toLowerCase()}`}}  key={this.state.assets[asset]}>
+                    <ListGroupItem active className='sidebarItem' key={this.state.assets[asset]} >
+                      {this.state.assets[asset]}
+                    </ListGroupItem>
+                  </Link>
+                :
+                  <Link className='link' to={{pathname: `/${this.state.assets[asset].toLowerCase()}`}}  key={this.state.assets[asset]}>
+                    <ListGroupItem className='sidebarItem' key={this.state.assets[asset]} >
+                      {this.state.assets[asset]}
+                    </ListGroupItem>
+                  </Link>
+              })
           }
         </ListGroup>
       </div>

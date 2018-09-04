@@ -48,7 +48,7 @@ export default class ServerEdit extends Component {
       base.removeBinding(this.ref2);
   }
 
-  editServer(event){
+  editServer(){
     firebase.database()
             .ref(`servers/${this.state.server.id}`)
             .update({
@@ -195,7 +195,7 @@ export default class ServerEdit extends Component {
             <p></p>
 
             <Link to={{ pathname: '/servers'}}>
-              <Button type="submit" onClick={(e) => this.editServer(e)} bsStyle='warning'>Edit this server</Button>
+              <Button type="submit" onClick={this.editServer.bind(this)} bsStyle='warning'>Edit this server</Button>
             </Link>
           </div>
         );

@@ -24,7 +24,7 @@ export default class CompanyEdit extends React.Component {
 
   }
 
-  editCompany(event){
+  editCompany(){
     firebase.database()
             .ref(`companies/${this.state.company.id}`)
             .update({
@@ -42,7 +42,7 @@ export default class CompanyEdit extends React.Component {
             </FormGroup>
 
             <Link to={{ pathname: '/companies'}}>
-              <Button type="submit" onClick={(e) => this.editCompany(e)} bsStyle='warning'>Edit this company</Button>
+              <Button type="submit" onClick={this.editCompany.bind(this)} bsStyle='warning'>Edit this company</Button>
             </Link>
           </div>
         );

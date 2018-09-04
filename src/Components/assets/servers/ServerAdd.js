@@ -4,7 +4,7 @@ import firebase from 'firebase';
 import AddNICModalForm from './AddNICModalForm';
 import ReactTable from 'react-table';
 import { Link } from 'react-router-dom';
-import { Form, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 export default class ServerAdd extends React.Component {
 
@@ -49,7 +49,7 @@ export default class ServerAdd extends React.Component {
       base.removeBinding(this.ref2);
   }
 
-  addServer(e){
+  addServer(){
     if (this.name.value.length < 1) return;
     firebase.database()
             .ref(`servers/${this.state.id}`)
@@ -64,9 +64,9 @@ export default class ServerAdd extends React.Component {
             });
   }
 
-  handleDeleteNIC(event){
+  handleDeleteNIC(id){
     firebase.database()
-            .ref(`nics/${event}`)
+            .ref(`nics/${id}`)
             .remove();
   }
 
@@ -191,8 +191,9 @@ export default class ServerAdd extends React.Component {
           <p></p>
 
           <Link to={{pathname : '/servers'}}>
-            <Button type="submit" onClick={() => this.addServer()} bsStyle='success' >+ Add Server</Button>
+            <Button type="submit" onClick={this.addServer.bind(this)} bsStyle='success' >+ Add Server</Button>
           </Link>
+          
         </div>
         );
     }

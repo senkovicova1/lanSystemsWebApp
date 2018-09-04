@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Sidebar from './Components/Sidebar';
-import Header from './Components/Header';
+import PageHeader from './Components/PageHeader';
 
 import ServerList from './Components/assets/servers/ServerList';
 import ServerAdd from './Components/assets/servers/ServerAdd';
@@ -19,7 +19,7 @@ const Root = () => {
   return(
     <BrowserRouter>
       <div>
-        <Route path='/' component={Header} />
+        <Route path='/' component={PageHeader} />
         <Route path='/' component={Sidebar} />
         <Route exact path='/servers' component={ServerList} />
         <Route exact path='/servers/add' component={ServerAdd } />

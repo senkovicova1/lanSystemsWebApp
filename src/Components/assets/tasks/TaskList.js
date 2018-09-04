@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import DataTable from '../../DataTable';
 import TaskAddModal from './TaskAddModal';
 import TaskEditModal from './TaskEditModal';

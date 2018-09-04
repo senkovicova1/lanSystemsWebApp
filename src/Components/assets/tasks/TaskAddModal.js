@@ -15,17 +15,12 @@ export default class TasksAddModal extends React.Component {
       users : [],
     }
 
-    this.onOpenModal.bind(this);
-    this.onCloseModal.bind(this);
+    this.setModalOpen.bind(this);
     this.addTasks.bind(this);
 
     this.setAny.bind(this);
-    this.handleChangeBy.bind(this);
-    this.handleChangeSolves.bind(this);
-    this.handleChangeStatus.bind(this);
-  }
 
-  componentDidMount(){
+
     const USERS = firebase.database().ref(`users`);
     USERS.once('value')
           .then(snap =>
@@ -37,17 +32,17 @@ export default class TasksAddModal extends React.Component {
           );
   }
 
-  onOpenModal = (e) => {
-    e.preventDefault();
-    this.setState({ open: true });
+  setModalOpen = (open) => {
+    this.setState({ open });
   };
 
-  onCloseModal = (e) => {
-    e.preventDefault();
-    this.setState({ open: false });
-  };
+  setAny(key, value){
+    let newState={};
+    newState[key]=value;
+    this.setState(newState);
+  }
 
-  addTasks(e){
+  addTasks(){
     const ID = Date.now();
     firebase.database()
             .ref(`tasks/${ID}`)
@@ -60,37 +55,15 @@ export default class TasksAddModal extends React.Component {
               solves : this.state.chosenSolves || "",
             });
 
-    this.onCloseModal(e);
+    this.setModalOpen(false);
   }
-
-  setAny(key, value){
-    let newState={};
-    newState[key]=value;
-    this.setState(newState);
-  }
-
-  handleChangeBy(value) {
-      this.setState({
-        chosenBy: value
-      });
-    }
-
-    handleChangeSolves(value) {
-        this.setState({
-          chosenSolves: value
-        });
-      }
-
-      handleChangeStatus(value) {
-          this.setState({
-            chosenStatus: value
-          });
-        }
 
   render() {
+
+    const USERS_OPTIONS = Object.values(this.state.users).map(r => r.name);
     return (
       <div>
-        <Button bsStyle='success' onClick={this.onOpenModal.bind(this)}>+ Add Task</Button>
+        <Button bsStyle='success' onClick={() => this.setModalOpen(true)}>+ Add Task</Button>
         <Modal
           open={this.state.open}
           onClose={() => {}}
@@ -122,7 +95,7 @@ export default class TasksAddModal extends React.Component {
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Made by</ControlLabel>
                 <AutoSuggest
-                  datalist={Object.values(this.state.users).map(r => r.name)}
+                  datalist={USERS_OPTIONS}
                   placeholder={this.state.chosenBy}
                   onChange={(value) => this.setAny('chosenBy', value)}
                   />
@@ -131,7 +104,7 @@ export default class TasksAddModal extends React.Component {
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Solved by</ControlLabel>
                 <AutoSuggest
-                  datalist={Object.values(this.state.users).map(r => r.name)}
+                  datalist={USERS_OPTIONS}
                   placeholder={this.state.chosenSolves}
                   onChange={(value) => this.setAny('chosenSolves', value)}
                   />
@@ -139,7 +112,7 @@ export default class TasksAddModal extends React.Component {
 
             <Button bsStyle='success' onClick={this.addTasks.bind(this)}>+ Add Task</Button>
 
-            <Button onClick={this.onCloseModal.bind(this)}>Close</Button>
+            <Button onClick={() => this.setModalOpen(false)}>Close</Button>
 
         </Modal>
       </div>

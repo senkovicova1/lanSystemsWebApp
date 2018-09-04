@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, NavItem, Nav} from 'react-bootstrap';
 
-export default class Header extends Component{
+export default class PageHeader extends Component{
 
   constructor(){
     super();
@@ -14,11 +14,11 @@ export default class Header extends Component{
     return(
       <Navbar inverse>
 
-        <Navbar.Header>
+        <header>
           <Navbar.Brand>
             <a href="/home">Lan Systems</a>
           </Navbar.Brand>
-        </Navbar.Header>
+        </header>
 
         <Nav pullRight>
           <NavItem href="/home">

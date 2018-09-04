@@ -11,7 +11,7 @@ export default class CompanyAdd extends React.Component {
       this.addCompany = this.addCompany.bind(this);
   }
 
-  addCompany(e){
+  addCompany(){
     if (this.company.value.length < 1) return;
     const ID = Date.now();
     firebase.database()
@@ -32,7 +32,7 @@ export default class CompanyAdd extends React.Component {
           </FormGroup>
 
           <Link to={{pathname : '/companies'}}>
-            <Button type="submit" onClick={() => this.addCompany()} bsStyle='success' >+ Add Company</Button>
+            <Button type="submit" onClick={ this.addCompany.bind(this)} bsStyle='success' >+ Add Company</Button>
           </Link>
         </div>
         );
