@@ -47,7 +47,7 @@ export default class DataTable extends Component{
     const COLUMNS = this.props.columns;
 
     return (
-      <div className='DataTable'>
+      <div className={(this.props.database === 'tasks') ? 'TaskDataTable' : 'DataTable'}>
 
         {this.props.loadButton()}
 {/* <Button onClick={this.addUsers.bind(this)}>asdsad</Button> */}

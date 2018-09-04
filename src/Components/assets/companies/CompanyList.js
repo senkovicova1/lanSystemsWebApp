@@ -21,7 +21,7 @@ export default class CompanyList extends Component{
 
   loadAddButton(){
     return (
-      <Link className='DataTableAddButton' to={{pathname: `companies/add`}}>
+      <Link className='DataTableAdd' to={{pathname: `companies/add`}}>
         <Button bsStyle="success" className='DataTableAddButton' >+ Add Company</Button>
       </Link>);
   }

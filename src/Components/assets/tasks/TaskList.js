@@ -3,14 +3,21 @@ import firebase from 'firebase';
 import DataTable from '../../DataTable';
 import TaskAddModal from './TaskAddModal';
 import TaskEditModal from './TaskEditModal';
+import TaskEdit from './TaskEdit';
 
 export default class TaskList extends Component{
 
   constructor(props){
     super(props);
+    this.state =
+      {
+        task : null,
+      };
+
     this.loadColumnNames.bind(this);
     this.loadAddButton.bind(this)
     this.remove.bind(this);
+    this.chosenTask.bind(this);
   }
 
   remove(row){
@@ -27,8 +34,26 @@ export default class TaskList extends Component{
 
   loadColumnNames(){
       return [{
+        Header: 'Title',
+        accessor: 'title',
+        Cell : row => <div
+                style={{ backgroundColor: "#fafafa" }}
+                onClick={() => this.chosenTask(row.original)}
+                dangerouslySetInnerHTML={{
+                    __html: row.original.title
+                }}
+              />
+
+        }];/*[{
                 Header: 'Title',
                 accessor: 'title',
+                Cell : row => {
+                      return (
+                        <div>
+                          <TaskEdit info={row.original} />
+                        </div>
+                    )
+                }
               },{
                 Header: 'Description',
                 accessor: 'description',
@@ -52,13 +77,21 @@ export default class TaskList extends Component{
                     )
                 },
                 filterMethod: (filter, row) => true,
-              }];
+              }];*/
+  }
+
+  chosenTask(task){
+    this.setState({ task })
   }
 
   render(){
       const COLUMNS = this.loadColumnNames();
       return (
-      <DataTable database={'tasks'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
-    );
+        <div>
+          <DataTable chosenTask={this.chosenTask.bind(this)} database={'tasks'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
+          <TaskEdit info={this.state.task} />
+
+        </div>
+      );
   }
 }

@@ -21,7 +21,7 @@ export default class ServerList extends Component{
 
   loadAddButton(){
     return (
-      <Link className='DataTableAddButton' to={{pathname: `servers/add`}}>
+      <Link className='DataTableAdd' to={{pathname: `servers/add`}}>
         <Button bsStyle="success" className='DataTableAddButton' >+ Add Server</Button>
       </Link>);
   }
