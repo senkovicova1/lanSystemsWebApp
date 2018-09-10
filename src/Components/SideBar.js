@@ -49,6 +49,11 @@ export default class Sidebar extends Component{
                   </Link>
               })
           }
+          <Link className='link' to={{pathname: `/lanwiki/articles`}}  key='lanwiki'>
+            <ListGroupItem className='sidebarItem' key='lanwiki' >
+              LanWiki
+            </ListGroupItem>
+          </Link>
         </ListGroup>
       </div>
     )

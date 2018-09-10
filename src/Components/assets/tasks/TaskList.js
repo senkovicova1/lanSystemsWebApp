@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import {Col} from 'react-bootstrap';
+
 import firebase from 'firebase';
 import DataTable from '../../DataTable';
 import TaskAddModal from './TaskAddModal';
 import TaskEditModal from './TaskEditModal';
 import TaskEdit from './TaskEdit';
+import Sidebar from '../../Sidebar';
 
 export default class TaskList extends Component{
 
@@ -87,10 +90,13 @@ export default class TaskList extends Component{
   render(){
       const COLUMNS = this.loadColumnNames();
       return (
-        <div>
-          <DataTable chosenTask={this.chosenTask.bind(this)} database={'tasks'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
-          <TaskEdit info={this.state.task} />
-
+        <div className='mainContainer'>
+          <Col xs={4} className='noPadding'>
+            <DataTable chosenTask={this.chosenTask.bind(this)} database={'tasks'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
+          </Col>
+          <Col xs={8} >
+            <TaskEdit info={this.state.task} />
+          </Col>
         </div>
       );
   }

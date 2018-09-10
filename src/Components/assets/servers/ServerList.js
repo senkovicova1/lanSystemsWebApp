@@ -55,7 +55,9 @@ export default class ServerList extends Component{
   render(){
     const COLUMNS = this.loadColumnNames();
     return (
-      <DataTable database={'servers'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
+      <div className='mainContainer'>
+         <DataTable database={'servers'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
+      </div>
     );
   }
 }

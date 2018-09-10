@@ -52,7 +52,9 @@ export default class CompanyList extends Component{
   render(){
     const COLUMNS = this.loadColumnNames();
     return (
-      <DataTable database={'companies'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
+      <div className='mainContainer'>
+          <DataTable database={'companies'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
+      </div>
     );
   }
 }

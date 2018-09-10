@@ -62,7 +62,7 @@ export default class TasksEdit extends Component {
 
   render() {
     if (this.props.info === null){
-      return (<p className="taskEdit">No task was chosen yet.</p>);
+      return (<p className="taskEditNoTask">No task was chosen yet.</p>);
     }
     const USERS_OPTIONS = Object.values(this.state.users).map(r => r.name);
     return (
