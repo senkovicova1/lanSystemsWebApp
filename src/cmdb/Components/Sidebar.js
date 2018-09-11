@@ -1,4 +1,4 @@
-import base from '../firebase';
+import base from '../../firebase';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';

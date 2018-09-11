@@ -1,5 +1,5 @@
 import React from 'react';
-import base from '../../../firebase';
+import base from '../../../../firebase';
 import firebase from 'firebase';
 import AddNICModalForm from './AddNICModalForm';
 import ReactTable from 'react-table';
@@ -193,7 +193,7 @@ export default class ServerAdd extends React.Component {
           <Link to={{pathname : '/servers'}}>
             <Button type="submit" onClick={this.addServer.bind(this)} bsStyle='success' >+ Add Server</Button>
           </Link>
-          
+
         </div>
         );
     }

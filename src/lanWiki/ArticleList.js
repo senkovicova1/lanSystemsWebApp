@@ -1,14 +1,38 @@
 import React, { Component } from 'react';
+import base from '../firebase';
 import firebase from 'firebase';
 import { Button, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Tags from './Tags';
 import Comments from './Comments';
 
+import sampleArticles from '../samples/sampleArticles';
+
 export default class ArticleList extends Component{
 
   constructor(props){
     super(props);
+    this.state = {
+      samples : null,
+    }
+    this.addSamples.bind(this);
+  }
+
+  componentWillMount(){
+      this.ref = base.syncState(`kb-article-titles`, {
+        context: this,
+        state: 'samples'
+      });
+  }
+
+  addSamples(){
+      this.setState({
+        samples : sampleArticles,
+      });
+  }
+
+  componentWillUnmount() {
+      base.removeBinding(this.ref);
   }
 
   render(){
@@ -16,6 +40,7 @@ export default class ArticleList extends Component{
       <div>
         <Col xs={8} >
           <div className='DataTable'>
+            <Button onClick={this.addSamples.bind(this)}>aaa</Button>
             <Link to={{pathname: `/lanwiki/articles`}}>
               <p>+ Article</p>
             </Link>

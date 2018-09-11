@@ -60,11 +60,11 @@ componentWillReceiveProps(props){
             .ref(`tasks/${this.props.info.id}`)
             .set({
               id : this.props.info.id,
-              title : this.title.value || this.props.info.title,
-              description : this.description.value  || this.props.info.description,
-              status : this.state.chosenStatus || this.props.info.status,
-              by : this.state.chosenBy || this.props.info.by,
-              solves : this.state.chosenSolves || this.props.info.solves,
+              title : this.state.title,
+              description : this.state.description,
+              status : this.state.status,
+              by : this.state.by,
+              solves : this.state.solves,
             });
 
   }

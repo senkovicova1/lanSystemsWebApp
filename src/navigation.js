@@ -2,21 +2,21 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { Col } from 'react-bootstrap';
 
-import Sidebar from './Components/Sidebar';
-import PageHeader from './Components/PageHeader';
+import Sidebar from './cmdb/Components/Sidebar';
+import PageHeader from './PageHeader';
 
-import ServerList from './Components/assets/servers/ServerList';
-import ServerAdd from './Components/assets/servers/ServerAdd';
-import ServerEdit from './Components/assets/servers/ServerEdit';
-import CompanyList from './Components/assets/companies/CompanyList';
-import CompanyAdd from './Components/assets/companies/CompanyAdd';
-import CompanyEdit from './Components/assets/companies/CompanyEdit';
-import TaskList from './Components/assets/tasks/TaskList';
+import ServerList from './cmdb/Components/assets/servers/ServerList';
+import ServerAdd from './cmdb/Components/assets/servers/ServerAdd';
+import ServerEdit from './cmdb/Components/assets/servers/ServerEdit';
+import CompanyList from './cmdb/Components/assets/companies/CompanyList';
+import CompanyAdd from './cmdb/Components/assets/companies/CompanyAdd';
+import CompanyEdit from './cmdb/Components/assets/companies/CompanyEdit';
+import TaskList from './cmdb/Components/assets/tasks/TaskList';
 import {BrowserRouter, Route} from 'react-router-dom';
 
-import Article from './Components/lanWiki/Article';
-import ArticleList from './Components/lanWiki/ArticleList';
-import ArticleEdit from './Components/lanWiki/ArticleEdit';
+import Article from './lanWiki/Article';
+import ArticleList from './lanWiki/ArticleList';
+import ArticleEdit from './lanWiki/ArticleEdit';
 
 import './style.css';
 
