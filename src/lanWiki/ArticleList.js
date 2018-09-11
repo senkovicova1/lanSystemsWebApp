@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import base from '../firebase';
-import firebase from 'firebase';
-import { Button, Col } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Tags from './Tags';
-import Comments from './Comments';
 
 import sampleArticles from '../samples/sampleArticles';
 
@@ -38,7 +35,6 @@ export default class ArticleList extends Component{
   render(){
     return (
       <div>
-        <Col xs={8} >
           <div className='DataTable'>
             <Button onClick={this.addSamples.bind(this)}>aaa</Button>
             <Link to={{pathname: `/lanwiki/articles`}}>
@@ -60,10 +56,6 @@ export default class ArticleList extends Component{
               <p className='articleAddButton' >read more...</p>
             </Link>
           </div>
-        </Col>
-        <Col xs={4}>
-          <Tags />
-        </Col>
       </div>
     );
   }

@@ -10,6 +10,7 @@ export default class Sidebar extends Component{
     this.state = {
         assets : []
     }
+    this.isActive.bind(this);
   }
 
   componentDidMount(){
@@ -23,9 +24,13 @@ export default class Sidebar extends Component{
     base.removeBinding(this.ref);
   }
 
+  isActive(item){
+    console.log(this.props.location.pathname);
+    console.log(item);
+      return this.props.location.pathname.toLowerCase().indexOf(item.toLowerCase()) > -1;
+    }
 
   render(){
-    const PAGE = this.props.location.pathname.substr(1).toLowerCase();
     return (
       <div className="sidebar">
 
@@ -34,26 +39,13 @@ export default class Sidebar extends Component{
           Object
             .keys(this.state.assets)
             .map(asset =>
-              {
-                return (this.state.assets[asset].toLowerCase() === PAGE) ?
-                  <Link className='link' to={{pathname: `/${this.state.assets[asset].toLowerCase()}`}}  key={this.state.assets[asset]}>
-                    <ListGroupItem active className='sidebarItem' key={this.state.assets[asset]} >
+                  <Link className='link' to={{pathname: `/cmdb/${this.state.assets[asset].toLowerCase()}`}}  key={this.state.assets[asset]}>
+                    <ListGroupItem active={this.isActive(this.state.assets[asset])} className='sidebarItem' key={this.state.assets[asset]} >
                       {this.state.assets[asset]}
                     </ListGroupItem>
                   </Link>
-                :
-                  <Link className='link' to={{pathname: `/${this.state.assets[asset].toLowerCase()}`}}  key={this.state.assets[asset]}>
-                    <ListGroupItem className='sidebarItem' key={this.state.assets[asset]} >
-                      {this.state.assets[asset]}
-                    </ListGroupItem>
-                  </Link>
-              })
+              )
           }
-          <Link className='link' to={{pathname: `/lanwiki/articles`}}  key='lanwiki'>
-            <ListGroupItem className='sidebarItem' key='lanwiki' >
-              LanWiki
-            </ListGroupItem>
-          </Link>
         </ListGroup>
       </div>
     )

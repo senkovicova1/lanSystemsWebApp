@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 export default class Tags extends Component{
-
-  constructor(props){
-    super(props);
-  }
 
   render(){
     const TAGS = {
