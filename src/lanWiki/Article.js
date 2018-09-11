@@ -1,31 +1,69 @@
 import React, { Component } from 'react';
+import base from '../firebase';
 import { Link } from 'react-router-dom';
 import Comments from './Comments';
 
 export default class Article extends Component{
+constructor(props){
+  super(props);
+  this.state = {
+    article : null,
+    tags:[]
+  }
+  this.tagsToString.bind(this);
+}
+
+tagsToString(tags){
+  let show = this.state.tags.filter((tag)=>tags.includes(tag.id));
+  let result="";
+  show.map((item)=>result+=item.name+' ');
+  return result;
+}
+
+
+componentWillMount(){
+    this.ref2 = base.bindToState(`kb-tags`, {
+      context: this,
+      state: 'tags',
+      asArray: true
+    });
+
+    this.ref = base.bindToState(`kb-articles`, {
+      context: this,
+      state: 'article',
+      asArray: true,
+      queries: {
+        orderByChild: 'id',
+        equalTo: parseInt(this.props.match.params.articleID),
+      }
+    });
+}
+
+componentWillUnmount() {
+    base.removeBinding(this.ref);
+    base.removeBinding(this.ref2);
+}
+
 
   render(){
+    let article=this.state.article && this.state.article.length===1?this.state.article[0]:null;
+    if(!article) return null;
     return (
       <div >
           <div className='DataTable'>
-            <Link to={{pathname: `/lanwiki/articles/edit/a-big-title`}}>
+            <Link to={{pathname: './'+article.id+`/edit`}}>
               <p>Edit</p>
             </Link>
 
-            <h1> A Big Title </h1>
+            <h1>{article.title}</h1>
             <p> Created: Branislav Susta 7:23 10.9.2018 </p>
             <p> Last Edit: Branislav Susta 7:23 10.9.2018 </p>
 
             <p>
-              Tags: Linux | Config List
+              Tags: {this.tagsToString([article.tags])}
             </p>
 
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi efficitur vulputate est eget fringilla. Suspendisse faucibus velit id nibh venenatis, eu mollis velit euismod. Aliquam erat volutpat. Vivamus ac rhoncus urna. Etiam nec faucibus nisi. Cras quis elit pharetra, maximus nunc a, varius elit. Proin et sem accumsan, hendrerit purus id, rutrum velit. Fusce lacinia elit tellus, in tempus ante maximus id. Vivamus consequat risus ac semper dictum. Suspendisse elementum volutpat egestas. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed placerat augue, vitae mattis mauris. Sed molestie ac ex sed interdum. Phasellus dui sapien, porttitor ut mattis nec, placerat sed felis. Nam quis tincidunt lacus.
-            </p>
-            <p>
-            Aenean blandit tortor est, et sodales ante ultrices ac. Pellentesque tincidunt varius aliquet. Suspendisse malesuada metus a sapien lacinia, vel tempor ex fringilla. Etiam a consequat orci, vitae aliquet arcu. Vivamus pellentesque venenatis quam non porta. Sed lobortis non ante ac iaculis. Proin malesuada libero metus. Nulla urna lacus, ultrices nec aliquet sit amet, gravida in eros. Vivamus efficitur fermentum erat eget viverra. Vivamus non tortor at ante sollicitudin pharetra. Proin consequat finibus diam, a fringilla turpis elementum fermentum. Quisque finibus lacus sed rutrum viverra.
-            </p>
+            <div dangerouslySetInnerHTML={{__html:article.text}} />
 
           </div>
           <Comments />

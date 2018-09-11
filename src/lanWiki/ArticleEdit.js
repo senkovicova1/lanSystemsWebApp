@@ -2,19 +2,48 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import RichTextEditor from 'react-rte';
 import { FormGroup, ControlLabel, FormControl, Col, Checkbox, Table } from 'react-bootstrap';
+import base from '../firebase';
+import Select from 'react-select';
 
 export default class ArticleEdit extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      description: RichTextEditor.createValueFromString(
-        `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi efficitur vulputate est eget fringilla. Suspendisse faucibus velit id nibh venenatis, eu mollis velit euismod. Aliquam erat volutpat. Vivamus ac rhoncus urna. Etiam nec faucibus nisi. Cras quis elit pharetra, maximus nunc a, varius elit. Proin et sem accumsan, hendrerit purus id, rutrum velit. Fusce lacinia elit tellus, in tempus ante maximus id. Vivamus consequat risus ac semper dictum. Suspendisse elementum volutpat egestas. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas sed placerat augue, vitae mattis mauris. Sed molestie ac ex sed interdum. Phasellus dui sapien, porttitor ut mattis nec, placerat sed felis. Nam quis tincidunt lacus.
+      tags:null,
+      article:null,
+      articleTitle:'',
+      articleText: RichTextEditor.createValueFromString('',"html"),
+      articleTags:[],
+    } //ak to budem chciet dat do db, use this: this.state.text.toString("html")
+  }
 
-        Aenean blandit tortor est, et sodales ante ultrices ac. Pellentesque tincidunt varius aliquet. Suspendisse malesuada metus a sapien lacinia, vel tempor ex fringilla. Etiam a consequat orci, vitae aliquet arcu. Vivamus pellentesque venenatis quam non porta. Sed lobortis non ante ac iaculis. Proin malesuada libero metus. Nulla urna lacus, ultrices nec aliquet sit amet, gravida in eros. Vivamus efficitur fermentum erat eget viverra. Vivamus non tortor at ante sollicitudin pharetra. Proin consequat finibus diam, a fringilla turpis elementum fermentum. Quisque finibus lacus sed rutrum viverra.
-        `,
-        "html")
-    } //ak to budem chciet dat do db, use this: this.state.description.toString("html")
+  componentWillMount(){
+      this.ref2 = base.bindToState(`kb-tags`, {
+        context: this,
+        state: 'tags',
+        asArray: true
+      });
+
+      this.ref = base.bindToState(`kb-articles`, {
+        context: this,
+        asArray: true,
+        state:'article',
+        then: ()=>{
+          let article=this.state.article && this.state.article.length===1?this.state.article[0]:null;
+          if(!article) return null;
+          this.setState({article,articleText:RichTextEditor.createValueFromString(article.text,"html"),articleTitle:article.title,articleTags:article.tags});
+        },
+        queries: {
+          orderByChild: 'id',
+          equalTo: parseInt(this.props.match.params.articleID),
+        }
+      });
+  }
+
+  componentWillUnmount() {
+      base.removeBinding(this.ref);
+      base.removeBinding(this.ref2);
   }
 
   render() {
@@ -26,20 +55,31 @@ export default class ArticleEdit extends Component {
           </Link>
 
           <FormGroup bsSize="large" controlId="inputName">
-            <FormControl type="text" value='A Big Title'/>
+            <FormControl type="text" value={this.state.articleTitle}/>
+          </FormGroup>
+          <FormGroup controlId="wisig">
+            <ControlLabel>Edit Text</ControlLabel>
+            <RichTextEditor
+              value={this.state.articleText}
+              onChange={e => {
+                this.setState({ articleText: e });
+              }}
+              toolbarClassName="demo-toolbar"
+              editorClassName="demo-editor"
+            />
           </FormGroup>
 
           <FormGroup controlId="multiselectTag">
-            <Col xs={2}>
-              <ControlLabel>Tags:</ControlLabel>
-            </Col>
-            <Col xs={10}>
-              <FormControl componentClass="select" multiple>
-                <option value="linux">Linux</option>
-                <option value="configList">Config List</option>
-                <option value="windows">Windows</option>
-              </FormControl>
-            </Col>
+            <Select
+              options={this.state.tags.map(tag => {
+                tag.label = tag.name;
+                tag.value = tag.id;
+                return tag;
+              })}
+              isMulti
+              value={this.state.articleTags}
+              onChange={e =>{ this.setState({ articleTags: e })}}
+            />
           </FormGroup>
           <FormGroup controlId="multiselectTag">
             <p> </p>
@@ -56,11 +96,13 @@ export default class ArticleEdit extends Component {
               <FormGroup>
                 <Table>
                   <thead>
+                    <tr>
                     <th> </th>
                     <th>View</th>
                     <th>Read</th>
                     <th>Write</th>
                     <th>Actions</th>
+                    </tr>
                   </thead>
                   <tbody>
                     <tr>
@@ -74,18 +116,6 @@ export default class ArticleEdit extends Component {
                 </Table>
               </FormGroup>
             </Col>
-          </FormGroup>
-
-          <FormGroup controlId="wisig">
-            <ControlLabel>Edit Text</ControlLabel>
-            <RichTextEditor
-              value={this.state.description}
-              onChange={e => {
-                this.setState({ description: e });
-              }}
-              toolbarClassName="demo-toolbar"
-              editorClassName="demo-editor"
-            />
           </FormGroup>
       </div>
     );

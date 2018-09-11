@@ -36,7 +36,6 @@ export default class TasksEdit extends Component {
   }
 
 componentWillReceiveProps(props){
-  console.log(props);
   if (props.info.id !== this.props.info.id){
     this.setState({
       title: props.info.title,

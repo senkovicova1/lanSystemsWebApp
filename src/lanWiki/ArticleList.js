@@ -3,59 +3,98 @@ import base from '../firebase';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import sampleArticles from '../samples/sampleArticles';
-
 export default class ArticleList extends Component{
 
   constructor(props){
     super(props);
     this.state = {
-      samples : null,
+      articles : [],
+      tags:[],
     }
-    this.addSamples.bind(this);
+    this.tagsToString.bind(this);
   }
 
   componentWillMount(){
-      this.ref = base.syncState(`kb-article-titles`, {
+    this.ref2 = base.bindToState(`kb-tags`, {
+      context: this,
+      state: 'tags',
+      asArray: true
+    });
+    if(this.props.match.params.tagID==='all'){
+      this.ref = base.bindToState(`kb-articles`, {
         context: this,
-        state: 'samples'
+        state: 'articles',
+        asArray: true
       });
+    }else{
+      this.ref = base.bindToState(`kb-articles`, {
+        context: this,
+        state: 'articles',
+        asArray: true,
+        queries: {
+          orderByChild: 'tags',
+          equalTo: parseInt(this.props.match.params.tagID),
+        }
+      });
+    }
   }
 
-  addSamples(){
-      this.setState({
-        samples : sampleArticles,
-      });
+  componentWillReceiveProps(props){
+    if (props.match.params.tagID !== this.props.match.params.tagID){
+      base.removeBinding(this.ref);
+      if(props.match.params.tagID==='all'){
+        this.ref = base.bindToState(`kb-articles`, {
+          context: this,
+          state: 'articles',
+          asArray: true
+        });
+      }else{
+        this.ref = base.bindToState(`kb-articles`, {
+          context: this,
+          state: 'articles',
+          asArray: true,
+          queries: {
+            orderByChild: 'tags',
+            equalTo: parseInt(props.match.params.tagID),
+          }
+        });
+      }
+    }
+  }
+
+  tagsToString(tags){
+    let show = this.state.tags.filter((tag)=>tags.includes(tag.id));
+    let result="";
+    show.map((item)=>result+=item.name+' ');
+    return result;
   }
 
   componentWillUnmount() {
       base.removeBinding(this.ref);
+      base.removeBinding(this.ref2);
   }
 
   render(){
     return (
       <div>
-          <div className='DataTable'>
-            <Button onClick={this.addSamples.bind(this)}>aaa</Button>
-            <Link to={{pathname: `/lanwiki/articles`}}>
-              <p>+ Article</p>
-            </Link>
+        <Link to={{pathname: `/lanwiki`}}>
+          <p>+ Article</p>
+        </Link>
+        {this.state.articles.map((article)=>
+          <div key={article.id}>
 
-            <h3> A Big Title </h3>
-            <p> Created: Branislav Susta 7:23 10.9.2018, Last Edit: Branislav Susta 7:23 10.9.2018 </p>
-
+            <h3>{article.title}</h3>
             <p>
-              Tags: Linux | Config List
+              Tags: {this.tagsToString([article.tags])}
             </p>
 
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi efficitur vulputate est eget fringilla. Suspendisse faucibus velit id nibh venenatis, eu mollis velit euismod. Aliquam erat volutpat. Vivamus ac rhoncus urna. Etiam nec faucibus nisi. Cras quis elit pharetra, maximus nunc a, varius elit. Proin et sem accumsan, hendrerit purus id, rutrum velit. Fusce lacinia elit tellus, in tempus ante maximus id. Vivamus consequat risus ac semper dictum. Suspendisse elementum volutpat egestas.
-            </p>
+            <div dangerouslySetInnerHTML={{__html:article.text.substring(0,655)+'...'}} />
 
-            <Link className='articleRead' to={{pathname: `/lanwiki/articles/a-big-title`}}>
+            <Link className='articleRead' to={{pathname: './'+this.props.match.params.tagID+`/article/`+article.id}}>
               <p className='articleAddButton' >read more...</p>
             </Link>
           </div>
+        )}
       </div>
     );
   }

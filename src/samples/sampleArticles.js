@@ -1,4 +1,4 @@
-const sampleArticles = {
+/*const sampleArticles = {
   1: {
     id: 1,
     articleId: 1,
@@ -20,7 +20,7 @@ const sampleArticles = {
     `,
   },
 
-};
+};*/
 
 const sampleTags = {
   1: {
@@ -101,7 +101,7 @@ export default class ArticleList extends Component{
       <div>
         <Col xs={8} >
           <div className='DataTable'>*/
-        {/*    <Button onClick={this.addSamples.bind(this)}>aaa</Button> */}
+        /*{    <Button onClick={this.addSamples.bind(this)}>aaa</Button> }*/
   /*          <Link to={{pathname: `/lanwiki/articles`}}>
               <p>+ Article</p>
             </Link>
@@ -122,7 +122,7 @@ export default class ArticleList extends Component{
               }
             )
           }*/
-{/*
+/*{
             <h3> A Big Title </h3>
             <p> Created: Branislav Susta 7:23 10.9.2018, Last Edit: Branislav Susta 7:23 10.9.2018 </p>
 
@@ -137,7 +137,7 @@ export default class ArticleList extends Component{
             <Link className='articleRead' to={{pathname: `/lanwiki/articles/a-big-title`}}>
               <p className='articleAddButton' >read more...</p>
             </Link>
-            */}
+            }*/
       /*    </div>
         </Col>
         <Col xs={4}>

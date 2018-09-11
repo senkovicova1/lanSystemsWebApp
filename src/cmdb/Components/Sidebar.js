@@ -25,8 +25,6 @@ export default class Sidebar extends Component{
   }
 
   isActive(item){
-    console.log(this.props.location.pathname);
-    console.log(item);
       return this.props.location.pathname.toLowerCase().indexOf(item.toLowerCase()) > -1;
     }
 
