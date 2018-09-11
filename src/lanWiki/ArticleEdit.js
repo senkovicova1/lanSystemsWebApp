@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
-import firebase from 'firebase';
-import ReactTable from 'react-table';
-import 'react-table/react-table.css';
 import { Link } from 'react-router-dom';
 import RichTextEditor from 'react-rte';
-import { Button, FormGroup, ControlLabel, FormControl, Col, Checkbox, Table } from 'react-bootstrap';
-
-import Tags from './Tags';
+import { FormGroup, ControlLabel, FormControl, Col, Checkbox, Table } from 'react-bootstrap';
 
 export default class ArticleEdit extends Component {
 
@@ -25,7 +20,6 @@ export default class ArticleEdit extends Component {
   render() {
       return (
       <div>
-        <Col xs={8} className='DataTable'>
 
           <Link to={{ pathname: '/lanWiki/articles/a-big-title'}}>
             <p>Save</p>
@@ -93,12 +87,6 @@ export default class ArticleEdit extends Component {
               editorClassName="demo-editor"
             />
           </FormGroup>
-
-        </Col>
-
-        <Col xs={4}>
-          <Tags />
-        </Col>
       </div>
     );
 }}

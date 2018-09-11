@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
-import { Button, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Tags from './Tags';
 import Comments from './Comments';
 
 export default class Article extends Component{
 
-  constructor(props){
-    super(props);
-  }
-
   render(){
     return (
       <div >
-        <Col xs={8} >
           <div className='DataTable'>
             <Link to={{pathname: `/lanwiki/articles/edit/a-big-title`}}>
               <p>Edit</p>
@@ -37,10 +29,6 @@ export default class Article extends Component{
 
           </div>
           <Comments />
-        </Col>
-        <Col xs={4}>
-          <Tags />
-        </Col>
       </div>
     );
   }

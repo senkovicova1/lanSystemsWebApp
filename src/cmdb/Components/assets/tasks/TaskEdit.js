@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import firebase from 'firebase';
 import AutoSuggest from 'react-bootstrap-autosuggest';
-import Modal from 'react-responsive-modal';
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 const STATUS_OPTIONS = ['NEW', 'In progress', 'Solved', 'On hold'];

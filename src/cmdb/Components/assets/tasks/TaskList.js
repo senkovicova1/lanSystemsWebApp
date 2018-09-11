@@ -4,9 +4,7 @@ import {Col} from 'react-bootstrap';
 import firebase from 'firebase';
 import DataTable from '../../DataTable';
 import TaskAddModal from './TaskAddModal';
-import TaskEditModal from './TaskEditModal';
 import TaskEdit from './TaskEdit';
-import Sidebar from '../../Sidebar';
 
 export default class TaskList extends Component{
 
