@@ -26,10 +26,10 @@ export default class Navigation extends Component {
       <div>
         <PageHeader {...this.props}/>
           <div>
-            <Col xs={2} className='noPadding'>
+            <Col xs={1} className='noPadding'>
               <Sidebar  {...this.props}/>
             </Col>
-            <Col xs={10} className='noPadding'>
+            <Col xs={11} className='noPadding'>
               <Route exact path='/servers' component={ServerList} />
               <Route exact path='/servers/add' component={ServerAdd } />
               <Route exact path='/servers/edit/:id' component={ServerEdit }/>

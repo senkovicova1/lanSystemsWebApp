@@ -13,9 +13,11 @@ export default class TasksEdit extends Component {
     this.state = {
       open: false,
       users : [],
-      chosenBy : null,
-      chosenSolves : null,
-      chosenStatus : null,
+      title: this.props.info.title,
+      description: this.props.info.description,
+      chosenBy : this.props.info.by,
+      chosenSolves : this.props.info.solves,
+      chosenStatus : this.props.info.status,
     }
 
     this.setAny.bind(this);
@@ -33,6 +35,19 @@ export default class TasksEdit extends Component {
             }
           );
   }
+
+componentWillReceiveProps(props){
+  console.log(props);
+  if (props.info.id !== this.props.info.id){
+    this.setState({
+      title: props.info.title,
+      description: props.info.description,
+      chosenBy : props.info.by,
+      chosenSolves : props.info.solves,
+      chosenStatus : props.info.status,
+    })
+  }
+}
 
   setAny(key, value){
     let newState={};
@@ -72,19 +87,19 @@ export default class TasksEdit extends Component {
 
             <FormGroup controlId="formGoupInputTasks">
                 <ControlLabel>Title</ControlLabel>
-                <FormControl  inputRef={(input) => this.title = input} type="text" placeholder={this.props.info.title}/>
+                <FormControl  inputRef={(input) => this.title = input} placeholder="Enter task's name" type="text" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })}/>
             </FormGroup>
 
             <FormGroup controlId="formGoupInputIPAddress">
                 <ControlLabel>Description</ControlLabel>
-                <FormControl  inputRef={(input) => this.description = input} componentClass="textarea" placeholder={this.props.info.description} />
+                <FormControl  inputRef={(input) => this.description = input} componentClass="textarea" value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} />
             </FormGroup>
 
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Select status</ControlLabel>
                 <AutoSuggest
                   datalist={STATUS_OPTIONS}
-                  placeholder={this.state.chosenStatus || this.props.info.status}
+                  value={this.state.chosenStatus}
                   onChange={(value) => this.setAny('chosenStatus', value)}
                   />
             </FormGroup>
@@ -93,16 +108,16 @@ export default class TasksEdit extends Component {
               <ControlLabel>Made by</ControlLabel>
                 <AutoSuggest
                   datalist={USERS_OPTIONS}
-                  placeholder={this.state.chosenBy || this.props.info.by}
+                  value={this.state.chosenBy}
                   onChange={(value) => this.setAny('chosenBy', value)}
                   />
             </FormGroup>
 
             <FormGroup controlId="formControlsSelect">
-              <ControlLabel>Soled by</ControlLabel>
+              <ControlLabel>Solved by</ControlLabel>
                 <AutoSuggest
                   datalist={USERS_OPTIONS}
-                  placeholder={this.state.chosenSolves || this.props.info.solves}
+                  value={this.state.chosenSolves}
                   onChange={(value) => this.setAny('chosenSolves', value)}
                   />
             </FormGroup>

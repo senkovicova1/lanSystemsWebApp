@@ -95,7 +95,7 @@ export default class TaskList extends Component{
             <DataTable chosenTask={this.chosenTask.bind(this)} database={'tasks'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
           </Col>
           <Col xs={8} >
-            <TaskEdit info={this.state.task} />
+            { this.state.task !== null && <TaskEdit info={this.state.task} /> }
           </Col>
         </div>
       );
