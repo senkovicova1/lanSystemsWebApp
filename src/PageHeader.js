@@ -12,7 +12,7 @@ export default class PageHeader extends Component{
 
   render(){
     return(
-        <header style={{borderRadius:0,border:'2px solid #8db9df', color:'black'}}>
+        <header style={{borderRadius:0,borderBottom:'2px solid #8db9df', color:'black'}}>
           <Navbar.Brand>
             <DropdownButton
               bsStyle="default"

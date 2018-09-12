@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 import RichTextEditor from 'react-rte';
-import { FormGroup, ControlLabel, FormControl, Col, Checkbox, Table } from 'react-bootstrap';
+import firebase from 'firebase';
+import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import base from '../firebase';
 import Select from 'react-select';
 
@@ -16,28 +16,44 @@ export default class ArticleEdit extends Component {
       articleText: RichTextEditor.createValueFromString('',"html"),
       articleTags:[],
     } //ak to budem chciet dat do db, use this: this.state.text.toString("html")
+    this.submit.bind(this);
   }
 
   componentWillMount(){
       this.ref2 = base.bindToState(`kb-tags`, {
         context: this,
         state: 'tags',
-        asArray: true
+        asArray: true,
+        then: ()=>{
+          if(this.state.article!==null){
+            this.setState({
+              articleTags:(this.state.tags?this.state.tags:[]).map(tag => {
+                tag.label = tag.name;
+                tag.value = tag.id;
+                return tag;
+              }).filter((tag)=>[this.article.tags].includes(tag.id))});
+        }},
       });
 
-      this.ref = base.bindToState(`kb-articles`, {
+      this.ref = base.fetch('kb-articles/'+this.props.match.params.articleID, {
         context: this,
-        asArray: true,
         state:'article',
-        then: ()=>{
-          let article=this.state.article && this.state.article.length===1?this.state.article[0]:null;
-          if(!article) return null;
-          this.setState({article,articleText:RichTextEditor.createValueFromString(article.text,"html"),articleTitle:article.title,articleTags:article.tags});
-        },
-        queries: {
-          orderByChild: 'id',
-          equalTo: parseInt(this.props.match.params.articleID),
-        }
+        then(article){
+            if(!article){
+              this.props.history.push('/lanwiki');
+              return;
+            };
+            if(this.state.tags===null){
+              this.setState({article,articleText:RichTextEditor.createValueFromString(article.text,"html"),articleTitle:article.title,articleTags:article.tags});
+            }else{
+              this.setState({article,articleText:RichTextEditor.createValueFromString(article.text,"html"),articleTitle:article.title,
+                articleTags:(this.state.tags?this.state.tags:[]).map(tag => {
+                  tag.label = tag.name;
+                  tag.value = tag.id;
+                  return tag;
+                }).filter((tag)=>[article.tags].includes(tag.id))});
+            }
+          }
       });
   }
 
@@ -46,16 +62,28 @@ export default class ArticleEdit extends Component {
       base.removeBinding(this.ref2);
   }
 
+  submit(){
+    let data={
+      id:this.state.article.id,
+      tags:this.state.articleTags.length>0?this.state.articleTags[0].id:this.state.article.tags,
+      text:this.state.articleText.toString('html'),
+      title:this.state.articleTitle
+    }
+    base.update('kb-articles/'+this.state.article.id, {
+      data
+    });
+    this.props.history.goBack();
+  }
+
   render() {
       return (
-      <div>
-
-          <Link to={{ pathname: '/lanWiki/articles/a-big-title'}}>
-            <p>Save</p>
-          </Link>
-
+      <div style={{padding:10}}>
           <FormGroup bsSize="large" controlId="inputName">
-            <FormControl type="text" value={this.state.articleTitle}/>
+            <FormControl type="text"
+              onChange={e => {
+                this.setState({ articleTitle: e.target.value });
+              }}
+             value={this.state.articleTitle}/>
           </FormGroup>
           <FormGroup controlId="wisig">
             <ControlLabel>Edit Text</ControlLabel>
@@ -71,7 +99,7 @@ export default class ArticleEdit extends Component {
 
           <FormGroup controlId="multiselectTag">
             <Select
-              options={this.state.tags.map(tag => {
+              options={(this.state.tags?this.state.tags:[]).map(tag => {
                 tag.label = tag.name;
                 tag.value = tag.id;
                 return tag;
@@ -81,42 +109,7 @@ export default class ArticleEdit extends Component {
               onChange={e =>{ this.setState({ articleTags: e })}}
             />
           </FormGroup>
-          <FormGroup controlId="multiselectTag">
-            <p> </p>
-          </FormGroup>
-          <FormGroup controlId="multiselectACL">
-            <Col xs={2}>
-              <ControlLabel>ACL:</ControlLabel>
-            </Col>
-            <Col xs={10}>
-              <FormControl componentClass="select" multiple>
-                <option value="r">Read</option>
-                <option value="w">Write</option>
-              </FormControl>
-              <FormGroup>
-                <Table>
-                  <thead>
-                    <tr>
-                    <th> </th>
-                    <th>View</th>
-                    <th>Read</th>
-                    <th>Write</th>
-                    <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><h4> All </h4> </td>
-                      <td> <Checkbox inline> </Checkbox> </td>
-                      <td> <Checkbox inline> </Checkbox> </td>
-                      <td> <Checkbox inline> </Checkbox> </td>
-                      <td> <Checkbox inline> </Checkbox> </td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </FormGroup>
-            </Col>
-          </FormGroup>
+          <Button onClick={this.submit.bind(this)} bsStyle="primary">Save</Button>
       </div>
     );
 }}
