@@ -19,53 +19,18 @@ export default class ArticleList extends Component{
       state: 'tags',
       asArray: true
     });
-    if(this.props.match.params.tagID==='all'){
       this.ref = base.bindToState(`kb-articles`, {
         context: this,
         state: 'articles',
         asArray: true
       });
-    }else{
-      this.ref = base.bindToState(`kb-articles`, {
-        context: this,
-        state: 'articles',
-        asArray: true,
-        queries: {
-          orderByChild: 'tags',
-          includes: parseInt(this.props.match.params.tagID),
-        }
-      });
-    }
-  }
-
-  componentWillReceiveProps(props){
-    if (props.match.params.tagID !== this.props.match.params.tagID){
-      base.removeBinding(this.ref);
-      if(props.match.params.tagID==='all'){
-        this.ref = base.bindToState(`kb-articles`, {
-          context: this,
-          state: 'articles',
-          asArray: true
-        });
-      }else{
-        this.ref = base.bindToState(`kb-articles`, {
-          context: this,
-          state: 'articles',
-          asArray: true,
-          queries: {
-            orderByChild: 'tags',
-            equalTo: parseInt(props.match.params.tagID),
-          }
-        });
-      }
-    }
   }
 
   tagsToString(tags){
     let show = this.state.tags.filter((tag)=>tags.includes(tag.id));
     let result="";
-    show.map((item)=>result+=item.name+' ');
-    return result;
+    show.map((item)=>result+=item.name+' | ');
+    return result.substring(0,result.length-2);
   }
 
   componentWillUnmount() {
@@ -76,23 +41,23 @@ export default class ArticleList extends Component{
   render(){
     return (
       <div>
-        <Link to={{pathname: `/lanwiki`}}>
+        <Link to={{pathname: './'+this.props.match.params.tagID+'/add/article'}}>
           <p>+ Article</p>
         </Link>
-        {this.state.articles.map((article)=>
-          <div key={article.id}>
+        {this.state.articles.filter((item)=>this.props.match.params.tagID==='all'||item.tags.includes(parseInt(this.props.match.params.tagID))).map((article)=>
+          <div className="article" key={article.id}>
 
-            <h3>{article.title}</h3>
+            <h3 style={{paddingLeft:3}}>{article.title}</h3>
             <p>
               Tags: {this.tagsToString(article.tags)}
             </p>
-
-            <div dangerouslySetInnerHTML={{__html:article.text.substring(0,655)+'...'}} />
-
+            <div className="articleBody">
+              <div dangerouslySetInnerHTML={{__html:article.text.substring(0,655)+'...'}} />
             <Link className='articleRead' to={{pathname: './'+this.props.match.params.tagID+`/article/`+article.id}}>
               <p className='articleAddButton' >read more...</p>
             </Link>
           </div>
+        </div>
         )}
       </div>
     );

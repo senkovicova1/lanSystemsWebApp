@@ -20,64 +20,44 @@ export default class ArticleEdit extends Component {
   }
 
   componentWillMount(){
+    this.ref = base.bindToState(`kb-articles`, {
+      context: this,
+      state: 'article',
+      asArray: true,
+      queries: {
+        orderByChild: 'id',
+        limitToLast: 1
+      }
+    });
+
       this.ref2 = base.bindToState(`kb-tags`, {
         context: this,
         state: 'tags',
         asArray: true,
-        then: ()=>{
-          if(this.state.article!==null){
-            this.setState({
-              articleTags:(this.state.tags?this.state.tags:[]).map(tag => {
-                tag.label = tag.name;
-                tag.value = tag.id;
-                return tag;
-              }).filter((tag)=>[this.article.tags].includes(tag.id))});
-        }},
       });
 
-      base.fetch('kb-articles/'+this.props.match.params.articleID, {
-        context: this,
-        state:'article',
-        then(article){
-            if(!article){
-              this.props.history.push('/lanwiki');
-              return;
-            };
-            if(this.state.tags===null){
-              this.setState({article,articleText:RichTextEditor.createValueFromString(article.text,"html"),articleTitle:article.title,articleTags:article.tags});
-            }else{
-              this.setState({article,articleText:RichTextEditor.createValueFromString(article.text,"html"),articleTitle:article.title,
-                articleTags:(this.state.tags?this.state.tags:[]).map(tag => {
-                  tag.label = tag.name;
-                  tag.value = tag.id;
-                  return tag;
-                }).filter((tag)=>article.tags.includes(tag.id))});
-            }
-          }
-      });
-  }
+    }
 
   componentWillUnmount() {
-      base.removeBinding(this.ref2);
+    base.removeBinding(this.ref);
+    base.removeBinding(this.ref2);
   }
 
   submit(){
     let data={
-      id:this.state.article.id,
+      id:(this.state.article.length>0?this.state.article[0].id+1:0),
       tags:this.state.articleTags.map((item)=>item.id),
       text:this.state.articleText.toString('html'),
       title:this.state.articleTitle
     }
-    base.update('kb-articles/'+this.state.article.id, {
-      data
-    });
+    base.post('kb-articles/'+data.id,{data});
     this.props.history.goBack();
   }
 
   render() {
       return (
       <div style={{padding:10}}>
-          <h3>{'Editing article "' +this.state.articleTitle+'"' }</h3>
+        <h3>Adding new article</h3>
           <FormGroup bsSize="large" controlId="inputName">
             <FormControl type="text"
               onChange={e => {
@@ -109,7 +89,7 @@ export default class ArticleEdit extends Component {
               onChange={e =>{ this.setState({ articleTags: e })}}
             />
           </FormGroup>
-          <Button onClick={this.submit.bind(this)} bsStyle="primary">Save</Button>
+          <Button onClick={this.submit.bind(this)} bsStyle="primary">Add</Button>
       </div>
     );
 }}

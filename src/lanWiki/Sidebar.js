@@ -30,7 +30,6 @@ export default class Tags extends Component{
     }
 
   render(){
-    console.log(this.state.kbTags);
     return (
       <ListGroup className='sidebar'>
         <Link className='link' to={{pathname: `/lanwiki/tag/all`}}>

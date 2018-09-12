@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 import Article from './Article';
 import ArticleList from './ArticleList';
 import ArticleEdit from './ArticleEdit';
+import ArticleAdd from './ArticleAdd';
 
 export default class Navigation extends Component {
   render(){
@@ -17,6 +18,7 @@ export default class Navigation extends Component {
           </Col>
           <Col xs={11} className='noPadding'>
             <Route exact path='/lanwiki/tag/:tagID' component={ArticleList} />
+            <Route exact path='/lanwiki/tag/:tagID/add/article' component={ArticleAdd} />
             <Route exact path='/lanwiki/tag/:tagID/article/:articleID' component={Article} />
             <Route exact path='/lanwiki/tag/:tagID/article/:articleID/edit' component={ArticleEdit} />
           </Col>

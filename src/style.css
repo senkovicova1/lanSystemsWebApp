@@ -23,6 +23,15 @@
   color:white !important;
 }
 
+.article{
+  border-bottom:solid #8db9df 4px;
+}
+.articleBody{
+  border-top:solid #8db9df 2px;
+  border-radius: 3px;
+  padding:10px;
+}
+
 .addTagSidebar:hover{
   background-color:#214565 !important;
 }
