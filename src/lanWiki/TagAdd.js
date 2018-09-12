@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
-import RichTextEditor from 'react-rte';
-import firebase from 'firebase';
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, FormControl, Button } from 'react-bootstrap';
 import { SketchPicker } from "react-color";
 import base from '../firebase';
-import Select from 'react-select';
 
 export default class ArticleEdit extends Component {
 

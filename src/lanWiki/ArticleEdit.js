@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
 import RichTextEditor from 'react-rte';
-import firebase from 'firebase';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import base from '../firebase';
 import Select from 'react-select';
+
+import { EditorState, convertToRaw, convertFromRaw, ContentState, convertFromHTML } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 export default class ArticleEdit extends Component {
 
@@ -13,10 +18,11 @@ export default class ArticleEdit extends Component {
       tags:null,
       article:null,
       articleTitle:'',
-      articleText: RichTextEditor.createValueFromString('',"html"),
+      articleText: EditorState.createEmpty(),
       articleTags:[],
     } //ak to budem chciet dat do db, use this: this.state.text.toString("html")
     this.submit.bind(this);
+    this.onEditorStateChange.bind(this);
   }
 
   componentWillMount(){
@@ -43,15 +49,26 @@ export default class ArticleEdit extends Component {
               this.props.history.push('/lanwiki');
               return;
             };
+
+            const TEXT = EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(article.text)));
+
             if(this.state.tags===null){
-              this.setState({article,articleText:RichTextEditor.createValueFromString(article.text,"html"),articleTitle:article.title,articleTags:article.tags});
+              this.setState({
+                article,
+                articleText: TEXT,
+                articleTitle:article.title,
+                articleTags:article.tags});
             }else{
-              this.setState({article,articleText:RichTextEditor.createValueFromString(article.text,"html"),articleTitle:article.title,
+              this.setState({
+                article,
+                articleText:TEXT,
+                articleTitle:article.title,
                 articleTags:(this.state.tags?this.state.tags:[]).map(tag => {
                   tag.label = tag.name;
                   tag.value = tag.id;
                   return tag;
-                }).filter((tag)=>article.tags.includes(tag.id))});
+                }).filter((tag)=>article.tags.includes(tag.id))
+              });
             }
           }
       });
@@ -65,8 +82,8 @@ export default class ArticleEdit extends Component {
     let data={
       id:this.state.article.id,
       tags:this.state.articleTags.map((item)=>item.id),
-      text:this.state.articleText.toString('html'),
-      title:this.state.articleTitle
+      text: draftToHtml(convertToRaw(this.state.articleText.getCurrentContent())),
+      title:this.state.articleTitle,
     }
     base.update('kb-articles/'+this.state.article.id, {
       data
@@ -74,7 +91,14 @@ export default class ArticleEdit extends Component {
     this.props.history.goBack();
   }
 
+  onEditorStateChange(text) {
+    this.setState({
+      articleText : text
+    });
+  };
+
   render() {
+    const TEXT = this.state.articleText;
       return (
       <div style={{padding:10}}>
           <h3>{'Editing article "' +this.state.articleTitle+'"' }</h3>
@@ -87,14 +111,17 @@ export default class ArticleEdit extends Component {
           </FormGroup>
           <FormGroup controlId="wisig">
             <ControlLabel>Edit Text</ControlLabel>
-            <RichTextEditor
-              value={this.state.articleText}
-              onChange={e => {
-                this.setState({ articleText: e });
-              }}
-              toolbarClassName="demo-toolbar"
-              editorClassName="demo-editor"
-            />
+            <div>
+              <Editor
+                editorState={TEXT}
+                wrapperClassName="demo-wrapper"
+                editorClassName="demo-editor"
+                onEditorStateChange={this.onEditorStateChange.bind(this)}
+              />
+              <textarea
+                value={TEXT !== null ? draftToHtml(convertToRaw(TEXT.getCurrentContent())) : "<p>not now</p>"}
+              />
+            </div>
           </FormGroup>
 
           <FormGroup controlId="multiselectTag">

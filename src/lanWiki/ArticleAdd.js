@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import RichTextEditor from 'react-rte';
-import firebase from 'firebase';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import base from '../firebase';
 import Select from 'react-select';
