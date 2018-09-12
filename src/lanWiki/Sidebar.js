@@ -1,13 +1,15 @@
 import base from '../firebase';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Modal } from 'react-bootstrap';
+import TagAdd from './TagAdd';
 
 export default class Tags extends Component{
   constructor(props){
     super(props);
     this.state = {
-      kbTags : []
+      kbTags : [],
+      openAddTag:false
     }
     //this.isActive.bind(this);
   }
@@ -28,6 +30,7 @@ export default class Tags extends Component{
     }
 
   render(){
+    console.log(this.state.kbTags);
     return (
       <ListGroup className='sidebar'>
         <Link className='link' to={{pathname: `/lanwiki/tag/all`}}>
@@ -47,11 +50,17 @@ export default class Tags extends Component{
                 </Link>)
               })
             }
-            <Link className='link' to={{pathname: `/lanwiki/add/tag`}}>
-              <ListGroupItem active={this.isActive('add')} className='sidebarItem' >
-                +Tag
-              </ListGroupItem>
-            </Link>
+            <ListGroupItem onClick={()=>{this.setState({openAddTag:true})}} active={this.isActive('add')} className='sidebarItem addTagSidebar' >
+              +Tag
+            </ListGroupItem>
+            <Modal show={this.state.openAddTag} onHide={()=>{this.setState({openAddTag:false})}}>
+              <Modal.Header closeButton>
+                <Modal.Title>Add tag</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <TagAdd closeModal={()=>{this.setState({openAddTag:false})}} />
+              </Modal.Body>
+            </Modal>
           </ListGroup>
         );
 

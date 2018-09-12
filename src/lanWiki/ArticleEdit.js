@@ -35,7 +35,7 @@ export default class ArticleEdit extends Component {
         }},
       });
 
-      this.ref = base.fetch('kb-articles/'+this.props.match.params.articleID, {
+      base.fetch('kb-articles/'+this.props.match.params.articleID, {
         context: this,
         state:'article',
         then(article){
@@ -51,21 +51,20 @@ export default class ArticleEdit extends Component {
                   tag.label = tag.name;
                   tag.value = tag.id;
                   return tag;
-                }).filter((tag)=>[article.tags].includes(tag.id))});
+                }).filter((tag)=>article.tags.includes(tag.id))});
             }
           }
       });
   }
 
   componentWillUnmount() {
-      base.removeBinding(this.ref);
       base.removeBinding(this.ref2);
   }
 
   submit(){
     let data={
       id:this.state.article.id,
-      tags:this.state.articleTags.length>0?this.state.articleTags[0].id:this.state.article.tags,
+      tags:this.state.articleTags.map((item)=>item.id),
       text:this.state.articleText.toString('html'),
       title:this.state.articleTitle
     }

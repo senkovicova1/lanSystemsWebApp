@@ -32,7 +32,7 @@ export default class ArticleList extends Component{
         asArray: true,
         queries: {
           orderByChild: 'tags',
-          equalTo: parseInt(this.props.match.params.tagID),
+          includes: parseInt(this.props.match.params.tagID),
         }
       });
     }
@@ -84,7 +84,7 @@ export default class ArticleList extends Component{
 
             <h3>{article.title}</h3>
             <p>
-              Tags: {this.tagsToString([article.tags])}
+              Tags: {this.tagsToString(article.tags)}
             </p>
 
             <div dangerouslySetInnerHTML={{__html:article.text.substring(0,655)+'...'}} />

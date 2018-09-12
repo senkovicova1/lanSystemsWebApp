@@ -19,6 +19,14 @@
   margin-left: 10px;
 }
 
+.addTagSidebar{
+  color:white !important;
+}
+
+.addTagSidebar:hover{
+  background-color:#214565 !important;
+}
+
 .noPadding {
   padding: 0px;
 }

@@ -60,7 +60,7 @@ componentWillUnmount() {
             <p> Last Edit: Branislav Susta 7:23 10.9.2018 </p>
 
             <p>
-              Tags: {this.tagsToString([article.tags])}
+              Tags: {this.tagsToString(article.tags)}
             </p>
 
             <div dangerouslySetInnerHTML={{__html:article.text}} />
