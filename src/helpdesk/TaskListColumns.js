@@ -61,9 +61,12 @@ export default class TaskList extends Component{
         <div style={{padding:15}}>
           <div>
             <h3>Task List</h3>
-          <Button bsStyle="success" onClick={()=>this.setState({openAddTaskModal:true})} style={{marginLeft:10}}>
-            Add task
-          </Button>
+              <Button bsStyle="success" onClick={()=>this.setState({openAddTaskModal:true})} style={{marginLeft:10}}>
+                Add task
+              </Button>
+              <Button bsStyle="primary" onClick={()=>this.setState({openAddStatusModal:true})} style={{marginLeft:10}}>
+                Add status
+              </Button>
         </div>
 
         <div className="taskTableContentColumns">
