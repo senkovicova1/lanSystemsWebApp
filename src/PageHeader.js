@@ -23,6 +23,7 @@ export default class PageHeader extends Component{
             >
             <MenuItem onClick={()=>this.props.history.push('/cmdb')}>CMDB</MenuItem>
             <MenuItem onClick={()=>this.props.history.push('/lanwiki')}>LanWiki</MenuItem>
+            <MenuItem onClick={()=>this.props.history.push('/helpdesk')}>Helpdesk</MenuItem>
             </DropdownButton>
           </Navbar.Brand>
             <Nav pullRight>
