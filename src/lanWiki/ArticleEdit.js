@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import RichTextEditor from 'react-rte';
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, Modal } from 'react-bootstrap';
 import base from '../firebase';
+import firebase from 'firebase';
 import Select from 'react-select';
 
-import { EditorState, convertToRaw, convertFromRaw, ContentState, convertFromHTML } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import PictureUploadModal from './PictureUploadModal';
 
 export default class ArticleEdit extends Component {
 
@@ -18,14 +16,14 @@ export default class ArticleEdit extends Component {
       tags:null,
       article:null,
       articleTitle:'',
-      articleText: EditorState.createEmpty(),
+      articleText: RichTextEditor.createValueFromString('',"html"),
       articleTags:[],
-    } //ak to budem chciet dat do db, use this: this.state.text.toString("html")
+    }
     this.submit.bind(this);
-    this.onEditorStateChange.bind(this);
+    this.appendImage.bind(this);
   }
 
-  componentWillMount(){
+    componentWillMount(){
       this.ref2 = base.bindToState(`kb-tags`, {
         context: this,
         state: 'tags',
@@ -50,18 +48,16 @@ export default class ArticleEdit extends Component {
               return;
             };
 
-            const TEXT = EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(article.text)));
-
             if(this.state.tags===null){
               this.setState({
                 article,
-                articleText: TEXT,
+                articleText: RichTextEditor.createValueFromString(article.text,"html"),
                 articleTitle:article.title,
                 articleTags:article.tags});
             }else{
               this.setState({
                 article,
-                articleText:TEXT,
+                articleText:RichTextEditor.createValueFromString(article.text,"html"),
                 articleTitle:article.title,
                 articleTags:(this.state.tags?this.state.tags:[]).map(tag => {
                   tag.label = tag.name;
@@ -72,33 +68,35 @@ export default class ArticleEdit extends Component {
             }
           }
       });
-  }
 
-  componentWillUnmount() {
-      base.removeBinding(this.ref2);
-  }
-
-  submit(){
-    let data={
-      id:this.state.article.id,
-      tags:this.state.articleTags.map((item)=>item.id),
-      text: draftToHtml(convertToRaw(this.state.articleText.getCurrentContent())),
-      title:this.state.articleTitle,
     }
-    base.update('kb-articles/'+this.state.article.id, {
-      data
-    });
-    this.props.history.goBack();
-  }
 
-  onEditorStateChange(text) {
-    this.setState({
-      articleText : text
-    });
-  };
+    componentWillUnmount() {
+        base.removeBinding(this.ref2);
+    }
+
+    submit(){
+      let data={
+        id:this.state.article.id,
+        tags:this.state.articleTags.map((item)=>item.id),
+        text: this.state.articleText.toString('html'),
+        title:this.state.articleTitle,
+      }
+      base.update('kb-articles/'+this.state.article.id, {
+        data
+      });
+      this.props.history.goBack();
+    }
+
+    appendImage(image){
+      console.log(this.state.articleText.toString('html').concat(image));
+      this.setState({
+        articleText : RichTextEditor.createValueFromString(this.state.articleText.toString('html').concat(image),"html"),
+        openModal : false
+      });
+    }
 
   render() {
-    const TEXT = this.state.articleText;
       return (
       <div style={{padding:10}}>
           <h3>{'Editing article "' +this.state.articleTitle+'"' }</h3>
@@ -109,19 +107,28 @@ export default class ArticleEdit extends Component {
               }}
              value={this.state.articleTitle}/>
           </FormGroup>
+
+          <Button onClick={() => this.setState({openModal:true})}> Add picture to text </Button>
+
+          <Modal bsSize='large' show={this.state.openModal} onHide={()=>{this.setState({openModal:false})}}>
+            <Modal.Header closeButton>
+              <Modal.Title>Images</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <PictureUploadModal appendImage={this.appendImage.bind(this)} closeModal={()=>{this.setState({openModal:false})}} />
+            </Modal.Body>
+          </Modal>
+
           <FormGroup controlId="wisig">
             <ControlLabel>Edit Text</ControlLabel>
-            <div>
-              <Editor
-                editorState={TEXT}
-                wrapperClassName="demo-wrapper"
-                editorClassName="demo-editor"
-                onEditorStateChange={this.onEditorStateChange.bind(this)}
-              />
-              <textarea
-                value={TEXT !== null ? draftToHtml(convertToRaw(TEXT.getCurrentContent())) : "<p>not now</p>"}
-              />
-            </div>
+            <RichTextEditor
+              value={this.state.articleText}
+              onChange={e => {
+                this.setState({ articleText: e });
+              }}
+              toolbarClassName="demo-toolbar"
+              editorClassName="demo-editor"
+            />
           </FormGroup>
 
           <FormGroup controlId="multiselectTag">

@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import RichTextEditor from 'react-rte';
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, Modal } from 'react-bootstrap';
 import base from '../firebase';
+import firebase from 'firebase';
 import Select from 'react-select';
+
+import PictureUploadModal from './PictureUploadModal';
 
 export default class ArticleEdit extends Component {
 
@@ -16,6 +19,7 @@ export default class ArticleEdit extends Component {
       articleTags:[],
     } //ak to budem chciet dat do db, use this: this.state.text.toString("html")
     this.submit.bind(this);
+    this.appendImage.bind(this);
   }
 
   componentWillMount(){
@@ -53,6 +57,15 @@ export default class ArticleEdit extends Component {
     this.props.history.goBack();
   }
 
+  appendImage(image){
+    console.log(this.state.articleText.toString('html').concat(image));
+    this.setState({
+      articleText : RichTextEditor.createValueFromString(this.state.articleText.toString('html').concat(image),"html"),
+      openModal : false
+    });
+  }
+
+
   render() {
       return (
       <div style={{padding:10}}>
@@ -64,6 +77,18 @@ export default class ArticleEdit extends Component {
               }}
              value={this.state.articleTitle}/>
           </FormGroup>
+
+          <Button onClick={() => this.setState({openModal:true})}> Add picture to text </Button>
+
+          <Modal bsSize='large' show={this.state.openModal} onHide={()=>{this.setState({openModal:false})}}>
+            <Modal.Header closeButton>
+              <Modal.Title>Images</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <PictureUploadModal appendImage={this.appendImage.bind(this)} closeModal={()=>{this.setState({openModal:false})}} />
+            </Modal.Body>
+          </Modal>
+
           <FormGroup controlId="wisig">
             <ControlLabel>Edit Text</ControlLabel>
             <RichTextEditor
