@@ -15,7 +15,7 @@ export default class CompanyAdd extends React.Component {
     if (this.company.value.length < 1) return;
     const ID = Date.now();
     firebase.database()
-            .ref(`companies/${ID}`)
+            .ref(`settings-companies/${ID}`)
             .set({
               id: ID,
               companyName : this.company.value,
@@ -31,7 +31,7 @@ export default class CompanyAdd extends React.Component {
             <FormControl  inputRef={(input) => this.company = input} type="text" placeholder="Enter Company Name"/>
           </FormGroup>
 
-          <Link to={{pathname : '/companies'}}>
+          <Link to={{pathname : '/cmdb/companies'}}>
             <Button type="submit" onClick={ this.addCompany.bind(this)} bsStyle='success' >+ Add Company</Button>
           </Link>
         </div>

@@ -15,7 +15,7 @@ export default class ServerList extends Component{
 
   remove(row){
     firebase.database()
-            .ref(`servers/${row.original.id}`)
+            .ref(`cmdb-servers/${row.original.id}`)
             .remove();
   }
 
@@ -56,7 +56,7 @@ export default class ServerList extends Component{
     const COLUMNS = this.loadColumnNames();
     return (
       <div className='mainContainer'>
-         <DataTable database={'servers'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
+         <DataTable database={'cmdb-servers'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
       </div>
     );
   }

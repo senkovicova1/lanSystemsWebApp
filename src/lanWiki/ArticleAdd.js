@@ -4,6 +4,7 @@ import { FormGroup, ControlLabel, FormControl, Button, Modal } from 'react-boots
 import base from '../firebase';
 import firebase from 'firebase';
 import Select from 'react-select';
+import { Link } from 'react-router-dom';
 
 import PictureUploadModal from './PictureUploadModal';
 
@@ -67,8 +68,14 @@ export default class ArticleEdit extends Component {
 
 
   render() {
+    const PATH = this.props.location.pathname.split('/');
+    const NEW_PATH = PATH.splice(0, PATH.length-2).join('/');
       return (
       <div style={{padding:10}}>
+        <Link to={{pathname: `${NEW_PATH}`}}>
+          <p>Back</p>
+        </Link>
+
         <h3>Adding new article</h3>
           <FormGroup bsSize="large" controlId="inputName">
             <FormControl type="text"
@@ -76,6 +83,19 @@ export default class ArticleEdit extends Component {
                 this.setState({ articleTitle: e.target.value });
               }}
              value={this.state.articleTitle}/>
+          </FormGroup>
+
+          <FormGroup controlId="multiselectTag">
+            <Select
+              options={(this.state.tags?this.state.tags:[]).map(tag => {
+                tag.label = tag.name;
+                tag.value = tag.id;
+                return tag;
+              })}
+              isMulti
+              value={this.state.articleTags}
+              onChange={e =>{ this.setState({ articleTags: e })}}
+            />
           </FormGroup>
 
           <Button onClick={() => this.setState({openModal:true})}> Add picture to text </Button>
@@ -101,18 +121,7 @@ export default class ArticleEdit extends Component {
             />
           </FormGroup>
 
-          <FormGroup controlId="multiselectTag">
-            <Select
-              options={(this.state.tags?this.state.tags:[]).map(tag => {
-                tag.label = tag.name;
-                tag.value = tag.id;
-                return tag;
-              })}
-              isMulti
-              value={this.state.articleTags}
-              onChange={e =>{ this.setState({ articleTags: e })}}
-            />
-          </FormGroup>
+
           <Button onClick={this.submit.bind(this)} bsStyle="primary">Add</Button>
       </div>
     );

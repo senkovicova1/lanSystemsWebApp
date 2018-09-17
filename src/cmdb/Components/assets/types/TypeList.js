@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import DataTable from '../../DataTable';
 
-export default class CompanyList extends Component{
+export default class TypeList extends Component{
 
   constructor(props){
     super(props);
@@ -15,28 +15,28 @@ export default class CompanyList extends Component{
 
   remove(row){
     firebase.database()
-            .ref(`settings-companies/${row.original.id}`)
+            .ref(`cmdb-types/${row.original.id}`)
             .remove();
   }
 
   loadAddButton(){
     return (
-      <Link className='DataTableAdd' to={{pathname: `companies/add`}}>
-        <Button bsStyle="success" className='DataTableAddButton' >+ Add Company</Button>
+      <Link className='DataTableAdd' to={{pathname: `types/add`}}>
+        <Button bsStyle="success" className='DataTableAddButton' >+ Add Type</Button>
       </Link>);
   }
 
   loadColumnNames(){
       return [{
                 Header: 'Name',
-                accessor: 'companyName',
+                accessor: 'typeName',
               },{
                 Header: '',
                 accessor: 'edit',
                 Cell : row => {
                       return (
                         <div>
-                          <Link to={{pathname: `cmdb/companies/edit/${row.original.id}`}}>
+                          <Link to={{pathname: `/cmdb/types/edit/${row.original.id}`}}>
                               <Button bsStyle='warning'>Edit</Button>
                           </Link>
                           <Button onClick={() => {
@@ -53,7 +53,7 @@ export default class CompanyList extends Component{
     const COLUMNS = this.loadColumnNames();
     return (
       <div className='mainContainer'>
-          <DataTable database={'settings-companies'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
+          <DataTable database={'cmdb-types'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
       </div>
     );
   }

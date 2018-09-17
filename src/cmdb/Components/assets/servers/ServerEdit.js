@@ -12,23 +12,40 @@ export default class ServerEdit extends Component {
   constructor(props){
     super(props);
       this.state = {
-        server : 0,
+        id : null,
+        serverName : null,
+        companyName : null,
+        description: null,
+        serverFunction: null,
+        processor: null,
+        hdd: null,
+        type : null,
+        status : null,
         companies: {},
-        chosenCompany: null,
         nics : {},
+        types : {},
+        statuses : {},
       }
       this.editServer.bind(this);
-      this.handleChange.bind(this);
+      this.setAny.bind(this);
       this.renderEditable.bind(this);
       this.handleDeleteNIC.bind(this);
   }
 
   componentDidMount(){
     const SERVER_ID = this.props.match.params.id;
-    const DB = firebase.database().ref(`servers/${SERVER_ID}`);
+    const DB = firebase.database().ref(`cmdb-servers/${SERVER_ID}`);
     DB.on('value', snap =>
         this.setState({
-          server : snap.val()
+          id : SERVER_ID,
+          serverName : snap.val().serverName,
+          companyName : snap.val().companyName,
+          description: snap.val().description,
+          serverFunction: snap.val().serverFunction,
+          processor: snap.val().processor,
+          hdd: snap.val().hdd,
+          type : snap.val().type,
+          status : snap.val().status,
         })
       );
 
@@ -37,35 +54,49 @@ export default class ServerEdit extends Component {
         state: 'nics'
       });
 
-    this.ref2 = base.syncState(`companies`, {
+    this.ref2 = base.syncState(`settings-companies`, {
       context: this,
       state: 'companies'
     });
+
+      this.ref3 = base.syncState(`cmdb-types`, {
+          context: this,
+          state: 'types'
+        });
+
+      this.ref4 = base.syncState(`cmdb-statuses`, {
+          context: this,
+          state: 'statuses'
+        });
   }
 
   componentWillUnmount() {
       base.removeBinding(this.ref1);
       base.removeBinding(this.ref2);
+      base.removeBinding(this.ref3);
+      base.removeBinding(this.ref4);
   }
 
   editServer(){
     firebase.database()
-            .ref(`servers/${this.state.server.id}`)
+            .ref(`cmdb-servers/${this.state.id}`)
             .update({
-              serverName : this.name.value || this.state.server.serverName,
-              companyName : this.company.value || this.state.server.companyName,
-              description: this.description.value || this.state.server.description,
-              serverFunction: this.serverFunction.value || this.state.server.serverFunction,
-              processor: this.processor.value || this.state.server.processor,
-              hdd: this.hdd.value || this.state.server.hdd,
+              serverName : this.state.serverName,
+              companyName : this.state.companyName,
+              description: this.state.description,
+              serverFunction: this.state.serverFunction,
+              processor: this.state.processor,
+              hdd: this.state.hdd,
+              type: this.state.type,
+              status: this.state.status
             });
   }
 
-  handleChange(event) {
-      this.setState({
-        chosenCompany: event.target.value
-      });
-    }
+  setAny(key, value){
+    let newState={};
+    newState[key]=value.target.value;
+    this.setState( newState);
+  }
 
   handleDeleteNIC(event){
     firebase.database()
@@ -97,7 +128,7 @@ export default class ServerEdit extends Component {
   render() {
       const DATA = Object
                     .values(this.state.nics)
-                    .filter(val => val.serverID === this.state.server.id);
+                    .filter(val => val.serverID === this.state.id);
       const COLUMNS = [
               {
                 Header: 'NIC',
@@ -149,12 +180,12 @@ export default class ServerEdit extends Component {
 
             <FormGroup controlId="inputName">
               <ControlLabel>Server Name</ControlLabel>
-              <FormControl  inputRef={(input) => this.name = input} type="text" placeholder={this.state.server.serverName}/>
+              <FormControl  type="text" placeholder='Enter name' value={this.state.serverName} onChange={(e) => this.setState({ serverName: e.target.value })}/>
             </FormGroup>
 
             <FormGroup controlId="selectCompany">
               <ControlLabel>Select company</ControlLabel>
-                <FormControl value={this.state.chosenCompany || this.state.server.companyName} onChange={this.handleChange.bind(this)} componentClass="select" placeholder="select" inputRef={(input) => this.company = input}>
+                <FormControl value={this.state.companyName} onChange={(value) => this.setAny('companyName', value)} componentClass="select" placeholder="select" >
                 {
                   Object.keys(this.state.companies)
                         .map(c => <option key={c} value={this.state.companies[c].companyName}> {this.state.companies[c].companyName} </option> )
@@ -162,24 +193,44 @@ export default class ServerEdit extends Component {
                 </FormControl>
             </FormGroup>
 
+            <FormGroup controlId="selectCompany">
+              <ControlLabel>Select type</ControlLabel>
+                <FormControl value={this.state.type} onChange={(value) => this.setAny('type', value)} componentClass="select" placeholder="select" >
+                {
+                  Object.keys(this.state.types)
+                        .map(c => <option key={c} value={this.state.types[c].typeName}> {this.state.types[c].typeName} </option> )
+                }
+                </FormControl>
+            </FormGroup>
+
+            <FormGroup controlId="selectCompany">
+              <ControlLabel>Select status</ControlLabel>
+                <FormControl value={this.state.status} onChange={(value) => this.setAny('status', value)} componentClass="select" placeholder="select" >
+                {
+                  Object.keys(this.state.statuses)
+                        .map(c => <option key={c} value={this.state.statuses[c].statusName}> {this.state.statuses[c].statusName} </option> )
+                }
+                </FormControl>
+            </FormGroup>
+
             <FormGroup controlId="inputFunction">
               <ControlLabel>Function</ControlLabel>
-              <FormControl  inputRef={(input) => this.serverFunction = input} type="text" placeholder={this.state.server.serverFunction}/>
+              <FormControl  placeholder='Enter function' value={this.state.serverFunction} onChange={(e) => this.setState({ serverFunction: e.target.value })} type="text" />
             </FormGroup>
 
             <FormGroup controlId="textareaDescription">
-              <ControlLabel>Popis</ControlLabel>
-              <FormControl inputRef={(input) => this.description = input} componentClass="textarea" placeholder={this.state.server.description} />
+              <ControlLabel>Description</ControlLabel>
+              <FormControl componentClass="textarea" placeholder='Enter describtion' value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} />
             </FormGroup>
 
             <FormGroup controlId="inputProcessor">
               <ControlLabel>Processor</ControlLabel>
-              <FormControl  inputRef={(input) => this.processor = input} type="text" placeholder={this.state.server.processor}/>
+              <FormControl type="text" placeholder='Enter processor' value={this.state.processor} onChange={(e) => this.setState({ processor: e.target.value })} />
             </FormGroup>
 
             <FormGroup controlId="textareaHDD">
               <ControlLabel>HDD</ControlLabel>
-              <FormControl inputRef={(input) => this.hdd = input} componentClass="textarea" placeholder={this.state.server.hdd} />
+              <FormControl componentClass="textarea"  placeholder='Enter HDD' value={this.state.hdd} onChange={(e) => this.setState({ hdd: e.target.value })} />
             </FormGroup>
 
             <ReactTable
@@ -190,11 +241,11 @@ export default class ServerEdit extends Component {
               showPagination={false}
             />
 
-            <AddNICModalForm serverId={this.state.server.id}/>
+            <AddNICModalForm serverId={this.state.id}/>
 
             <p></p>
 
-            <Link to={{ pathname: '/servers'}}>
+            <Link to={{ pathname: '/cmdb/servers'}}>
               <Button type="submit" onClick={this.editServer.bind(this)} bsStyle='warning'>Edit this server</Button>
             </Link>
           </div>

@@ -34,7 +34,7 @@ componentWillMount(){
       asArray: true,
       queries: {
         orderByChild: 'id',
-        equalTo: parseInt(this.props.match.params.articleID),
+        equalTo: parseInt(this.props.match.params.articleID, 10),
       }
     });
 }
@@ -46,11 +46,18 @@ componentWillUnmount() {
 
 
   render(){
+    const PATH = this.props.location.pathname.split('/');
+    const NEW_PATH = PATH.splice(0, PATH.length-2).join('/');
     let article=this.state.article && this.state.article.length===1?this.state.article[0]:null;
     if(!article) return null;
     return (
       <div >
           <div className='DataTable'>
+
+            <Link to={{pathname: `${NEW_PATH}`}}>
+              <p>Back</p>
+            </Link>
+
             <Link to={{pathname: './'+article.id+`/edit`}}>
               <p>Edit</p>
             </Link>
