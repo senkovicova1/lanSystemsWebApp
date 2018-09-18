@@ -15,12 +15,17 @@
   cursor : pointer;
 }
 
+.headerIcons{
+  font-size:22px;
+  margin-top: 7px;
+}
+
 .statusStyle{
-  fontSize:15;
+  font-size:15;
   padding:10px;
   border-radius:0;
   cursor:pointer;
-  borderNope :solid black 1px;
+  height: 34px;
 }
 
 .taskTableContentColumns{
@@ -30,7 +35,7 @@
 .taskTableContentColumns .list-group{
   width:250px;
   padding-left: 5px;
-  
+
 }
 
 .taskTableContentColumns .list-group .list-group-item{
