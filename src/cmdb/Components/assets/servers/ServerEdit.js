@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import base from '../../../../firebase';
-import firebase from 'firebase';
 import AddNICModalForm from './AddNICModalForm';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { Link } from 'react-router-dom';
-import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { Button, FormGroup, ControlLabel, FormControl, Modal } from 'react-bootstrap';
+import Select from 'react-select';
+import BackupTaskList from '../backuptasks/BackupTaskList';
 
 export default class ServerEdit extends Component {
 
@@ -21,10 +22,15 @@ export default class ServerEdit extends Component {
         hdd: null,
         type : null,
         status : null,
+        placeID : null,
+
         companies: {},
         nics : {},
         types : {},
         statuses : {},
+        places : [],
+
+        openEdit : false,
       }
       this.editServer.bind(this);
       this.setAny.bind(this);
@@ -34,22 +40,26 @@ export default class ServerEdit extends Component {
 
   componentDidMount(){
     const SERVER_ID = this.props.match.params.id;
-    const DB = firebase.database().ref(`cmdb-servers/${SERVER_ID}`);
-    DB.on('value', snap =>
+    base.fetch(`cmdb-servers/${SERVER_ID}`, {
+      context: this,
+      state:'server',
+      then:(server)=>{
         this.setState({
           id : SERVER_ID,
-          serverName : snap.val().serverName,
-          companyName : snap.val().companyName,
-          description: snap.val().description,
-          serverFunction: snap.val().serverFunction,
-          processor: snap.val().processor,
-          hdd: snap.val().hdd,
-          type : snap.val().type,
-          status : snap.val().status,
+          serverName : server.serverName,
+          companyName : server.companyName,
+          description: server.description,
+          serverFunction: server.serverFunction,
+          processor: server.processor,
+          hdd: server.hdd,
+          type : server.type,
+          status : server.status,
+          placeID : server.placeID,
         })
-      );
+      }
+    });
 
-    this.ref1 = base.syncState(`nics`, {
+    this.ref1 = base.syncState(`cmdb-nics`, {
         context: this,
         state: 'nics'
       });
@@ -64,32 +74,35 @@ export default class ServerEdit extends Component {
           state: 'types'
         });
 
-      this.ref4 = base.syncState(`cmdb-statuses`, {
-          context: this,
-          state: 'statuses'
-        });
+      this.ref5 = base.bindToState(`cmdb-places`, {
+        context: this,
+        state: 'places',
+        asArray: true,
+      });
   }
 
   componentWillUnmount() {
       base.removeBinding(this.ref1);
       base.removeBinding(this.ref2);
       base.removeBinding(this.ref3);
-      base.removeBinding(this.ref4);
+      base.removeBinding(this.ref5);
   }
 
   editServer(){
-    firebase.database()
-            .ref(`cmdb-servers/${this.state.id}`)
-            .update({
-              serverName : this.state.serverName,
-              companyName : this.state.companyName,
-              description: this.state.description,
-              serverFunction: this.state.serverFunction,
-              processor: this.state.processor,
-              hdd: this.state.hdd,
-              type: this.state.type,
-              status: this.state.status
-            });
+    let data={
+      serverName : this.state.serverName,
+      companyName : this.state.companyName,
+      description: this.state.description,
+      serverFunction: this.state.serverFunction,
+      processor: this.state.processor,
+      hdd: this.state.hdd,
+      type: this.state.type,
+      status: this.state.status,
+      placeID : this.state.placeID,
+    }
+    base.update(`cmdb-servers/${this.state.id}`,{data});
+
+    this.props.history.goBack();
   }
 
   setAny(key, value){
@@ -99,9 +112,11 @@ export default class ServerEdit extends Component {
   }
 
   handleDeleteNIC(event){
-    firebase.database()
-            .ref(`nics/${event}`)
-            .remove();
+    if (window.confirm("Are you sure you want to delete this NIC?")) {
+      base.remove(`cmdb-nics/${event}`);
+    } else {
+      return;
+    }
   }
 
   renderEditable(cellInfo) {
@@ -126,55 +141,87 @@ export default class ServerEdit extends Component {
 
 
   render() {
-      const DATA = Object
+    console.log('aaa');
+    console.log(this.state.placeID);
+      const DATA_NIC = Object
                     .values(this.state.nics)
                     .filter(val => val.serverID === this.state.id);
-      const COLUMNS = [
-              {
-                Header: 'NIC',
-                accessor: 'nic',
-                Cell: this.renderEditable.bind(this)
-              }, {
-                Header: 'IP address',
-                accessor: 'IPaddress',
-                Cell: this.renderEditable.bind(this)
-              },{
-                Header: 'Mask',
-                accessor: 'mask',
-                Cell: this.renderEditable.bind(this)
-              }, {
-                Header: 'Gateway',
-                accessor: 'gateway',
-                Cell: this.renderEditable.bind(this)
-              },{
-                Header: 'DNS1',
-                accessor: 'dns1',
-                Cell: this.renderEditable.bind(this)
-              }, {
-                Header: 'DNS2',
-                accessor: 'dns2',
-                Cell: this.renderEditable.bind(this)
-              },{
-                Header: 'MAC',
-                accessor: 'mac',
-                Cell: this.renderEditable.bind(this)
-              }, {
-                Header: 'DHCP',
-                accessor: 'dhcp',
-                Cell : this.renderEditable.bind(this)
+
+      const COLUMNS_NIC = [
+      {
+        Header: 'NIC',
+        accessor: 'nic',
+        Cell: this.renderEditable.bind(this)
+      }, {
+        Header: 'IP address',
+        accessor: 'IPaddress',
+        Cell: this.renderEditable.bind(this)
+      },{
+        Header: 'Mask',
+        accessor: 'mask',
+        Cell: this.renderEditable.bind(this)
+      }, {
+        Header: 'Gateway',
+        accessor: 'gateway',
+        Cell: this.renderEditable.bind(this)
+      },{
+        Header: 'DNS1',
+        accessor: 'dns1',
+        Cell: this.renderEditable.bind(this)
+      }, {
+        Header: 'DNS2',
+        accessor: 'dns2',
+        Cell: this.renderEditable.bind(this)
+      },{
+        Header: 'MAC',
+        accessor: 'mac',
+        Cell: this.renderEditable.bind(this)
+      }, {
+        Header: 'DHCP',
+        accessor: 'dhcp',
+        Cell : this.renderEditable.bind(this)
+      },
+      {
+        Header: '',
+        accessor: 'edit',
+        Cell : row => {
+              return (
+                  <div>
+                    <Button bsSize='small' bsStyle='danger' onClick={(e) => {this.handleDeleteNIC(row.original.id)}}>Delete</Button>
+                  </ div>
+                )
               },
+      },
+    ];
+
+      const DATA_PLACES = (this.state.placeID === null || this.state.placeID === "") ? [] : this.state.places.filter(place => place.id === this.state.placeID);
+      const COLUMNS_PLACES = [
               {
+                Header: 'Room',
+                accessor: 'room',
+              }, {
+                Header: 'Street',
+                accessor: 'street',
+              },{
+                Header: 'City',
+                accessor: 'city',
+              }, {
+                Header: 'State',
+                accessor: 'state',
+              }, {
                 Header: '',
                 accessor: 'edit',
                 Cell : row => {
                       return (
                           <div>
-                            <Button bsSize='small' bsStyle='danger' onClick={(e) => {this.handleDeleteNIC(row.original.id)}}>Delete</Button>
+                            <Button bsSize='small' bsStyle='warning' onClick={() => this.setState({openEdit:true})}>Change</Button>
+                            <Button bsSize='small' bsStyle='danger' onClick={() => this.setState({placeID : null})}>No location</Button>
                           </ div>
                         )
                       },
               },
             ];
+
     return (
           <div className='form'>
 
@@ -206,10 +253,9 @@ export default class ServerEdit extends Component {
             <FormGroup controlId="selectCompany">
               <ControlLabel>Select status</ControlLabel>
                 <FormControl value={this.state.status} onChange={(value) => this.setAny('status', value)} componentClass="select" placeholder="select" >
-                {
-                  Object.keys(this.state.statuses)
-                        .map(c => <option key={c} value={this.state.statuses[c].statusName}> {this.state.statuses[c].statusName} </option> )
-                }
+                  <option key={1} value='ON'> ON </option>
+                  <option key={2} value='OFF'> OFF </option>
+                  <option key={3} value='TEST'> TEST </option>
                 </FormControl>
             </FormGroup>
 
@@ -233,21 +279,69 @@ export default class ServerEdit extends Component {
               <FormControl componentClass="textarea"  placeholder='Enter HDD' value={this.state.hdd} onChange={(e) => this.setState({ hdd: e.target.value })} />
             </FormGroup>
 
-            <ReactTable
-              data={DATA}
-              columns={COLUMNS}
-              defaultPageSize={5}
-              className="-striped -highlight"
-              showPagination={false}
-            />
+            <FormGroup controlId="textareaHDD">
+              <ControlLabel>NICs</ControlLabel>
+                <ReactTable
+                  data={DATA_NIC}
+                  columns={COLUMNS_NIC}
+                  defaultPageSize={5}
+                  className="-striped -highlight"
+                  showPagination={false}
+                />
 
-            <AddNICModalForm serverId={this.state.id}/>
+                <AddNICModalForm serverId={this.state.id}/>
+            </FormGroup>
 
-            <p></p>
+            <FormGroup controlId="textareaHDD">
+              <ControlLabel>Location</ControlLabel>
+                {
+                  (this.state.placeID !== null && this.state.placeID !== "") &&
+                  <ReactTable
+                    data={DATA_PLACES}
+                    columns={COLUMNS_PLACES}
+                    defaultPageSize={1}
+                    showPagination={false}
+                  />
+              }
 
-            <Link to={{ pathname: '/cmdb/servers'}}>
-              <Button type="submit" onClick={this.editServer.bind(this)} bsStyle='warning'>Edit this server</Button>
-            </Link>
+                {(this.state.placeID === null || this.state.placeID === "") &&
+                  <div>
+                  <Button bsStyle="success" bsSize='small' onClick={() => this.setState({openEdit:true})}> Choose location of server </Button>
+                  </div>
+                }
+
+                <Modal bsSize='large' show={this.state.openEdit} onHide={()=>{this.setState({openEdit:false})}}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Locations</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <FormGroup controlId="selectplace">
+                      <ControlLabel>Select place</ControlLabel>
+
+                        <Select
+                          options={this.state.places.map((place)=>{
+                            place.value=place.id;
+                            place.label=place.state + ', ' + place.city + ', ' + place.street + ', ' + place.room;
+                            return place;
+                          })}
+                          value={this.state.place}
+                          onChange={e =>{ this.setState({ placeID: e.id })}}
+                          />
+
+                        <Button onClick={() => this.setState({openEdit:false})}> Close </Button>
+
+                    </FormGroup>
+                  </Modal.Body>
+                </Modal>
+
+            </FormGroup>
+
+            <FormGroup controlId="textareaHDD">
+              <BackupTaskList serverID={parseInt(this.state.id)} />
+            </FormGroup>
+
+            <Button type="submit" onClick={this.editServer.bind(this)} bsStyle='warning'>Edit this server</Button>
+
           </div>
         );
   }

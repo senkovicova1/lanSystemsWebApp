@@ -23,7 +23,7 @@ export default class AddNICModalForm extends React.Component {
     if (this.nic.value === '') return;
     const ID = Date.now();
     firebase.database()
-            .ref(`nics/${ID}`)
+            .ref(`cmdb-nics/${ID}`)
             .set({
               id : ID,
               serverID : this.props.serverId,

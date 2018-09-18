@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
+import base from '../../../../firebase';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import DataTable from '../../DataTable';
@@ -13,10 +14,42 @@ export default class ServerList extends Component{
     this.remove.bind(this);
   }
 
+  componentDidMount(){
+    this.ref1 = base.syncState(`cmdb-nics`, {
+        context: this,
+        state: 'nics',
+        asArray: true
+      });
+
+    this.ref2 = base.syncState(`cmdb-backup-tasks`, {
+        context: this,
+        state: 'backupTasks',
+        asArray: true
+      });
+  }
+
+  componentWillUnmount(){
+    base.removeBinding(this.ref1);
+      base.removeBinding(this.ref2);
+  }
+
   remove(row){
-    firebase.database()
-            .ref(`cmdb-servers/${row.original.id}`)
-            .remove();
+    if (window.confirm("Are you sure you want to delete this server? Note: It's NICs and Backup Tasks will be deleted as well.")) {
+      base.remove(`cmdb-servers/${row.original.id}`);
+      const NICsToRemove = this.state.nics
+                          .filter(nic => nic.serverID === ''+row.original.id)
+                          .map(nic => nic.id);
+
+      NICsToRemove.forEach(id => base.remove(`cmdb-nics/${id}`))
+
+      const BTsToRemove = this.state.backupTasks
+                          .filter(bt => bt.serverID === row.original.id)
+                          .map(bt => bt.id);
+
+      BTsToRemove.forEach(id => base.remove(`cmdb-backup-tasks/${id}`))
+    } else {
+      return;
+    }
   }
 
   loadAddButton(){

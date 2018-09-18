@@ -2,6 +2,7 @@ import React from 'react';
 import base from '../../../../firebase';
 import firebase from 'firebase';
 import AddNICModalForm from './AddNICModalForm';
+import BackupTaskList from '../backuptasks/BackupTaskList';
 import ReactTable from 'react-table';
 import { Link } from 'react-router-dom';
 import { Button, FormGroup, ControlLabel, FormControl, Modal } from 'react-bootstrap';
@@ -18,6 +19,7 @@ export default class ServerAdd extends React.Component {
         types : {},
         statuses : {},
         places : [],
+        lastServer : null,
 
         openEdit : false,
 
@@ -26,8 +28,6 @@ export default class ServerAdd extends React.Component {
       this.addServer.bind(this);
       this.renderEditable.bind(this);
       this.handleDeleteNIC.bind(this);
-
-      this.placeId = null;
   }
 
   componentDidMount(){
@@ -41,7 +41,7 @@ export default class ServerAdd extends React.Component {
       }
     });
 
-    this.ref1 = base.syncState(`nics`, {
+    this.ref1 = base.syncState(`cmdb-nics`, {
         context: this,
         state: 'nics'
       });
@@ -56,11 +56,6 @@ export default class ServerAdd extends React.Component {
         state: 'types'
       });
 
-    this.ref4 = base.syncState(`cmdb-statuses`, {
-        context: this,
-        state: 'statuses'
-      });
-
     this.ref5 = base.bindToState(`cmdb-places`, {
       context: this,
       state: 'places',
@@ -72,10 +67,11 @@ export default class ServerAdd extends React.Component {
       base.removeBinding(this.ref1);
       base.removeBinding(this.ref2);
       base.removeBinding(this.ref3);
-      base.removeBinding(this.ref4);
+      base.removeBinding(this.ref5);
   }
 
   addServer(){
+    console.log(this.hdd.value);
     if (this.name.value.length < 1) return;
     const ID = this.state.lastServer.length>0?this.state.lastServer[0].id+1:0;
     firebase.database()
@@ -90,14 +86,16 @@ export default class ServerAdd extends React.Component {
               hdd: this.hdd.value,
               type : this.type.value,
               status : this.status.value,
-              placeId : this.placeId,
+              placeID : (this.state.place !== null && this.state.place !== undefined) ? this.state.place.id : "",
             });
   }
 
   handleDeleteNIC(id){
-    firebase.database()
-            .ref(`nics/${id}`)
-            .remove();
+    if (window.confirm("Are you sure you want to delete this NIC?")) {
+      base.remove(`cmdb-nics/${id}`);
+    } else {
+      return;
+    }
   }
 
   renderEditable(cellInfo) {
@@ -121,9 +119,11 @@ export default class ServerAdd extends React.Component {
       }
 
   render() {
+    const SERVER_ID = this.state.lastServer !== null && this.state.lastServer.length>0?this.state.lastServer[0].id+1:0;
+
     const DATA_NIC = Object
                   .values(this.state.nics)
-                  .filter(val => val.serverID === this.state.id);
+                  .filter(val => val.serverID === ''+SERVER_ID);
     const COLUMNS_NIC = [
             {
               Header: 'NIC',
@@ -228,10 +228,9 @@ export default class ServerAdd extends React.Component {
           <FormGroup controlId="selectStatus">
             <ControlLabel>Select status</ControlLabel>
               <FormControl componentClass="select" placeholder="select" inputRef={(input) => this.status = input}>
-                {
-                  Object.keys(this.state.statuses)
-                        .map(c => <option key={c} value={this.state.statuses[c].statusName}> {this.state.statuses[c].statusName} </option> )
-                }
+                <option key={1} value='ON'> ON </option>
+                <option key={2} value='OFF'> OFF </option>
+                <option key={3} value='TEST'> TEST </option>
               </FormControl>
           </FormGroup>
 
@@ -265,7 +264,7 @@ export default class ServerAdd extends React.Component {
                 showPagination={false}
               />
 
-              <AddNICModalForm serverId={this.state.id}/>
+            <AddNICModalForm serverId={ SERVER_ID+''}/>
           </FormGroup>
 
           <FormGroup controlId="textareaHDD">
@@ -310,6 +309,10 @@ export default class ServerAdd extends React.Component {
                 </Modal.Body>
               </Modal>
 
+          </FormGroup>
+
+          <FormGroup controlId="textareaHDD">
+            <BackupTaskList serverID={SERVER_ID} />
           </FormGroup>
 
           <Link to={{pathname : '/cmdb/servers'}}>
