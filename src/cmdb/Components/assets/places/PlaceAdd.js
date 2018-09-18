@@ -12,7 +12,7 @@ export default class PlaceAdd extends React.Component {
   }
 
   addPlace(){
-    if (this.room.length < 1 && this.street.length < 1 && this.city.length < 1 && this.state.length < 1) return;
+    if (this.room.length < 1 && this.street.length < 1 && this.city.length < 1 && this.stateX.length < 1) return;
     const ID = Date.now();
     firebase.database()
             .ref(`cmdb-places/${ID}`)
@@ -21,7 +21,7 @@ export default class PlaceAdd extends React.Component {
                room  : this.room.value,
                street : this.street.value,
                city : this.city.value,
-               state : this.state.value,
+               state : this.stateX.value,
             });
   }
 
@@ -46,7 +46,7 @@ export default class PlaceAdd extends React.Component {
 
           <FormGroup controlId="formGoupInput">
             <ControlLabel>Place state</ControlLabel>
-            <FormControl  inputRef={(input) => this.state = input} type="text" placeholder="Enter Place state"/>
+            <FormControl  inputRef={(input) => this.stateX = input} type="text" placeholder="Enter Place state"/>
           </FormGroup>
 
           <Link to={{pathname : '/cmdb/places'}}>

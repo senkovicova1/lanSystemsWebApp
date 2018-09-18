@@ -5,7 +5,6 @@ import AddNICModalForm from './AddNICModalForm';
 import ReactTable from 'react-table';
 import { Link } from 'react-router-dom';
 import { Button, FormGroup, ControlLabel, FormControl, Modal } from 'react-bootstrap';
-import AutoSuggest from 'react-bootstrap-autosuggest';
 import Select from 'react-select';
 
 export default class ServerAdd extends React.Component {

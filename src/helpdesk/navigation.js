@@ -4,6 +4,7 @@ import { Col } from 'react-bootstrap';
 import Sidebar from './Sidebar';
 
 import TaskListContainer from './TaskListContainer';
+
 import CompaniesList from '../settings/companies/CompaniesList';
 import CompanyAdd from '../settings/companies/CompanyAdd';
 import CompanyEdit from '../settings/companies/CompanyEdit';

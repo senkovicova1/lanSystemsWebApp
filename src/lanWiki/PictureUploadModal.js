@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import base from '../firebase';
-import { Link } from 'react-router-dom';
-import Modal from 'react-responsive-modal';
-import { Button, FormGroup, ControlLabel, FormControl, Grid, Row, Col, Image } from 'react-bootstrap';
+import { Grid, Row, Col, Image } from 'react-bootstrap';
 
 import firebase from 'firebase';
 import FileUploader from "react-firebase-file-uploader";

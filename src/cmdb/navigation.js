@@ -26,6 +26,14 @@ import PlaceEdit from './Components/assets/places/PlaceEdit';
 
 import TaskList from './Components/assets/tasks/TaskList';
 
+import UsersList from '../settings/users/UsersList';
+import UserAdd from '../settings/users/UserAdd';
+import UserEdit from '../settings/users/UserEdit';
+
+import CompaniesList from '../settings/companies/CompaniesList';
+import SettingsCompanyAdd from '../settings/companies/CompanyAdd';
+import SettingsCompanyEdit from '../settings/companies/CompanyEdit';
+
 export default class Navigation extends Component {
   render(){
     return(
@@ -56,6 +64,13 @@ export default class Navigation extends Component {
               <Route exact path='/cmdb/places/edit/:id' component={PlaceEdit} />
 
               <Route exact path='/cmdb/tasks' component={TaskList} />
+
+              <Route exact path='/cmdb/settings/companies' component={CompaniesList} />
+              <Route exact path='/cmdb/settings/companies/add' component={SettingsCompanyAdd} />
+              <Route exact path='/cmdb/settings/companies/edit/:companyID' component={SettingsCompanyEdit} />
+              <Route exact path='/cmdb/settings/users' component={UsersList} />
+              <Route exact path='/cmdb/settings/users/add' component={UserAdd} />
+              <Route exact path='/cmdb/settings/users/edit/:userID' component={UserEdit} />
             </Col>
          </div>
       </div>

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import RichTextEditor from 'react-rte';
 import { FormGroup, ControlLabel, FormControl, Button, Modal } from 'react-bootstrap';
 import base from '../firebase';
-import firebase from 'firebase';
 import Select from 'react-select';
 import { Link } from 'react-router-dom';
 

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { FormGroup, FormControl, Button } from 'react-bootstrap';
-import { SketchPicker } from "react-color";
 import base from '../firebase';
 
 export default class ArticleEdit extends Component {
@@ -50,7 +49,7 @@ export default class ArticleEdit extends Component {
             }}
            value={this.state.title}/>
         </FormGroup>
-        
+
           <Button onClick={this.submit.bind(this)} bsStyle="primary">Add</Button>
       </div>
     );
