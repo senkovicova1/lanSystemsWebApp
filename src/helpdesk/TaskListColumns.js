@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import base from '../firebase';
-import { Link } from 'react-router-dom';
-import ReactTable from 'react-table';
-import {Button, Badge, Modal, ListGroup, ListGroupItem} from 'react-bootstrap';
-import StatusAdd from './StatusAdd';
-import TaskAdd from './TaskAdd';
+import { ListGroup, Glyphicon } from 'react-bootstrap';
 import TaskListRow from './TaskListRow';
 
 export default class TaskList extends Component{
@@ -39,40 +35,24 @@ export default class TaskList extends Component{
   }
 
   render(){
-    const tableSetting=[
-      {
-        Header: 'ID',
-        accessor: 'id',
-      },{
-        Header: 'Title',
-        accessor: 'title',
-      },{
-        Header: 'Status',
-        accessor: 'status',
-        Cell : row => {
-          let status=this.state.statuses.find((item)=>item.id===row.value);
-          return (
-            <span>{status?status.title:'Unknown status'}</span>
-          )
-        }
-      }];
-      const data =[...this.state.tasks];
       return (
         <div style={{padding:15}}>
-          <div>
-            <h3>Task List</h3>
-              <Button bsStyle="success" onClick={()=>this.setState({openAddTaskModal:true})} style={{marginLeft:10}}>
-                Add task
-              </Button>
-              <Button bsStyle="primary" onClick={()=>this.setState({openAddStatusModal:true})} style={{marginLeft:10}}>
-                Add status
-              </Button>
-        </div>
 
         <div className="taskTableContentColumns">
           {this.state.statuses.map((status)=>
             (<ListGroup key={status.id}>
-              <label>{status.title}</label>
+              <label>{status.title}
+                <Glyphicon style={{marginLeft:5}}
+                  glyph="remove-sign"
+                  onClick={()=>{
+                    if (window.confirm("Are you sure you want to delete status "+ status.title+"?")) {
+                      base.remove(`hd-statuses/`+status.id);
+                    } else {
+                      return;
+                    }
+                  }
+                }
+                /></label>
               {
                 this.state.tasks.filter((item)=>item.status===status.id).map((task)=><TaskListRow task={task} key={task.id} status={status} />)
               }
@@ -80,23 +60,6 @@ export default class TaskList extends Component{
           )
           }
       </div>
-
-        <Modal show={this.state.openAddStatusModal} onHide={()=>{this.setState({openAddStatusModal:false})}}>
-          <Modal.Header closeButton>
-            <Modal.Title>Add status</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <StatusAdd closeModal={()=>{this.setState({openAddStatusModal:false})}} />
-          </Modal.Body>
-        </Modal>
-        <Modal show={this.state.openAddTaskModal} onHide={()=>{this.setState({openAddTaskModal:false})}}>
-          <Modal.Header closeButton>
-            <Modal.Title>Add task</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <TaskAdd closeModal={()=>{this.setState({openAddTaskModal:false})}} />
-          </Modal.Body>
-        </Modal>
       </div>
     );
   }

@@ -7,8 +7,6 @@ import CMDBNavigation from './cmdb/navigation';
 import LanWikiNavigation from './lanWiki/navigation';
 import HelpdeskNavigation from './helpdesk/navigation';
 
-
-
 export default class Navigation extends Component {
   render(){
     return(
