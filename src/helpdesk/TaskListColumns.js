@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import base from '../firebase';
-import { ListGroup, Glyphicon } from 'react-bootstrap';
+import { ListGroup, Glyphicon, Modal } from 'react-bootstrap';
 import TaskListRow from './TaskListRow';
+import TaskEdit from './TaskEdit';
 
 export default class TaskList extends Component{
 
@@ -11,8 +12,8 @@ export default class TaskList extends Component{
       tasks:[],
       statuses:[],
       status:'all',
-      openAddStatusModal:false,
-      openAddTaskModal:false,
+      openEditTaskModal:false,
+      editedTaskID:null
     }
   }
 
@@ -54,12 +55,20 @@ export default class TaskList extends Component{
                 }
                 /></label>
               {
-                this.state.tasks.filter((item)=>item.status===status.id).map((task)=><TaskListRow task={task} key={task.id} status={status} />)
+                this.state.tasks.filter((item)=>item.status===status.id).map((task)=><TaskListRow task={task} key={task.id} status={status} openEdit={()=>this.setState({openEditTaskModal:true,editedTaskID:task.id})} />)
               }
             </ListGroup>)
           )
           }
       </div>
+      <Modal show={this.state.openEditTaskModal} onHide={()=>{this.setState({openEditTaskModal:false})}}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit task</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <TaskEdit taskID={this.state.editedTaskID} closeModal={()=>{this.setState({openEditTaskModal:false})}} />
+          </Modal.Body>
+        </Modal>
       </div>
     );
   }

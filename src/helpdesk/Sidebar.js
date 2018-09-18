@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import base from '../firebase';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
-import { ListGroup, ListGroupItem, FormControl, Glyphicon, InputGroup, Modal } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Modal } from 'react-bootstrap';
 import ProjectEdit from './ProjectEdit';
 import ProjectAdd from './ProjectAdd';
 
@@ -12,7 +12,6 @@ export default class Tags extends Component{
     this.state = {
       project : {id:'all', title:'All', value:'all', label:'All'},
       openAddTag:false,
-      search:'',
       projects:[],
       openEditProject:false,
       openAddProject:false,
@@ -44,19 +43,6 @@ export default class Tags extends Component{
     });
     return (
       <ListGroup className='sidebar fullWidth'>
-        <ListGroupItem className='sidebarItem noColor' >
-          <InputGroup>
-            <InputGroup.Addon>
-              <Glyphicon glyph="search" />
-            </InputGroup.Addon>
-            <FormControl type="text"
-              placeholder="Search"
-              onChange={e => {
-                this.setState({ search: e.target.value });
-              }}
-              value={this.state.search}/>
-          </InputGroup>
-        </ListGroupItem>
         <ListGroupItem className='sidebarItem noColor' >
           <label>Project</label>
           <Select

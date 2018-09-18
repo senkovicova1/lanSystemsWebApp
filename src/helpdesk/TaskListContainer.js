@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Modal, Badge} from 'react-bootstrap';
+import {Button, Modal, Badge, InputGroup, Glyphicon, FormControl} from 'react-bootstrap';
 import StatusAdd from './StatusAdd';
 import TaskAdd from './TaskAdd';
 import TaskListColumns from './TaskListColumns';
@@ -13,18 +13,34 @@ export default class TaskListContainer extends Component{
       openAddStatusModal:false,
       openAddTaskModal:false,
       isColumn:false,
+      search:'',
     }
   }
   render(){
       return (
         <div style={{padding:15}}>
           <div>
+            <span style={{display:'flex'}}>
             <Button bsStyle="success" onClick={()=>this.setState({openAddTaskModal:true})} style={{marginLeft:10}}>
               Add task
             </Button>
             <Button bsStyle="success" onClick={()=>this.setState({openAddStatusModal:true})} style={{marginLeft:10}}>
               Add status
             </Button>
+              <InputGroup style={{marginLeft:5}}>
+                <InputGroup.Addon>
+                  <Glyphicon glyph="search" />
+                </InputGroup.Addon>
+                <FormControl type="text"
+                  placeholder="Search"
+                  style={{width:250}}
+                  onChange={e => {
+                    this.setState({ search: e.target.value });
+                  }}
+                  value={this.state.search}/>
+              </InputGroup>
+            </span>
+
             <span style={{float:'right'}}>
               <Badge className="statusStyle" style={{backgroundColor:!this.state.isColumn?'#337ab7':'#8db9df'}}
                 onClick={()=>{this.setState({isColumn:false})}}>

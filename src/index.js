@@ -5,6 +5,7 @@ import Navigation from './navigation';
 
 import {BrowserRouter, Route} from 'react-router-dom';
 
+import 'react-datepicker/dist/react-datepicker.css';
 import './style.css';
 import 'react-table/react-table.css';
 

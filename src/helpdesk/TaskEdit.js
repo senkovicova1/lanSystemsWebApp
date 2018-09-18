@@ -4,18 +4,21 @@ import Select from 'react-select';
 import base from '../firebase';
 import moment from 'moment';
 import DatePicker from "react-datepicker";
-export default class StatusAdd extends Component {
+export default class TaskEdit extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      task:null,
       statuses:[],
+      statusesLoaded:false,
       projects:[],
+      projectsLoaded:false,
       users:[],
+      usersLoaded:false,
       companies:[],
-
-
+      companiesLoaded:false,
+      task:null,
+      taskLoaded:false,
       title:'',
       status:null,
       project:null,
@@ -28,38 +31,82 @@ export default class StatusAdd extends Component {
 
     }
     this.submit.bind(this);
+    this.tryLoad.bind(this);
+  }
+
+  tryLoad(last, value){
+    let stateCopy={...this.state};
+    if(last==='task'){
+      stateCopy.task=value;
+    }
+    stateCopy[(last+'Loaded')]=true;
+    if(
+      !stateCopy.statusesLoaded||
+      !stateCopy.projectsLoaded||
+      !stateCopy.usersLoaded||
+      !stateCopy.companiesLoaded||
+      !stateCopy.taskLoaded
+    )return;
+    this.setState({
+      title:stateCopy.task.title?stateCopy.task.title:'',
+      status:stateCopy.task.status?(stateCopy.statuses.map((item)=>{item.label=item.title;item.value=item.id;return item}).find((item)=>item.id===stateCopy.task.status)):null,
+      project:stateCopy.task.project?(stateCopy.projects.map((item)=>{item.label=item.title;item.value=item.id;return item}).find((item)=>item.id===stateCopy.task.project)):null,
+      requestedBy:stateCopy.task.requestedBy?(stateCopy.users.map((item)=>{item.label=item.username;item.value=item.id;return item}).find((item)=>item.id===stateCopy.task.requestedBy)):null,
+      company:stateCopy.task.company?(stateCopy.companies.map((item)=>{item.label=item.companyName;item.value=item.id;return item}).find((item)=>item.id===stateCopy.task.company)):null,
+      solver:stateCopy.task.solver?(stateCopy.users.map((item)=>{item.label=item.username;item.value=item.id;return item}).find((item)=>item.id===stateCopy.task.solver)):null,
+      deadline:stateCopy.task.deadline?stateCopy.task.deadline:null,
+      description:stateCopy.task.description?stateCopy.task.description:'',
+      hours:stateCopy.task.hours?stateCopy.task.hours:'',
+    });
   }
 
   componentWillMount(){
     this.connections=[];
-      this.connections.push(base.bindToState(`hd-tasks`, {
-        context: this,
-        state: 'task',
-        asArray: true,
-        queries: {
-          orderByChild: 'id',
-          limitToLast: 1
+    base.fetch('hd-tasks/'+this.props.taskID, {
+      context: this,
+      state:'task',
+      then:(task)=>{
+        this.tryLoad('task',task);
+        this.setState({task,taskLoaded:true});
+
         }
-      }));
+    });
+
       this.connections.push(base.bindToState(`hd-statuses`, {
         context: this,
         state: 'statuses',
-        asArray: true
+        asArray: true,
+        then:()=>{
+          this.tryLoad('statuses', true);
+          this.setState({statusesLoaded:true});
+        }
       }));
       this.connections.push(base.bindToState(`hd-projects`, {
         context: this,
         state: 'projects',
-        asArray: true
+        asArray: true,
+        then:()=>{
+          this.tryLoad('projects', true);
+          this.setState({projectsLoaded:true});
+        }
       }));
       this.connections.push(base.bindToState(`settings-users`, {
         context: this,
         state: 'users',
-        asArray: true
+        asArray: true,
+        then:()=>{
+          this.tryLoad('users', true);
+          this.setState({usersLoaded:true});
+        }
       }));
       this.connections.push(base.bindToState(`settings-companies`, {
         context: this,
         state: 'companies',
-        asArray: true
+        asArray: true,
+        then:()=>{
+          this.tryLoad('companies', true);
+          this.setState({companiesLoaded:true});
+        }
       }));
     }
 
@@ -80,8 +127,8 @@ export default class StatusAdd extends Component {
     }
     let data={
       title:this.state.title,
-      status:this.state.status.id,
-      id:(this.state.task.length>0?this.state.task[0].id+1:0),
+      status:this.state.status?this.state.status.id:null,
+      id:this.props.taskID,
       project:this.state.project?this.state.project.id:null,
       requestedBy:this.state.requestedBy?this.state.requestedBy.id:null,
       company:this.state.company?this.state.company.id:null,
@@ -90,7 +137,7 @@ export default class StatusAdd extends Component {
       description:this.state.description,
       hours:this.state.hours,
     }
-    base.post(`hd-tasks/`+data.id,{data});
+    base.update(`hd-tasks/`+data.id,{data});
     this.props.closeModal();
   }
 
@@ -198,7 +245,7 @@ export default class StatusAdd extends Component {
             }}
             value={this.state.hours}/>
         </FormGroup>
-        <Button onClick={this.submit.bind(this)} bsStyle="primary">Add</Button>
+        <Button onClick={this.submit.bind(this)} bsStyle="primary">Save</Button>
       </div>
     );
 }}
