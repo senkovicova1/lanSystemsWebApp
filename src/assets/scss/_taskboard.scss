@@ -4,7 +4,7 @@
 
 .taskList {
   li {
-    background-color: $light-alt;
+    background-color: white;
     border: 1px solid rgba($muted,0.2);
     border-left-width: 3px;
     border-radius: 3px;
@@ -20,6 +20,11 @@
   .task-warning {
     border-left-color: $warning;
   }
+
+  .task-new {
+    border-left-color: blue;
+  }
+
   .task-danger {
     border-left-color: $danger;
   }
@@ -36,3 +41,23 @@
   background-color: rgba($muted,0.2) !important;
   padding: 20px;
 }
+
+.task-box
+ {
+  margin-top:20px;
+  
+  border: 1px solid rgba(54, 64, 74, 0.05);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-clip: padding-box;
+  background-color: #fafafa;
+ }
+ 
+ .task-box-heading
+ {
+  padding:12px 20px;
+ }
+
+ .task-box-list {
+  padding: 20px;
+ }

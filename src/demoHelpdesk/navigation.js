@@ -10,12 +10,11 @@ export default class Navigation extends Component {
     return(
       <div>
         <div>
-          <Col xs={1} className='noPadding'>
+
             <Sidebar  {...this.props}/>
-          </Col>
-          <Col xs={11} className='noPadding'>
+
           <Route exact path='/demoHelpdesk/taskList' component={TaskList} /> 
-          </Col>
+
        </div>
       </div>
     )

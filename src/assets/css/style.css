@@ -1911,7 +1911,7 @@ body.fixed-left .side-menu.left {
 #sidebar-menu > ul > li > a {
   color: #36404a;
   display: block;
-  padding: 12px 20px;
+  padding: 5px 20px;
   margin: 4px 0;
   border-left: 3px solid #ffffff;
 }
@@ -8690,7 +8690,7 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
 ============= */
 /* line 6, C:/Webprojekty/lanSystemsWebApp/src/assets/scss/_taskboard.scss */
 .taskList li {
-  background-color: #fafafa;
+  background-color: white;
   border: 1px solid rgba(152, 166, 173, 0.2);
   border-left-width: 3px;
   border-radius: 3px;
@@ -8713,25 +8713,50 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
   border-left-color: #ffbd4a;
 }
 
-/* line 23, C:/Webprojekty/lanSystemsWebApp/src/assets/scss/_taskboard.scss */
+/* line 24, C:/Webprojekty/lanSystemsWebApp/src/assets/scss/_taskboard.scss */
+.taskList .task-new {
+  border-left-color: blue;
+}
+
+/* line 28, C:/Webprojekty/lanSystemsWebApp/src/assets/scss/_taskboard.scss */
 .taskList .task-danger {
   border-left-color: #f05050;
 }
 
-/* line 26, C:/Webprojekty/lanSystemsWebApp/src/assets/scss/_taskboard.scss */
+/* line 31, C:/Webprojekty/lanSystemsWebApp/src/assets/scss/_taskboard.scss */
 .taskList a {
   font-size: 13px;
 }
 
-/* line 29, C:/Webprojekty/lanSystemsWebApp/src/assets/scss/_taskboard.scss */
+/* line 34, C:/Webprojekty/lanSystemsWebApp/src/assets/scss/_taskboard.scss */
 .taskList .checkbox {
   margin-left: 20px;
 }
 
-/* line 34, C:/Webprojekty/lanSystemsWebApp/src/assets/scss/_taskboard.scss */
+/* line 39, C:/Webprojekty/lanSystemsWebApp/src/assets/scss/_taskboard.scss */
 .task-placeholder {
   border: 1px dashed rgba(152, 166, 173, 0.5) !important;
   background-color: rgba(152, 166, 173, 0.2) !important;
+  padding: 20px;
+}
+
+/* line 45, C:/Webprojekty/lanSystemsWebApp/src/assets/scss/_taskboard.scss */
+.task-box {
+  margin-top: 20px;
+  border: 1px solid rgba(54, 64, 74, 0.05);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-clip: padding-box;
+  background-color: #fafafa;
+}
+
+/* line 56, C:/Webprojekty/lanSystemsWebApp/src/assets/scss/_taskboard.scss */
+.task-box-heading {
+  padding: 12px 20px;
+}
+
+/* line 61, C:/Webprojekty/lanSystemsWebApp/src/assets/scss/_taskboard.scss */
+.task-box-list {
   padding: 20px;
 }
 
