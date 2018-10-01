@@ -37,12 +37,11 @@ import SettingsCompanyEdit from '../settings/companies/CompanyEdit';
 export default class Navigation extends Component {
   render(){
     return(
-      <div>
-          <div>
-            <Col xs={1} className='noPadding'>
+      <div> 
+           <div className='sidebar'>
               <Sidebar  {...this.props}/>
-            </Col>
-            <Col xs={11} className='noPadding'>
+            </div>
+            <div className='main'>
               <Route exact path='/cmdb/servers' component={ServerList} />
               <Route exact path='/cmdb/servers/add' component={ServerAdd } />
               <Route exact path='/cmdb/servers/edit/:id' component={ServerEdit }/>
@@ -71,8 +70,8 @@ export default class Navigation extends Component {
               <Route exact path='/cmdb/settings/users' component={UsersList} />
               <Route exact path='/cmdb/settings/users/add' component={UserAdd} />
               <Route exact path='/cmdb/settings/users/edit/:userID' component={UserEdit} />
-            </Col>
-         </div>
+            </div>
+    
       </div>
     )
   }

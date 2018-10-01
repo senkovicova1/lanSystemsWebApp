@@ -24,23 +24,27 @@ export default class PageHeader extends Component{
 
   render(){
     return(
-      <header style={{borderRadius:0,borderBottom:'2px solid #8db9df', color:'black'}}>
+      <div className="topbar">
+        <div className="topbar-left">
         <Navbar.Brand>
           <DropdownButton
-            id="pageSelector"
-            bsStyle="default"
+            id="pageSelector"     
             title="Lan Systems"
             noCaret
-            style={{backgroundColor:'inherit', borderWidth:0}}
+            style={{backgroundColor:'#36404a', borderWidth:0, borderRadius:0, marginLeft:20}}
             >
             <MenuItem onClick={()=>this.props.history.push('/cmdb')}>CMDB</MenuItem>
             <MenuItem onClick={()=>this.props.history.push('/lanwiki')}>LanWiki</MenuItem>
             <MenuItem onClick={()=>this.props.history.push('/helpdesk')}>Helpdesk</MenuItem>
+            <MenuItem onClick={()=>this.props.history.push('/demohelpdesk')}>DemoHelpdesk</MenuItem>
           </DropdownButton>
         </Navbar.Brand>
+        </div>
+      <header className="navbar-custom">
+
         <Nav pullRight>
           <Dropdown pullRight id="settings">
-            <Dropdown.Toggle noCaret style={{backgroundColor:'inherit', borderWidth:0}}>
+            <Dropdown.Toggle noCaret style={{backgroundColor:'#36404a', borderWidth:0, marginRight:10}}>
               <Glyphicon glyph="cog" className="headerIcons" />
             </Dropdown.Toggle>
             <Dropdown.Menu>
@@ -50,6 +54,7 @@ export default class PageHeader extends Component{
           </Dropdown>
         </Nav>
       </header>
+      </div>
     )
   }
 }

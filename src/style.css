@@ -45,13 +45,14 @@
 	border:none !important;
 }
 
-
 .navbar{
   margin-bottom: 0px;
 }
 
-.DataTable{
-  margin-top: 10px;
+.topBarButton{
+  background-color: #36404a;
+  border-radius: 0;
+  border: none;
 }
 
 .ReactTable.-striped.-highlight {
@@ -139,30 +140,57 @@
   padding: 0px;
 }
 
+.header {
+  border-radius: 0;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  height: 50px;
+}
+
 .sidebar {
   margin-top: 0px;
   margin-bottom: 0px;
-  width: 150px;
+  position:absolute;
+  overflow: auto;
+  width: 250px;
   height: calc(100vh - 50px);
-  background-color: #8db9df;
+  border-right: 1px solid rgba(0,0,0,.1);
+  background-color: #f4f4f4;
 }
 
 .list-group {
 }
 
 .list-group-item {
-    color: white;
+    color: #505050;
     margin: 0px;
-    background-color: #8db9df;
+    background-color:#f4f4f4;
     border: none;
     border-radius: 0px;
 }
 
-.list-group-item:hover {
-    background-color: #214565;
+.list-group-item:hover  {
+    color: #337ab7;
     border: none;
     border-radius: 0px;
+    text-decoration: none !important;
 }
+
+.list-group-item.active {
+  background-color:#dcecf9;
+  color: #337ab7;
+  border-radius: 0;
+  text-decoration: none !important;
+}
+
+
+.main {
+  margin-left: 250px;
+  padding-left:20px; 
+  padding-right:30px; 
+  padding-top:20px;
+  padding-bottom: 20px;
+}
+
 
 .taskEdit {
 }

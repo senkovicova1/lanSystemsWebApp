@@ -6,6 +6,7 @@ import Reroute from './reroute';
 import CMDBNavigation from './cmdb/navigation';
 import LanWikiNavigation from './lanWiki/navigation';
 import HelpdeskNavigation from './helpdesk/navigation';
+import DemoHelpdeskNavigation from './demoHelpdesk/navigation';
 
 export default class Navigation extends Component {
   render(){
@@ -17,6 +18,7 @@ export default class Navigation extends Component {
             <Route path='/cmdb' component={CMDBNavigation} />
             <Route path='/lanwiki' component={LanWikiNavigation} />
             <Route path='/helpdesk' component={HelpdeskNavigation} />
+            <Route path='/demoHelpdesk' component={DemoHelpdeskNavigation} />
          </div>
       </div>
     )

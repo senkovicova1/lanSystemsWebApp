@@ -59,7 +59,7 @@ export default class DataTable extends Component{
             row[filter.id].toLowerCase().includes(filter.value.toLowerCase())}
           columns={COLUMNS}
           defaultPageSize={20}
-          className="-striped -highlight"
+          className=" -highlight"
         />
 
       </div>
