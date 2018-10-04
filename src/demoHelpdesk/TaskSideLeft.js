@@ -5,7 +5,7 @@ import Select from 'react-select';
 import Comments from './components/comments.js';
 import Subtasks from './components/subtasks.js';
 
-export default class TaskSide extends Component {
+export default class TaskSideLeft extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -23,9 +23,9 @@ export default class TaskSide extends Component {
 			{ value: 'pending', label: 'Closed' },
 		];
 
-		const selectStyle ={
+		const selectStyle = {
 			control: styles => ({ ...styles, backgroundColor: 'white' }),
-		}
+		};
 
 		return (
 			<div className="content-page">
@@ -42,7 +42,7 @@ export default class TaskSide extends Component {
 							</div>
 						</div>
 						<div className="row">
-							<div className="col-lg-8">
+							<div className="col-lg-5">
 								<div class="card-box">
 									<h1># 142 Nefunguje klavesnica</h1>
 									<hr />
@@ -52,14 +52,10 @@ export default class TaskSide extends Component {
 										<span class="label label-info m-r-5">Mimo pracovných hodín</span>
 										<span class="label label-success m-r-5">Telefonovať</span>
 									</div>
+									<div class="form-group m-b-10">
 									<label class="">Popis</label>
 									<textarea class="form-control" rows="2" />
-									<Subtasks />
-									<Comments />
-								</div>
-							</div>
-							<div className="col-lg-4">
-								<div class="card-box">
+									</div>
 									<div class="form-group m-b-10">
 										<label>Status</label>
 										<Select options={statuses} styles={selectStyle} />
@@ -92,6 +88,13 @@ export default class TaskSide extends Component {
 										<label>Opakovanie </label>
 										<Select options={statuses} styles={selectStyle} />
 									</div>
+									<Subtasks />
+								</div>
+							</div>
+							<div className="col-lg-7">
+								<div class="card-box">
+							
+									<Comments />
 								</div>
 							</div>
 						</div>

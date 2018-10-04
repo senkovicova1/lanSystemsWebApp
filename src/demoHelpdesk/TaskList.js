@@ -12,7 +12,7 @@ export default class TaskListContainer extends Component {
 			openAddTaskModal: false,
 			isColumn: false,
 			search: '',
-			taskListType: 'option1',
+			taskListType: 'option2',
 		};
 	}
 	render() {

@@ -154,6 +154,69 @@ export default class TasksTwo extends Component {
 											<td>15.04 2.10.2018</td>
 											<td>15.05 2.11.2018</td>
 										</tr>
+										<tr class="">
+											<td>
+												<div class="checkbox checkbox-primary checkbox-single m-r-15">
+													<input id="checkbox2" type="checkbox" checked="" />
+													<label for="checkbox2" />
+												</div>
+											</td>
+											<td>152</td>
+											<td>New</td>
+											<td>
+												{' '}
+												<Link className="" to={{ pathname: `/demoHelpdesk/taskTop2` }}>
+													Task edit top v2{' '}
+												</Link>
+											</td>
+											<td>Branislav Šusta</td>
+											<td>LAN Systems s.r.o.</td>
+											<td>Patrik Patoprsty</td>
+											<td>15.04 2.10.2018</td>
+											<td>15.05 2.11.2018</td>
+										</tr>
+										<tr class="">
+											<td>
+												<div class="checkbox checkbox-primary checkbox-single m-r-15">
+													<input id="checkbox2" type="checkbox" checked="" />
+													<label for="checkbox2" />
+												</div>
+											</td>
+											<td>152</td>
+											<td>New</td>
+											<td>
+												{' '}
+												<Link className="" to={{ pathname: `/demoHelpdesk/taskTop3` }}>
+													Task edit top v3 - label inline{' '}
+												</Link>
+											</td>
+											<td>Branislav Šusta</td>
+											<td>LAN Systems s.r.o.</td>
+											<td>Patrik Patoprsty</td>
+											<td>15.04 2.10.2018</td>
+											<td>15.05 2.11.2018</td>
+										</tr>
+										<tr class="">
+											<td>
+												<div class="checkbox checkbox-primary checkbox-single m-r-15">
+													<input id="checkbox2" type="checkbox" checked="" />
+													<label for="checkbox2" />
+												</div>
+											</td>
+											<td>152</td>
+											<td>New</td>
+											<td>
+												{' '}
+												<Link className="" to={{ pathname: `/demoHelpdesk/taskSideLeft` }}>
+													Taskedit side left{' '}
+												</Link>
+											</td>
+											<td>Branislav Šusta</td>
+											<td>LAN Systems s.r.o.</td>
+											<td>Patrik Patoprsty</td>
+											<td>15.04 2.10.2018</td>
+											<td>15.05 2.11.2018</td>
+										</tr>
 									</tbody>
 								</table>
 							</div>

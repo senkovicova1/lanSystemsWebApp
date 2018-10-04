@@ -5,7 +5,7 @@ import Select from 'react-select';
 import Comments from './components/comments.js';
 import Subtasks from './components/subtasks.js';
 
-export default class TaskTop extends Component {
+export default class TaskTop2 extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -16,14 +16,16 @@ export default class TaskTop extends Component {
 		};
 	}
 	render() {
-
 		const statuses = [
 			{ value: 'new', label: 'New' },
 			{ value: 'open', label: 'Open' },
 			{ value: 'pending', label: 'Closed' },
 		];
 
-		
+		const selectStyle ={
+			control: styles => ({ ...styles, backgroundColor: 'white' }),
+		}
+
 		return (
 			<div className="content-page">
 				<div className="content">
@@ -44,51 +46,51 @@ export default class TaskTop extends Component {
 
 										<div className="col-lg-4">
 											<div class="m-t-20">
-												<p>
-													<strong>Status: </strong>
-													<span class="label label-pink">Opakovanie</span>
-												</p>
-												<p class="m-t-10">
-													<strong>Projekt: </strong>
-													hotline@lansystems.sk{' '}
-												</p>
-												<p class="m-t-10">
-													<strong>Typ práce: </strong>
-													none{' '}
-												</p>
+												<div class="form-group m-b-10">
+													<label>Status</label>
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+												<div class="form-group m-b-10">
+													<label>Projekt</label>
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+												<div class="form-group m-b-10">
+													<label>Typ prace</label>
+													<Select options={statuses} styles={selectStyle} />
+												</div>
 											</div>
 										</div>
 										<div className="col-lg-4">
 											<div class="m-t-20">
-												<p>
-													<strong>Zadal: </strong>
-													hotline@lansystems.sk
-												</p>
-												<p class="m-t-10">
-													<strong>Firma: </strong>
-													LAN Systems s.r.o.{' '}
-												</p>
-												<p class="m-t-10">
-													<strong>Riesi: </strong>
-													hotline@lansystems.sk
-												</p>
+												<div class="form-group m-b-10">
+													<label>Zadal</label>
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+												<div class="form-group m-b-10">
+													<label>Firma</label>
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+												<div class="form-group m-b-10">
+													<label>Riesi</label>
+													<Select options={statuses} styles={selectStyle} />
+												</div>
 											</div>
 										</div>
 
 										<div className="col-lg-4">
 											<div class="m-t-20">
-												<p>
-													<strong>Pripomienka: </strong>
-													none
-												</p>
-												<p class="m-t-10">
-													<strong>Deadline: </strong>
-													hotline@lansystems.sk{' '}
-												</p>
-												<p class="m-t-10">
-													<strong>Opakovanie: </strong>
-													none{' '}
-												</p>
+												<div class="form-group m-b-10">
+													<label>Pripomienka</label>
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+												<div class="form-group m-b-10">
+													<label>Deadline</label>
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+												<div class="form-group m-b-10">
+													<label>Opakovanie</label>
+													<Select options={statuses} styles={selectStyle} />
+												</div>
 											</div>
 										</div>
 									</div>

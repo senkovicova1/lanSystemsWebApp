@@ -82,6 +82,17 @@ export default class TasksBoard extends Component {
 									</li>
 								</ul>
 							</div>
+							<div class="row m-l-10 m-r-10">
+                                    <div class="col-7">
+                                        Showing 1 - 10 of 289
+                                    </div>
+                                    <div class="col-5 m-b-10">
+                                        <div class="btn-group pull-right">
+                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-left"></i></button>
+                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
 						</div>
 					</div>
 
@@ -114,6 +125,17 @@ export default class TasksBoard extends Component {
 									</li>
 								</ul>
 							</div>
+							<div class="row m-l-10 m-r-10">
+                                    <div class="col-7">
+                                        Showing 1 - 10 of 289
+                                    </div>
+                                    <div class="col-5 m-b-10">
+                                        <div class="btn-group pull-right">
+                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-left"></i></button>
+                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
 						</div>
 					</div>
 
@@ -146,6 +168,17 @@ export default class TasksBoard extends Component {
 									</li>
 								</ul>
 							</div>
+							<div class="row m-l-10 m-r-10">
+                                    <div class="col-7">
+                                        Showing 1 - 10 of 289
+                                    </div>
+                                    <div class="col-5 m-b-10">
+                                        <div class="btn-group pull-right">
+                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-left"></i></button>
+                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
 						</div>
 					</div>
 
@@ -178,6 +211,17 @@ export default class TasksBoard extends Component {
 									</li>
 								</ul>
 							</div>
+							<div class="row m-l-10 m-r-10">
+                                    <div class="col-7">
+                                        Showing 1 - 10 of 289
+                                    </div>
+                                    <div class="col-5 m-b-10">
+                                        <div class="btn-group pull-right">
+                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-left"></i></button>
+                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
 						</div>
 					</div>
 				</div>
