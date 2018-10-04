@@ -24,6 +24,9 @@ export default class Sidebar extends Component {
 								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
 									All Tasks
 								</Link>
+								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+									My Tasks
+								</Link>
 							</li>
 						</ul>
 					</div>

@@ -38,9 +38,6 @@ export default class Comments extends Component {
 
 					<hr />
 					<div class="">
-						<h4 class="m-t-0 font-18">
-							<b>Hi Bro, How are you?</b>
-						</h4>
 
 						<div class="media m-b-30">
 							<img
