@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, Badge, InputGroup, Glyphicon, FormControl } from 'react-bootstrap';
 import TasksBoard from './TasksBoard';
 import TasksRow from './TasksRow';
-
+import Filter from './Filter';
 import TasksTwo from './TasksTwo';
 
 export default class TaskListContainer extends Component {
@@ -14,7 +14,7 @@ export default class TaskListContainer extends Component {
 			isColumn: false,
 			search: '',
 			taskListType: 'option2',
-			filterView: 'false',
+			filterView: 'true',
 		};
 	}
 	render() {
@@ -89,13 +89,7 @@ export default class TaskListContainer extends Component {
 								</div>
 								<div class="p-2">
 									<div class="input-group">
-										<input
-											type="text"
-											class="form-control"
-											placeholder="Recipient's username"
-											aria-label="Recipient's username"
-											aria-describedby="basic-addon2"
-										/>
+										<input type="text" class="form-control" placeholder="Search" />
 										<div class="input-group-append">
 											<button class="btn btn-white" type="button">
 												<i class="fa fa-search" />
@@ -122,12 +116,30 @@ export default class TaskListContainer extends Component {
 								</div>
 							</div>
 						</div>
-						{this.state.taskListType === 'option1' && <TasksBoard />}
-					{this.state.taskListType === 'option2' && <TasksRow />}
-					{this.state.taskListType === 'option3' && <TasksTwo />}
+						<div class="row">
+							{this.state.filterView === 'true' && (
+								<div className="col-xl-2">
+									<Filter />
+								</div>
+							)}
+
+							{this.state.taskListType === 'option2' && (
+								<div class={'' + (this.state.filterView === 'true' ? 'col-xl-10' : 'col-xl-12')}>
+									<TasksRow />{' '}
+								</div>
+							)}
+
+							{this.state.taskListType === 'option1' && 
+								<div class={'' + (this.state.filterView === 'true' ? 'col-xl-10' : 'col-xl-12')}>
+								<TasksBoard />
+								</div>}
+
+							{this.state.taskListType === 'option3' && 
+								<div class={'' + (this.state.filterView === 'true' ? 'col-xl-10' : 'col-xl-12')}>
+							<TasksTwo />
+							</div>}
+						</div>
 					</div>
-
-
 				</div>
 			</div>
 		);

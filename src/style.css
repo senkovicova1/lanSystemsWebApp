@@ -206,3 +206,7 @@
 .form {
   margin: 10px;
 }
+
+.hide {
+  display: none;
+}
