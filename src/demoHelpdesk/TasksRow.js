@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, Badge, InputGroup, Glyphicon, FormControl } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-export default class TasksTwo extends Component {
+export default class TasksRow2 extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -15,36 +15,7 @@ export default class TasksTwo extends Component {
 	render() {
 		return (
 			<div>
-				<div className="row m-t-20 m-b-20">
-					<div class="col-md-4">
-						<form role="form">
-							<div class="form-group contact-search m-b-10">
-								<input type="text" id="search" class="form-control" placeholder="Search..." />
-								<button type="submit" class="btn btn-white">
-									<i class="fa fa-search" />
-								</button>
-							</div>
-						</form>
-					</div>
-
-					<div class="col-md-8">
-						<div class="h5 m-0 pull-right">
-							<span class="font-16 m-r-10">Sort By:</span>
-							<div class="btn-group btn-group-toggle" data-toggle="buttons">
-								<label class="btn btn-secondary active">
-									<input type="radio" name="options" id="option1" autocomplete="off" checked />
-									Name
-								</label>
-								<label class="btn btn-secondary">
-									<input type="radio" name="options" id="option2" autocomplete="off" /> Created date
-								</label>
-								<label class="btn btn-secondary">
-									<input type="radio" name="options" id="option3" autocomplete="off" /> Deadline
-								</label>
-							</div>
-						</div>
-					</div>
-				</div>
+			
 				<div className="row">
 					<div className="col-md-12" style={{ paddingLeft: 30 }}>
 						<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
@@ -209,6 +180,27 @@ export default class TasksTwo extends Component {
 												{' '}
 												<Link className="" to={{ pathname: `/demoHelpdesk/taskSideLeft` }}>
 													Taskedit side left{' '}
+												</Link>
+											</td>
+											<td>Branislav Šusta</td>
+											<td>LAN Systems s.r.o.</td>
+											<td>Patrik Patoprsty</td>
+											<td>15.04 2.10.2018</td>
+											<td>15.05 2.11.2018</td>
+										</tr>
+										<tr class="">
+											<td>
+												<div class="checkbox checkbox-primary checkbox-single m-r-15">
+													<input id="checkbox2" type="checkbox" checked="" />
+													<label for="checkbox2" />
+												</div>
+											</td>
+											<td>152</td>
+											<td>New</td>
+											<td>
+												{' '}
+												<Link className="" to={{ pathname: `/demoHelpdesk/taskTop4` }}>
+													Taskedit top dva stlpce
 												</Link>
 											</td>
 											<td>Branislav Šusta</td>

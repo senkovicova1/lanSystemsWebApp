@@ -5,7 +5,7 @@ import Select from 'react-select';
 import Comments from './components/comments.js';
 import Subtasks from './components/subtasks.js';
 
-export default class TaskTop3 extends Component {
+export default class TaskTop4 extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {

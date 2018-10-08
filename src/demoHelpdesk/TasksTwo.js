@@ -16,36 +16,6 @@ export default class TasksRow extends Component {
 	render() {
 		return (
 			<div>
-				<div className="row m-t-20">
-					<div class="col-md-4">
-						<form role="form">
-							<div class="form-group contact-search m-b-10">
-								<input type="text" id="search" class="form-control" placeholder="Search..." />
-								<button type="submit" class="btn btn-white">
-									<i class="fa fa-search" />
-								</button>
-							</div>
-						</form>
-					</div>
-
-					<div class="col-md-8">
-						<div class="h5 m-0 pull-right">
-							<span class="font-16 m-r-10">Sort By:</span>
-							<div class="btn-group btn-group-toggle" data-toggle="buttons">
-								<label class="btn btn-secondary active">
-									<input type="radio" name="options" id="option1" autocomplete="off" checked />
-									Name
-								</label>
-								<label class="btn btn-secondary">
-									<input type="radio" name="options" id="option2" autocomplete="off" /> Created date
-								</label>
-								<label class="btn btn-secondary">
-									<input type="radio" name="options" id="option3" autocomplete="off" /> Deadline
-								</label>
-							</div>
-						</div>
-					</div>
-				</div>
 
 				<div className="row">
 					<div className="col-lg-4">

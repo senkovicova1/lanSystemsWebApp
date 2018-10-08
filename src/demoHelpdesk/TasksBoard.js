@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, Badge, InputGroup, Glyphicon, FormControl } from 'react-bootstrap';
 
-
 export default class TasksBoard extends Component {
 	constructor(props) {
 		super(props);
@@ -15,43 +14,6 @@ export default class TasksBoard extends Component {
 	render() {
 		return (
 			<div>
-				<div className="row m-t-20">
-					<div class="col-md-4">
-						<form role="form">
-							<div class="form-group contact-search m-b-10">
-								<input type="text" id="search" class="form-control" placeholder="Search..." />
-								<button type="submit" class="btn btn-white">
-									<i class="fa fa-search" />
-								</button>
-							</div>
-						</form>
-					</div>
-
-					<div class="col-md-8">
-						<div class="h5 m-0 pull-right">
-							<span class="font-16 m-r-10">Sort By:</span>
-							<div class="btn-group btn-group-toggle" data-toggle="buttons">
-								<label class="btn btn-secondary active">
-									<input
-										type="radio"
-										name="options"
-										id="option1"
-										autocomplete="off"
-										checked
-									/>
-									Name
-										</label>
-								<label class="btn btn-secondary">
-									<input type="radio" name="options" id="option2" autocomplete="off" /> Created date
-										</label>
-								<label class="btn btn-secondary">
-									<input type="radio" name="options" id="option3" autocomplete="off" /> Deadline
-										</label>
-							</div>
-						</div>
-					</div>
-				</div>
-
 				<div className="row">
 					<div className="col-lg-3">
 						<div className="task-box">
@@ -60,6 +22,10 @@ export default class TasksBoard extends Component {
 							</div>
 							<div className="task-box-list">
 								<ul className="sortable-list taskList list-unstyled" id="upcoming">
+									<div class="form-group contact-search">
+										<input type="text" id="search" class="form-control" placeholder="Add task..." />
+										<button type="submit" class="btn btn-white" />
+									</div>
 									<li className="task-new" id="task1">
 										<div className="checkbox checkbox-primary">
 											<input type="checkbox" aria-label="Single checkbox Two" />
@@ -80,19 +46,22 @@ export default class TasksBoard extends Component {
 											</p>
 										</div>
 									</li>
+									<form role="form" />
 								</ul>
 							</div>
 							<div class="row m-l-10 m-r-10">
-                                    <div class="col-7">
-                                        Showing 1 - 10 of 289
-                                    </div>
-                                    <div class="col-5 m-b-10">
-                                        <div class="btn-group pull-right">
-                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-left"></i></button>
-                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-right"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-7">Showing 1 - 10 of 289</div>
+								<div class="col-5 m-b-10">
+									<div class="btn-group pull-right">
+										<button type="button" class="btn btn-sm btn-default waves-effect">
+											<i class="fa fa-chevron-left" />
+										</button>
+										<button type="button" class="btn btn-sm btn-default waves-effect">
+											<i class="fa fa-chevron-right" />
+										</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -103,6 +72,10 @@ export default class TasksBoard extends Component {
 							</div>
 							<div className="task-box-list">
 								<ul className="sortable-list taskList list-unstyled" id="upcoming">
+									<div class="form-group contact-search">
+										<input type="text" id="search" class="form-control" placeholder="Add task..." />
+										<button type="submit" class="btn btn-white" />
+									</div>
 									<li className="task-new" id="task1">
 										<div className="checkbox checkbox-primary">
 											<input type="checkbox" aria-label="Single checkbox Two" />
@@ -126,16 +99,18 @@ export default class TasksBoard extends Component {
 								</ul>
 							</div>
 							<div class="row m-l-10 m-r-10">
-                                    <div class="col-7">
-                                        Showing 1 - 10 of 289
-                                    </div>
-                                    <div class="col-5 m-b-10">
-                                        <div class="btn-group pull-right">
-                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-left"></i></button>
-                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-right"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-7">Showing 1 - 10 of 289</div>
+								<div class="col-5 m-b-10">
+									<div class="btn-group pull-right">
+										<button type="button" class="btn btn-sm btn-default waves-effect">
+											<i class="fa fa-chevron-left" />
+										</button>
+										<button type="button" class="btn btn-sm btn-default waves-effect">
+											<i class="fa fa-chevron-right" />
+										</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -146,6 +121,10 @@ export default class TasksBoard extends Component {
 							</div>
 							<div className="task-box-list">
 								<ul className="sortable-list taskList list-unstyled" id="upcoming">
+									<div class="form-group contact-search">
+										<input type="text" id="search" class="form-control" placeholder="Add task..." />
+										<button type="submit" class="btn btn-white" />
+									</div>
 									<li className="task-new" id="task1">
 										<div className="checkbox checkbox-primary">
 											<input type="checkbox" aria-label="Single checkbox Two" />
@@ -169,16 +148,18 @@ export default class TasksBoard extends Component {
 								</ul>
 							</div>
 							<div class="row m-l-10 m-r-10">
-                                    <div class="col-7">
-                                        Showing 1 - 10 of 289
-                                    </div>
-                                    <div class="col-5 m-b-10">
-                                        <div class="btn-group pull-right">
-                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-left"></i></button>
-                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-right"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-7">Showing 1 - 10 of 289</div>
+								<div class="col-5 m-b-10">
+									<div class="btn-group pull-right">
+										<button type="button" class="btn btn-sm btn-default waves-effect">
+											<i class="fa fa-chevron-left" />
+										</button>
+										<button type="button" class="btn btn-sm btn-default waves-effect">
+											<i class="fa fa-chevron-right" />
+										</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -189,6 +170,10 @@ export default class TasksBoard extends Component {
 							</div>
 							<div className="task-box-list">
 								<ul className="sortable-list taskList list-unstyled" id="upcoming">
+									<div class="form-group contact-search">
+										<input type="text" id="search" class="form-control" placeholder="Add task..." />
+										<button type="submit" class="btn btn-white" />
+									</div>
 									<li className="task-new" id="task1">
 										<div className="checkbox checkbox-primary">
 											<input type="checkbox" aria-label="Single checkbox Two" />
@@ -212,21 +197,22 @@ export default class TasksBoard extends Component {
 								</ul>
 							</div>
 							<div class="row m-l-10 m-r-10">
-                                    <div class="col-7">
-                                        Showing 1 - 10 of 289
-                                    </div>
-                                    <div class="col-5 m-b-10">
-                                        <div class="btn-group pull-right">
-                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-left"></i></button>
-                                            <button type="button" class="btn btn-sm btn-default waves-effect"><i class="fa fa-chevron-right"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-7">Showing 1 - 10 of 289</div>
+								<div class="col-5 m-b-10">
+									<div class="btn-group pull-right">
+										<button type="button" class="btn btn-sm btn-default waves-effect">
+											<i class="fa fa-chevron-left" />
+										</button>
+										<button type="button" class="btn btn-sm btn-default waves-effect">
+											<i class="fa fa-chevron-right" />
+										</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
 		);
 	}
 }

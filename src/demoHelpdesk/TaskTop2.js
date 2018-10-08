@@ -23,7 +23,7 @@ export default class TaskTop2 extends Component {
 		];
 
 		const selectStyle ={
-			control: styles => ({ ...styles, backgroundColor: 'white' }),
+			control: styles => ({ ...styles, backgroundColor: 'white', maxHeight:30}),
 		}
 
 		return (
@@ -38,12 +38,12 @@ export default class TaskTop2 extends Component {
 											<h1># 142 Nefunguje klavesnica</h1>
 											<hr />
 										</div>
-										<div className="col-lg-12">
+										<div className="col-lg-1">
 											<strong>Tagy: </strong>
 											<span class="label label-info m-r-5">Mimo pracovných hodín</span>
 											<span class="label label-success m-r-5">Telefonovať</span>
 										</div>
-
+										<div className="col-lg-12 p-0">
 										<div className="col-lg-4">
 											<div class="m-t-20">
 												<div class="form-group m-b-10">
@@ -94,7 +94,7 @@ export default class TaskTop2 extends Component {
 											</div>
 										</div>
 									</div>
-
+</div>
 									<label class="">Popis</label>
 									<textarea class="form-control" rows="2" />
 									<Subtasks />

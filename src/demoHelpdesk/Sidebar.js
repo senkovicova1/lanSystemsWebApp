@@ -18,7 +18,6 @@ export default class Sidebar extends Component {
 				<div className="sidebar-inner slimscrollleft">
 					<div id="sidebar-menu">
 						<li className="text-muted menu-title">Filters</li>
-
 						<ul className="sidebar-menu">
 							<li>
 								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
@@ -26,6 +25,17 @@ export default class Sidebar extends Component {
 								</Link>
 								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
 									My Tasks
+								</Link>
+							</li>
+						</ul>
+						<li className="text-muted menu-title">Active projects</li>
+						<ul className="sidebar-menu">
+							<li>
+								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+									hotline@lansystems.sk
+								</Link>
+								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+									Mertel CRM
 								</Link>
 							</li>
 						</ul>
