@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Button, Modal, Badge, InputGroup, Glyphicon, FormControl } from 'react-bootstrap';
+import { Button, Modal, Badge, InputGroup, Glyphicon, FormControl, DropdownButton, MenuItem } from 'react-bootstrap';
 import TasksBoard from './TasksBoard';
 import TasksRow from './TasksRow';
 import Filter from './Filter';
 import TasksTwo from './TasksTwo';
+
+const sortTypes = [{ id: 0, name: "Name" }, { id: 1, name: "Created" }, { id: 2, name: "Deadline" }]
 
 export default class TaskListContainer extends Component {
 	constructor(props) {
@@ -14,7 +16,8 @@ export default class TaskListContainer extends Component {
 			isColumn: false,
 			search: '',
 			taskListType: 'option2',
-			filterView: 'true',
+			filterView: true,
+			sortType: 0
 		};
 	}
 	render() {
@@ -84,8 +87,8 @@ export default class TaskListContainer extends Component {
 						</div>
 						<div className="row m-t-10 m-b-10">
 							<div class="d-flex flex-row align-items-center">
-								<div class="p-2">
-									<button class="btn btn-success waves-effect waves-light">Filter</button>
+								<div className="p2">
+									<button class="btn btn-success waves-effect waves-light btn-sm" onClick={() => this.setState({ filterView: !this.state.filterView })}>Filter</button>
 								</div>
 								<div class="p-2">
 									<div class="input-group">
@@ -97,51 +100,78 @@ export default class TaskListContainer extends Component {
 										</div>
 									</div>
 								</div>
+								<div class="p-2">
+									<p className="m-0">Global search</p>
+								</div>
+								<div className="p-2">
+									<div className="checkbox form-check-inline" style={{ marginLeft: 30, marginRight: 30 }}>
+										<input id="checkbox0" type="checkbox" />
+										<label for="checkbox0">My Task</label>
+									</div>
+									<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
+										<input id="checkbox0" type="checkbox" />
+										<label for="checkbox0">NEW</label>
+									</div>
+									<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
+										<input id="checkbox0" type="checkbox" />
+										<label for="checkbox0">OPEN</label>
+									</div>
+									<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
+										<input id="checkbox0" type="checkbox" />
+										<label for="checkbox0">PENDING</label>
+									</div>
+									<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
+										<input id="checkbox0" type="checkbox" />
+										<label for="checkbox0">CLOSED</label>
+									</div>
+								</div>
 							</div>
-
-							<div class="h5 p-2 ml-auto">
+							<div class="p-2 ml-auto">
 								<span class="font-16 m-r-10">Sort By:</span>
-								<div class="btn-group btn-group-toggle" data-toggle="buttons">
-									<label class="btn btn-secondary active">
-										<input type="radio" name="options" id="option1" autocomplete="off" checked />
-										Name
-									</label>
-									<label class="btn btn-secondary">
-										<input type="radio" name="options" id="option2" autocomplete="off" /> Created
-										date
-									</label>
-									<label class="btn btn-secondary">
-										<input type="radio" name="options" id="option3" autocomplete="off" /> Deadline
-									</label>
-								</div>
+								<DropdownButton
+									id="pageSelector"
+									title={sortTypes.find((item) => item.id === this.state.sortType).name}
+									noCaret
+									style={{ backgroundColor: 'black', borderWidth: 0, borderRadius: 0, marginLeft: 20 }}
+								>
+									{
+										sortTypes.map((item) =>
+											<MenuItem onClick={() => this.setState({ sortType: item.id })}>{item.name}</MenuItem>
+										)
+									}
+								</DropdownButton>
+
 							</div>
-						</div>
-						<div class="row">
-							{this.state.filterView === 'true' && (
-								<div className="col-xl-2">
-									<Filter />
-								</div>
-							)}
 
-							{this.state.taskListType === 'option2' && (
-								<div class={'' + (this.state.filterView === 'true' ? 'col-xl-10' : 'col-xl-12')}>
-									<TasksRow />{' '}
-								</div>
-							)}
-
-							{this.state.taskListType === 'option1' && (
-								<div class={'' + (this.state.filterView === 'true' ? 'col-xl-10' : 'col-xl-12')}>
-									<TasksBoard />
-								</div>
-							)}
-
-							{this.state.taskListType === 'option3' && (
-								<div class={'' + (this.state.filterView === 'true' ? 'col-xl-10' : 'col-xl-12')}>
-									<TasksTwo />
-								</div>
-							)}
 						</div>
 					</div>
+
+					<div class="row m-0">
+						{this.state.filterView && (
+							<div className="col-xl-3">
+								<Filter />
+							</div>
+						)}
+
+						{this.state.taskListType === 'option2' && (
+							<div class={'' + (this.state.filterView ? 'col-xl-9' : 'col-xl-12')}>
+								<TasksRow />{' '}
+							</div>
+						)}
+
+						{this.state.taskListType === 'option1' && (
+							<div class={'' + (this.state.filterView ? 'col-xl-9' : 'col-xl-12')}>
+								<TasksBoard />
+							</div>
+						)}
+
+						{this.state.taskListType === 'option3' && (
+							<div class={'' + (this.state.filterView ? 'col-xl-9' : 'col-xl-12')}>
+								<TasksTwo />
+							</div>
+						)}
+					</div>
+
 				</div>
 			</div>
 		);

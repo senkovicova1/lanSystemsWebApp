@@ -21,10 +21,6 @@ export default class TasksBoard extends Component {
 						</div>
 						<div className="task-box-list">
 							<ul className="sortable-list taskList list-unstyled" id="upcoming">
-								<div class="form-group contact-search">
-									<input type="text" id="search" class="form-control" placeholder="Add task..." />
-									<button type="submit" class="btn btn-white" />
-								</div>
 								<li className="task-new" id="task1">
 									<div className="checkbox checkbox-primary">
 										<input type="checkbox" aria-label="Single checkbox Two" />
@@ -71,10 +67,6 @@ export default class TasksBoard extends Component {
 						</div>
 						<div className="task-box-list">
 							<ul className="sortable-list taskList list-unstyled" id="upcoming">
-								<div class="form-group contact-search">
-									<input type="text" id="search" class="form-control" placeholder="Add task..." />
-									<button type="submit" class="btn btn-white" />
-								</div>
 								<li className="task-new" id="task1">
 									<div className="checkbox checkbox-primary">
 										<input type="checkbox" aria-label="Single checkbox Two" />
@@ -120,10 +112,6 @@ export default class TasksBoard extends Component {
 						</div>
 						<div className="task-box-list">
 							<ul className="sortable-list taskList list-unstyled" id="upcoming">
-								<div class="form-group contact-search">
-									<input type="text" id="search" class="form-control" placeholder="Add task..." />
-									<button type="submit" class="btn btn-white" />
-								</div>
 								<li className="task-new" id="task1">
 									<div className="checkbox checkbox-primary">
 										<input type="checkbox" aria-label="Single checkbox Two" />
@@ -169,10 +157,6 @@ export default class TasksBoard extends Component {
 						</div>
 						<div className="task-box-list">
 							<ul className="sortable-list taskList list-unstyled" id="upcoming">
-								<div class="form-group contact-search">
-									<input type="text" id="search" class="form-control" placeholder="Add task..." />
-									<button type="submit" class="btn btn-white" />
-								</div>
 								<li className="task-new" id="task1">
 									<div className="checkbox checkbox-primary">
 										<input type="checkbox" aria-label="Single checkbox Two" />

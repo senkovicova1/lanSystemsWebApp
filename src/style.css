@@ -1,4 +1,6 @@
-//Datepicker
+
+
+
 .react-datepicker-popper {
 	z-index: 7;
 }
@@ -185,8 +187,8 @@
 
 .main {
   margin-left: 250px;
-  padding-left:20px; 
-  padding-right:30px; 
+  padding-left:20px;
+  padding-right:30px;
   padding-top:20px;
   padding-bottom: 20px;
 }
@@ -210,3 +212,4 @@
 .hide {
   display: none;
 }
+

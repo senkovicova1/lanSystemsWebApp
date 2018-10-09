@@ -15,28 +15,6 @@ export default class TasksRow2 extends Component {
 	render() {
 		return (
 			<div>
-			
-				<div className="row">
-					<div className="col-md-12" style={{ paddingLeft: 30 }}>
-						<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
-							<input id="checkbox0" type="checkbox" />
-							<label for="checkbox0">NEW</label>
-						</div>
-						<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
-							<input id="checkbox0" type="checkbox" />
-							<label for="checkbox0">OPEN</label>
-						</div>
-						<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
-							<input id="checkbox0" type="checkbox" />
-							<label for="checkbox0">PENDING</label>
-						</div>
-						<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
-							<input id="checkbox0" type="checkbox" />
-							<label for="checkbox0">CLOSED</label>
-						</div>
-					</div>
-				</div>
-
 				<div className="row">
 					<div class="col-md-12">
 						<div class="card-box">
