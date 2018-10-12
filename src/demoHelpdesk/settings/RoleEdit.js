@@ -28,6 +28,13 @@ export default class RoleEdit extends Component {
 									<input type="text" class="form-control" value="Some text value..." />
 								</div>
 							</div>
+							<div class="form-group row">
+								<label class="col-2 col-form-label">Popis</label>
+								<div class="col-10">
+									<textarea class="form-control" rows="5" />
+								</div>
+							</div>
+							<h4 className="page-title m-b-20">ACL</h4>
 							<div class="d-flex p-2 bd-highlight p-l-0">
 								<div class="p-2 bd-highlight p-l-0">
 									<button

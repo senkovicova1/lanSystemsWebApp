@@ -23,9 +23,21 @@ export default class TypeEdit extends Component {
 								</div>
 							</div>
 							<div class="form-group row">
+								<label class="col-2 col-form-label">Poradie</label>
+								<div class="col-10">
+									<input type="text" class="form-control" value="Some text value..." />
+								</div>
+							</div>
+							<div class="form-group row">
 								<label class="col-2 col-form-label">Name</label>
 								<div class="col-10">
 									<input type="text" class="form-control" value="Some text value..." />
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-2 col-form-label">Popis</label>
+								<div class="col-10">
+								<textarea class="form-control" rows="5"></textarea>
 								</div>
 							</div>
 							<div class="d-flex p-2 bd-highlight p-l-0">
