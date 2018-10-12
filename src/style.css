@@ -213,3 +213,6 @@
   display: none;
 }
 
+select.form-control {
+  height:  none !important;
+}

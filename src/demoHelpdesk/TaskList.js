@@ -142,7 +142,6 @@ export default class TaskListContainer extends Component {
 								</DropdownButton>
 
 							</div>
-
 						</div>
 					</div>
 

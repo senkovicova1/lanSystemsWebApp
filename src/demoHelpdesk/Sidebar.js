@@ -14,7 +14,6 @@ export default class Sidebar extends Component {
 		};
 	}
 	render() {
-
 		const projects = [
 			{ value: 'hotline@lansystems.sk', label: 'hotline@lansystems.sk' },
 			{ value: 'Mertel CRM', label: 'Mertel CRM' },
@@ -23,7 +22,7 @@ export default class Sidebar extends Component {
 
 		const selectStyle = {
 			control: styles => ({ ...styles, backgroundColor: 'white', maxHeight: 30 }),
-		}
+		};
 
 		return (
 			<div className="left side-menu">
@@ -33,6 +32,7 @@ export default class Sidebar extends Component {
 							<label>Projekty</label>
 							<Select options={projects} styles={selectStyle} />
 						</div>
+
 						<li className="text-muted menu-title">Filters</li>
 						<ul className="sidebar-menu">
 							<li>
@@ -44,7 +44,7 @@ export default class Sidebar extends Component {
 								</Link>
 							</li>
 						</ul>
-						{/*
+
 						<li className="text-muted menu-title">Active projects</li>
 						<ul className="sidebar-menu">
 							<li>
@@ -56,7 +56,47 @@ export default class Sidebar extends Component {
 								</Link>
 							</li>
 						</ul>
-						*/}
+						<li className="text-muted menu-title">Archived projects</li>
+						<ul className="sidebar-menu" />
+						<li className="text-muted menu-title">Settings</li>
+						<ul className="sidebar-menu">
+							<li>
+								<Link className="" to={{ pathname: `/demoHelpdesk/settings/users` }}>
+									Users
+								</Link>
+							</li>
+							<li>
+								<Link className="" to={{ pathname: `/demoHelpdesk/settings/companies` }}>
+									Companies
+								</Link>
+							</li>
+							<li>
+								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+									Status
+								</Link>
+							</li>
+							<li>
+								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+									Typ práce
+								</Link>
+							</li>
+							<li>
+								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+									User roles
+								</Link>
+							</li>
+							<li>
+								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+									Jednotky
+								</Link>
+							</li>
+							<li>
+								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+									Projects
+
+								</Link>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
