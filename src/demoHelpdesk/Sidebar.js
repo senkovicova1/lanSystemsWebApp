@@ -71,27 +71,27 @@ export default class Sidebar extends Component {
 								</Link>
 							</li>
 							<li>
-								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+								<Link className="" to={{ pathname: `/demoHelpdesk/settings/statuses` }}>
 									Status
 								</Link>
 							</li>
 							<li>
-								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+								<Link className="" to={{ pathname: `/demoHelpdesk/settings/types` }}>
 									Typ práce
 								</Link>
 							</li>
 							<li>
-								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+								<Link className="" to={{ pathname: `/demoHelpdesk/settings/roles` }}>
 									User roles
 								</Link>
 							</li>
 							<li>
-								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+								<Link className="" to={{ pathname: `/demoHelpdesk/settings/units` }}>
 									Jednotky
 								</Link>
 							</li>
 							<li>
-								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+								<Link className="" to={{ pathname: `/demoHelpdesk/settings/projects` }}>
 									Projects
 
 								</Link>

@@ -14,6 +14,16 @@ import CompaniesList from './settings/CompaniesList';
 import CompanyEdit from './settings/CompanyEdit';
 import UsersList from './settings/UsersList';
 import UserEdit from './settings/UserEdit';
+import ProjectsList from './settings/ProjectsList';
+import ProjectEdit from './settings/ProjectEdit';
+import RolesList from './settings/RolesList';
+import RoleEdit from './settings/RoleEdit';
+import TypesList from './settings/TypesList';
+import TypeEdit from './settings/TypeEdit';
+import UnitsList from './settings/UnitsList';
+import UnitEdit from './settings/UnitEdit';
+import StatusesList from './settings/StatusesList';
+import StatusEdit from './settings/StatusEdit';
 
 export default class Navigation extends Component {
 	render() {
@@ -34,6 +44,16 @@ export default class Navigation extends Component {
 					<Route exact path="/demoHelpdesk/settings/companyEdit" component={CompanyEdit} />
 					<Route exact path="/demoHelpdesk/settings/users" component={UsersList} />
 					<Route exact path="/demoHelpdesk/settings/userEdit" component={UserEdit} />
+					<Route exact path="/demoHelpdesk/settings/statuses" component={StatusesList} />
+					<Route exact path="/demoHelpdesk/settings/statusEdit" component={StatusEdit} />
+					<Route exact path="/demoHelpdesk/settings/projects" component={ProjectsList} />
+					<Route exact path="/demoHelpdesk/settings/projectEdit" component={ProjectEdit} />
+					<Route exact path="/demoHelpdesk/settings/roles" component={RolesList} />
+					<Route exact path="/demoHelpdesk/settings/roleEdit" component={RoleEdit} />
+					<Route exact path="/demoHelpdesk/settings/types" component={TypesList} />
+					<Route exact path="/demoHelpdesk/settings/typeEdit" component={TypeEdit} />
+					<Route exact path="/demoHelpdesk/settings/units" component={UnitsList} />
+					<Route exact path="/demoHelpdesk/settings/unitEdit" component={UnitEdit} />
 				</div>
 			</div>
 		);

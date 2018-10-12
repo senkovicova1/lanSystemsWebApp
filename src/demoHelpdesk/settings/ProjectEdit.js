@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, Badge, InputGroup, Glyphicon, FormControl, DropdownButton, MenuItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-export default class UserEdit extends Component {
+export default class ProjectEdit extends Component {
 	constructor(props) {
 		super(props);
 	}
@@ -11,7 +11,7 @@ export default class UserEdit extends Component {
 			<div className="content-page">
 				<div className="content">
 					<div className="container-fluid">
-						<h4 className="page-title m-b-20">Unit Edit</h4>
+						<h4 className="page-title m-b-20">Project Edit</h4>
 						<div className="card-box">
 							<div class="form-group row">
 								<label class="col-2 col-form-label">Active</label>
@@ -28,7 +28,6 @@ export default class UserEdit extends Component {
 									<input type="text" class="form-control" value="Some text value..." />
 								</div>
 							</div>
-						
 							<div class="d-flex p-2 bd-highlight p-l-0">
 								<div class="p-2 bd-highlight p-l-0">
 									<button
