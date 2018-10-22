@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import base from '../../firebase';
 import ReactTable from 'react-table';
 import {Button} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 export default class TaskList extends Component{
 
@@ -58,28 +59,47 @@ export default class TaskList extends Component{
       accessor: 'edit',
       Cell : row => {
             return (
-              <span>
-                <Button onClick={() => {
-                    this.props.history.push(this.getLocation()+'/settings/companies/edit/'+row.original.id)}
-                  } bsStyle='warning'>Edit</Button>
-                <Button style={{marginLeft:5}} onClick={() => {
-                      this.remove(row)}
-                    } bsStyle='danger'>Delete</Button>
-              </span>
+              <div>
+                <Link className="table-action-btn" to={{pathname: `companies/edit/${row.original.id}`}}>
+                    <i class="md md-edit" />
+                </Link>
+                <a href="#" className="table-action-btn" onClick={() => {
+                    this.remove(row)}
+                  }>
+                    <i class="md md-close" />
+                  </a>
+              </div>
           )
       }
     }];
-    const data =[...this.state.companies];
+    const DATA =[...this.state.companies];
     return (
-    <div style={{padding:15}}>
-      <Button bsStyle="success" onClick={()=>this.props.history.push(this.getLocation()+'/settings/companies/add')} style={{marginLeft:10}}>
-        Add company
-      </Button>
-        <ReactTable
-          data={data}
-          columns={tableSetting}
-          className="-striped -highlight"
-          />
+
+      <div className='content-page'>
+        <div className="content">
+          <div className="container-fluid">
+
+            <div className="row m-t-10 m-b-10 m-l-5 m-r-5">
+              <div class="d-flex flex-row align-items-center">
+                <h4 className="page-title">Companies</h4>
+              </div>
+              <div class="p-2 ml-auto">
+                <Button bsStyle="success" onClick={()=>this.props.history.push(this.getLocation()+'/settings/companies/add')} style={{marginLeft:10}}>
+                  Add company
+                </Button>
+              </div>
+            </div>
+
+
+            {(DATA.length > 0) &&
+              <ReactTable
+                data={DATA}
+                columns={tableSetting}
+                defaultPageSize={DATA.length}
+                showPagination={false}
+                /> }
+          </div>
+        </div>
       </div>
     );
   }

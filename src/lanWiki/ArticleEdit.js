@@ -99,7 +99,10 @@ export default class ArticleEdit extends Component {
     const PATH = this.props.location.pathname.split('/');
     const NEW_PATH = PATH.splice(0, PATH.length-1).join('/');
       return (
-      <div style={{padding:10}}>
+        <div className='content-page'>
+          <div className="content">
+            <div className="container-fluid">
+              <div className='card-box'>
         <Link to={{pathname: `${NEW_PATH}`}}>
           <p>Back</p>
         </Link>
@@ -150,6 +153,9 @@ export default class ArticleEdit extends Component {
           </FormGroup>
 
           <Button onClick={this.submit.bind(this)} bsStyle="primary">Save</Button>
-      </div>
+          </div>
+        </div>
+          </div>
+          </div>
     );
 }}

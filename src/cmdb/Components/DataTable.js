@@ -47,22 +47,27 @@ export default class DataTable extends Component{
     const COLUMNS = this.props.columns;
 
     return (
-      <div className='DataTable'>
 
-        {this.props.loadButton()}
-{/* <Button onClick={this.addUsers.bind(this)}>asdsad</Button> */}
+        <div className='content-page'>
+          <div className="content">
+            <div className="container-fluid">
 
-        <ReactTable
-          data={DATA}
-          filterable
-          defaultFilterMethod={(filter, row) =>
-            row[filter.id].toLowerCase().includes(filter.value.toLowerCase())}
-          columns={COLUMNS}
-          defaultPageSize={20}
-          className=" -highlight"
-        />
+              {this.props.loadButton()}
+                {/* <Button onClick={this.addUsers.bind(this)}>asdsad</Button> */}
+              {(DATA.length > 0) &&
+              <ReactTable
+                data={DATA}
+                filterable
+                defaultFilterMethod={(filter, row) =>
+                  row[filter.id].toLowerCase().includes(filter.value.toLowerCase())}
+                columns={COLUMNS}
+                defaultPageSize={DATA.length}
+                showPagination={false}
+              />}
 
+        </div>
       </div>
+    </div>
     )
   }
 

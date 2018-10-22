@@ -21,9 +21,16 @@ export default class TypeList extends Component{
 
   loadAddButton(){
     return (
-      <Link className='DataTableAdd' to={{pathname: `types/add`}}>
-        <Button bsStyle="success" className='DataTableAddButton' >+ Add Type</Button>
-      </Link>);
+      <div className="row m-b-10 m-l-5 m-r-5">
+        <div class="d-flex flex-row align-items-center">
+          <h4 className="page-title">Types</h4>
+        </div>
+        <div class="p-2 ml-auto">
+          <Link className='DataTableAdd' to={{pathname: `types/add`}}>
+            <button className='btn btn-success waves-effect waves-light btn-sm' >+ Add Type</button>
+          </Link>
+        </div>
+      </div>);
   }
 
   loadColumnNames(){
@@ -36,12 +43,14 @@ export default class TypeList extends Component{
                 Cell : row => {
                       return (
                         <div>
-                          <Link to={{pathname: `/cmdb/types/edit/${row.original.id}`}}>
-                              <Button bsStyle='warning'>Edit</Button>
+                          <Link className="table-action-btn" to={{pathname: `types/edit/${row.original.id}`}}>
+                              <i class="md md-edit" />
                           </Link>
-                          <Button onClick={() => {
+                          <a href="#" className="table-action-btn" onClick={() => {
                               this.remove(row)}
-                            } bsStyle='danger'>Remove</Button>
+                            }>
+                              <i class="md md-close" />
+                            </a>
                         </div>
                     )
                 },
@@ -52,9 +61,7 @@ export default class TypeList extends Component{
   render(){
     const COLUMNS = this.loadColumnNames();
     return (
-      <div className='mainContainer'>
           <DataTable database={'cmdb-types'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
-      </div>
     );
   }
 }

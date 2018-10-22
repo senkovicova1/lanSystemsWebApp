@@ -28,31 +28,47 @@ export default class PlaceAdd extends React.Component {
   render() {
     return (
 
-        <div className='form'>
-          <FormGroup controlId="formGoupInput">
-            <ControlLabel>Place room</ControlLabel>
+      <div className='content-page'>
+        <div className="content">
+          <div className="container-fluid">
+            <div className='card-box'>
+
+              <h4 class="page-title m-b-20">Place Edit</h4>
+          <div className='form-group row'>
+            <ControlLabel className='col-2 col-form-label'>Room</ControlLabel>
+            <div className='col-10' >
             <FormControl  inputRef={(input) => this.room = input} type="text" placeholder="Enter Place room"/>
-          </FormGroup>
+            </div>
+          </div>
 
-          <FormGroup controlId="formGoupInput">
-            <ControlLabel>Place street</ControlLabel>
+          <div className='form-group row'>
+            <ControlLabel className='col-2 col-form-label'>Street</ControlLabel>
+            <div className='col-10' >
             <FormControl  inputRef={(input) => this.street = input} type="text" placeholder="Enter Place street"/>
-          </FormGroup>
+            </div>
+          </div>
 
-          <FormGroup controlId="formGoupInput">
-            <ControlLabel>Place city</ControlLabel>
+          <div className='form-group row'>
+            <ControlLabel className='col-2 col-form-label'>City</ControlLabel>
+            <div className='col-10' >
             <FormControl  inputRef={(input) => this.city = input} type="text" placeholder="Enter Place city"/>
-          </FormGroup>
+            </div>
+          </div>
 
-          <FormGroup controlId="formGoupInput">
-            <ControlLabel>Place state</ControlLabel>
+          <div className='form-group row'>
+            <ControlLabel className='col-2 col-form-label'>State</ControlLabel>
+            <div className='col-10' >
             <FormControl  inputRef={(input) => this.stateX = input} type="text" placeholder="Enter Place state"/>
-          </FormGroup>
+            </div>
+          </div>
 
           <Link to={{pathname : '/cmdb/places'}}>
             <Button type="submit" onClick={ this.addPlace.bind(this)} bsStyle='success' >+ Add Place</Button>
           </Link>
         </div>
+          </div>
+            </div>
+              </div>
         );
     }
 }

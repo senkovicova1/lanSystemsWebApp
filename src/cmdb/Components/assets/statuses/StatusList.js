@@ -36,12 +36,14 @@ export default class StatusList extends Component{
                 Cell : row => {
                       return (
                         <div>
-                          <Link to={{pathname: `/cmdb/statuses/edit/${row.original.id}`}}>
-                              <Button bsStyle='warning'>Edit</Button>
+                          <Link className="table-action-btn" to={{pathname: `statuses/edit/${row.original.id}`}}>
+                              <i class="md md-edit" />
                           </Link>
-                          <Button onClick={() => {
+                          <a href="#" className="table-action-btn" onClick={() => {
                               this.remove(row)}
-                            } bsStyle='danger'>Remove</Button>
+                            }>
+                              <i class="md md-close" />
+                            </a>
                         </div>
                     )
                 },

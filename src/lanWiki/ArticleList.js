@@ -40,25 +40,32 @@ export default class ArticleList extends Component{
 
   render(){
     return (
-      <div>
+      <div className='content-page'>
+        <div className="content">
+          <div className="container-fluid">
+
         <Link to={{pathname: './'+this.props.match.params.tagID+'/add/article'}}>
           <p>+ Article</p>
         </Link>
         {this.state.articles.filter((item)=>this.props.match.params.tagID==='all'||item.tags.includes(parseInt(this.props.match.params.tagID, 10))).map((article)=>
-          <div className="article" key={article.id}>
+          <div className='card-box'>
+              <div className="article" key={article.id}>
 
-            <h3 style={{paddingLeft:3}}>{article.title}</h3>
-            <p>
-              Tags: {this.tagsToString(article.tags)}
-            </p>
-            <div className="articleBody">
-              <div dangerouslySetInnerHTML={{__html:article.text.substring(0,655)+'...'}} />
-            <Link className='articleRead' to={{pathname: './'+this.props.match.params.tagID+`/article/`+article.id}}>
-              <p className='articleAddButton' >read more...</p>
-            </Link>
+                <h3 style={{paddingLeft:3}}>{article.title}</h3>
+                <p>
+                  Tags: {this.tagsToString(article.tags)}
+                </p>
+                <div className="articleBody">
+                  <div dangerouslySetInnerHTML={{__html:article.text.substring(0,655)+'...'}} />
+                <Link className='articleRead' to={{pathname: './'+this.props.match.params.tagID+`/article/`+article.id}}>
+                  <p className='articleAddButton' >read more...</p>
+                </Link>
+              </div>
+            </div>
           </div>
-        </div>
-        )}
+          ) }
+      </div>
+      </div>
       </div>
     );
   }

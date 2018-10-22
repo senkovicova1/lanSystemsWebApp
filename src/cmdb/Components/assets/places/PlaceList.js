@@ -21,9 +21,16 @@ export default class PlaceList extends Component{
 
   loadAddButton(){
     return (
-      <Link className='DataTableAdd' to={{pathname: `places/add`}}>
-        <Button bsStyle="success" className='DataTableAddButton' >+ Add Place</Button>
-      </Link>);
+      <div className="row m-b-10 m-l-5 m-r-5">
+        <div class="d-flex flex-row align-items-center">
+          <h4 className="page-title">Places</h4>
+        </div>
+        <div class="p-2 ml-auto">
+          <Link className='DataTableAdd' to={{pathname: `places/add`}}>
+            <button className='btn btn-success waves-effect waves-light btn-sm' >+ Add Place</button>
+          </Link>
+        </div>
+      </div>);
   }
 
   loadColumnNames(){
@@ -45,12 +52,14 @@ export default class PlaceList extends Component{
                 Cell : row => {
                       return (
                         <div>
-                          <Link to={{pathname: `cmdb/places/edit/${row.original.id}`}}>
-                              <Button bsStyle='warning'>Edit</Button>
+                          <Link className="table-action-btn" to={{pathname: `places/edit/${row.original.id}`}}>
+                              <i class="md md-edit" />
                           </Link>
-                          <Button onClick={() => {
+                          <a href="#" className="table-action-btn" onClick={() => {
                               this.remove(row)}
-                            } bsStyle='danger'>Remove</Button>
+                            }>
+                              <i class="md md-close" />
+                            </a>
                         </div>
                     )
                 },
@@ -61,9 +70,7 @@ export default class PlaceList extends Component{
   render(){
     const COLUMNS = this.loadColumnNames();
     return (
-      <div className='mainContainer'>
           <DataTable database={'cmdb-places'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
-      </div>
     );
   }
 }

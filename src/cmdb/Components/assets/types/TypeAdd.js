@@ -23,16 +23,27 @@ export default class TypeAdd extends React.Component {
 
   render() {
     return (
+      <div className='content-page'>
+        <div className="content">
+          <div className="container-fluid">
+            <div className='card-box'>
 
-        <div className='form'>
-          <FormGroup controlId="formGroupInput">
-            <ControlLabel>Type Name</ControlLabel>
-            <FormControl  inputRef={(input) => this.type = input} type="text" placeholder="Enter Type Name"/>
-          </FormGroup>
+              <h4 class="page-title m-b-20">Server Edit</h4>
 
-          <Link to={{pathname : '/cmdb/types'}}>
-            <Button type="submit" onClick={ this.addType.bind(this)} bsStyle='success' >+ Add Type</Button>
-          </Link>
+                <div className='form-group row'>
+                  <ControlLabel className='col-3 col-form-label'>Type Name</ControlLabel>
+                  <div className='col-9' >
+                    <FormControl  inputRef={(input) => this.type = input} type="text" placeholder="Enter Type Name"/>
+                  </div>
+                </div>
+
+                <Link to={{pathname : '/cmdb/types'}}>
+                  <Button type="submit" onClick={ this.addType.bind(this)} bsStyle='success' >+ Add Type</Button>
+                </Link>
+
+              </div>
+            </div>
+          </div>
         </div>
         );
     }

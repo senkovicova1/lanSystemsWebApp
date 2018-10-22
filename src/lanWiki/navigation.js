@@ -21,10 +21,10 @@ export default class Navigation extends Component {
     return(
       <div>
         <div>
-          <Col xs={1} className='noPadding'>
+          <div>
             <Sidebar  {...this.props}/>
-          </Col>
-          <Col xs={11} className='noPadding'>
+          </div>
+          <div>
             <Route exact path='/lanwiki/tag/:tagID' component={ArticleList} />
             <Route exact path='/lanwiki/tag/:tagID/add/article' component={ArticleAdd} />
             <Route exact path='/lanwiki/tag/:tagID/article/:articleID' component={Article} />
@@ -36,7 +36,7 @@ export default class Navigation extends Component {
             <Route exact path='/lanwiki/settings/users' component={UsersList} />
             <Route exact path='/lanwiki/settings/users/add' component={UserAdd} />
             <Route exact path='/lanwiki/settings/users/edit/:userID' component={UserEdit} />
-          </Col>
+          </div>
        </div>
       </div>
     )

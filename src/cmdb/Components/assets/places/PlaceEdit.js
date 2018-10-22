@@ -45,30 +45,47 @@ export default class PlaceEdit extends React.Component {
 
   render() {
     return (
-          <div className='form'>
-            <FormGroup controlId="formGoupInput">
-              <ControlLabel>Room</ControlLabel>
-              <FormControl type="text" placeholder='Enter room' value={this.state.room} onChange={(e) => this.setState({ room: e.target.value })}/>
-            </FormGroup>
+      <div className='content-page'>
+        <div className="content">
+          <div className="container-fluid">
+            <div className='card-box'>
 
-            <FormGroup controlId="formGoupInput">
-              <ControlLabel>Street</ControlLabel>
+              <h4 class="page-title m-b-20">Place Edit</h4>
+
+                <div className='form-group row'>
+                  <ControlLabel className='col-2 col-form-label'>Room</ControlLabel>
+                  <div className='col-10' >
+                  <FormControl type="text" placeholder='Enter room' value={this.state.room} onChange={(e) => this.setState({ room: e.target.value })}/>
+                  </div>
+                </div>
+
+                <div className='form-group row'>
+                  <ControlLabel className='col-2 col-form-label'>Street</ControlLabel>
+                  <div className='col-10' >
               <FormControl type="text"placeholder='Enter street' value={this.state.street} onChange={(e) => this.setState({ street: e.target.value })}/>
-            </FormGroup>
+              </div>
+            </div>
 
-            <FormGroup controlId="formGoupInput">
-              <ControlLabel>City</ControlLabel>
+            <div className='form-group row'>
+              <ControlLabel className='col-2 col-form-label'>City</ControlLabel>
+              <div className='col-10' >
               <FormControl type="text" placeholder='Enter city' value={this.state.city} onChange={(e) => this.setState({ city: e.target.value })}/>
-            </FormGroup>
+              </div>
+            </div>
 
-            <FormGroup controlId="formGoupInput">
-              <ControlLabel>State</ControlLabel>
+            <div className='form-group row'>
+              <ControlLabel className='col-2 col-form-label'>State</ControlLabel>
+              <div className='col-10' >
               <FormControl type="text" placeholder='Enter state' value={this.state.state} onChange={(e) => this.setState({ state: e.target.value })}/>
-            </FormGroup>
+              </div>
+            </div>
 
             <Link to={{ pathname: '/cmdb/companies'}}>
               <Button type="submit" onClick={this.editPlace.bind(this)} bsStyle='warning'>Edit this company</Button>
             </Link>
+          </div>
+          </div>
+          </div>
           </div>
         );
   }

@@ -30,21 +30,24 @@ export default class Sidebar extends Component{
 
   render(){
     return (
-      <div>
-
-        <ListGroup>
-          {
-          Object
-            .keys(this.state.assets)
-            .map(asset =>
-                  <Link className='link' to={{pathname: `/cmdb/${this.state.assets[asset].toLowerCase()}`}}  key={this.state.assets[asset]}>
-                    <ListGroupItem active={this.isActive(this.state.assets[asset])} className='sidebarItem' key={this.state.assets[asset]} >
-                      {this.state.assets[asset]}
-                    </ListGroupItem>
-                  </Link>
-              )
-          }
-        </ListGroup>
+      <div className="left side-menu">
+        <div className="sidebar-inner slimscrollleft">
+					<div id="sidebar-menu">
+            <ul className="sidebar-menu">
+              {
+              Object
+                .keys(this.state.assets)
+                .map(asset =>
+                    <li className="sidebar-menu">
+                      <Link className='' to={{pathname: `/cmdb/${this.state.assets[asset].toLowerCase()}`}}  key={this.state.assets[asset]}>
+                          {this.state.assets[asset]}
+                      </Link>
+                    </li>
+                  )
+              }
+            </ul>
+          </div>
+        </div>
       </div>
     )
   }

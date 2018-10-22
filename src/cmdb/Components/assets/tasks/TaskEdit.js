@@ -79,51 +79,75 @@ componentWillReceiveProps(props){
     }
     const USERS_OPTIONS = Object.values(this.state.users).map(r => r.name);
     return (
-      <div className='taskEdit'>
 
-          <h2>Information about Task</h2>
+        <div >
+          <div className="content">
+            <div className="container-fluid">
+              <div className='taskEdit'>
+              <div className='card-box'>
 
-            <FormGroup controlId="formGoupInputTasks">
-                <ControlLabel>Title</ControlLabel>
-                <FormControl  inputRef={(input) => this.title = input} placeholder="Enter task's name" type="text" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })}/>
-            </FormGroup>
+                <h4 class="page-title m-b-20">Information about Task</h4>
 
-            <FormGroup controlId="formGoupInputIPAddress">
-                <ControlLabel>Description</ControlLabel>
-                <FormControl  inputRef={(input) => this.description = input} componentClass="textarea" value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} />
-            </FormGroup>
+                  <div className='form-group row'>
+                    <ControlLabel className='col-2 col-form-label'>Title</ControlLabel>
+                    <div className='col-10' >
+                        <FormControl  inputRef={(input) => this.title = input} placeholder="Enter task's name" type="text" value={this.state.title} onChange={(e) => this.setState({ title: e.target.value })}/>
+                        </div>
+                      </div>
 
-            <FormGroup controlId="formControlsSelect">
-              <ControlLabel>Select status</ControlLabel>
-                <AutoSuggest
-                  datalist={STATUS_OPTIONS}
-                  value={this.state.chosenStatus}
-                  onChange={(value) => this.setAny('chosenStatus', value)}
-                  />
-            </FormGroup>
+                      <div className='form-group row'>
+                        <ControlLabel className='col-2 col-form-label'>Description</ControlLabel>
+                        <div className='col-10' >
+                        <FormControl  inputRef={(input) => this.description = input} componentClass="textarea" value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} />
+                        </div>
+                      </div>
 
-            <FormGroup controlId="formControlsSelect">
-              <ControlLabel>Made by</ControlLabel>
-                <AutoSuggest
-                  datalist={USERS_OPTIONS}
-                  value={this.state.chosenBy}
-                  onChange={(value) => this.setAny('chosenBy', value)}
-                  />
-            </FormGroup>
+                      <div className='form-group row'>
+                        <ControlLabel className='col-2 col-form-label'>Select status</ControlLabel>
+                        <div className='col-10' >
+                        <AutoSuggest
+                          datalist={STATUS_OPTIONS}
+                          value={this.state.chosenStatus}
+                          onChange={(value) => this.setAny('chosenStatus', value)}
+                          />
+                        </div>
+                      </div>
 
-            <FormGroup controlId="formControlsSelect">
-              <ControlLabel>Solved by</ControlLabel>
-                <AutoSuggest
-                  datalist={USERS_OPTIONS}
-                  value={this.state.chosenSolves}
-                  onChange={(value) => this.setAny('chosenSolves', value)}
-                  />
-            </FormGroup>
+                      <div className='form-group row'>
+                        <ControlLabel className='col-2 col-form-label'>Made by</ControlLabel>
+                        <div className='col-10' >
+                        <AutoSuggest
+                          datalist={USERS_OPTIONS}
+                          value={this.state.chosenBy}
+                          onChange={(value) => this.setAny('chosenBy', value)}
+                          />
+                        </div>
+                      </div>
 
-            <Button bsStyle='warning' bsSize='small' onClick={this.editTasks.bind(this)}>Edit Task</Button>
-            <Button bsSize='small' bsStyle='danger' onClick={this.handleDelete.bind(this)}>Remove</Button>
+                      <div className='form-group row'>
+                        <ControlLabel className='col-2 col-form-label'>Solved by</ControlLabel>
+                        <div className='col-10' >
+                        <AutoSuggest
+                          datalist={USERS_OPTIONS}
+                          value={this.state.chosenSolves}
+                          onChange={(value) => this.setAny('chosenSolves', value)}
+                          />
+                        </div>
+                      </div>
 
-      </div>
+                      <div className='form-group row'>
+                        <div className="col-2.5">
+                            <Button bsStyle='warning' bsSize='small' onClick={this.editTasks.bind(this)}>Edit Task</Button>
+                        </div>
+                          <div className="col-2">
+                              <Button bsSize='small' bsStyle='danger' onClick={this.handleDelete.bind(this)}>Remove</Button>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
     );
   }
 

@@ -54,9 +54,17 @@ export default class ServerList extends Component{
 
   loadAddButton(){
     return (
-      <Link className='DataTableAdd' to={{pathname: `servers/add`}}>
-        <Button bsStyle="success" className='DataTableAddButton' >+ Add Server</Button>
-      </Link>);
+      <div className="row m-b-10 m-l-5 m-r-5">
+        <div class="d-flex flex-row align-items-center">
+          <h4 className="page-title">Servers</h4>
+        </div>
+        <div class="p-2 ml-auto">
+          <Link className='DataTableAdd' to={{pathname: `servers/add`}}>
+            <button className='btn btn-success waves-effect waves-light btn-sm' >+ Add Server</button>
+          </Link>
+        </div>
+      </div>);
+
   }
 
   loadColumnNames(){
@@ -67,17 +75,19 @@ export default class ServerList extends Component{
                 Header: 'Company Name',
                 accessor: 'companyName',
               },{
-                Header: '',
+                Header: 'Action',
                 accessor: 'edit',
                 Cell : row => {
                       return (
                         <div>
-                          <Link to={{pathname: `servers/edit/${row.original.id}`}}>
-                              <Button bsStyle='warning'>Edit</Button>
+                          <Link className="table-action-btn" to={{pathname: `servers/edit/${row.original.id}`}}>
+                              <i class="md md-edit" />
                           </Link>
-                          <Button onClick={() => {
+                          <a href="#" className="table-action-btn" onClick={() => {
                               this.remove(row)}
-                            } bsStyle='danger'>Remove</Button>
+                            }>
+                              <i class="md md-close" />
+                            </a>
                         </div>
                     )
                 },
@@ -88,9 +98,7 @@ export default class ServerList extends Component{
   render(){
     const COLUMNS = this.loadColumnNames();
     return (
-      <div className='mainContainer'>
-         <DataTable database={'cmdb-servers'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
-      </div>
+         <DataTable database={'cmdb-servers'} header='Servers' columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
     );
   }
 }

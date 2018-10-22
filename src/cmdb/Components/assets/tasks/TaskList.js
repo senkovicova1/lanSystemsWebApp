@@ -28,8 +28,14 @@ export default class TaskList extends Component{
   }
 
   loadAddButton(){
-    return (
-      <TaskAddModal />
+    return (<div className="row m-b-10 m-l-5 m-r-5">
+      <div class="d-flex flex-row align-items-center">
+        <h4 className="page-title">Tasks</h4>
+      </div>
+      <div class="p-2 ml-auto">
+          <TaskAddModal />
+      </div>
+    </div>
     );
   }
 
@@ -84,18 +90,30 @@ export default class TaskList extends Component{
   chosenTask(task){
     this.setState({ task })
   }
+  //
+
 
   render(){
       const COLUMNS = this.loadColumnNames();
       return (
-        <div className='mainContainer'>
-          <Col xs={4} className='noPadding'>
-            <DataTable chosenTask={this.chosenTask.bind(this)} database={'tasks'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
-          </Col>
-          <Col xs={8} >
-            { this.state.task !== null && <TaskEdit info={this.state.task} /> }
-          </Col>
-        </div>
+        <div>
+
+        {
+          ( this.state.task !== null &&
+            <div className='form-group row'>
+              <div className='col-6' >
+                <DataTable chosenTask={this.chosenTask.bind(this)} database={'tasks'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
+              </div>
+              <div className='col-6' >
+                <TaskEdit info={this.state.task} />
+              </div>
+           </div>  )
+
+           ||
+
+           <DataTable chosenTask={this.chosenTask.bind(this)} database={'tasks'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
+         }
+       </div>
       );
   }
 }

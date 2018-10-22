@@ -51,7 +51,10 @@ componentWillUnmount() {
     let article=this.state.article && this.state.article.length===1?this.state.article[0]:null;
     if(!article) return null;
     return (
-      <div >
+      <div className='content-page'>
+        <div className="content">
+          <div className="container-fluid">
+            <div className='card-box'>
           <div className='DataTable'>
 
             <Link to={{pathname: `${NEW_PATH}`}}>
@@ -74,7 +77,10 @@ componentWillUnmount() {
 
           </div>
           <Comments />
-      </div>
+          </div>
+        </div>
+          </div>
+          </div>
     );
   }
 }

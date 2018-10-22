@@ -36,12 +36,14 @@ export default class CompanyList extends Component{
                 Cell : row => {
                       return (
                         <div>
-                          <Link to={{pathname: `cmdb/companies/edit/${row.original.id}`}}>
-                              <Button bsStyle='warning'>Edit</Button>
+                          <Link className="table-action-btn" to={{pathname: `companies/edit/${row.original.id}`}}>
+                              <i class="md md-edit" />
                           </Link>
-                          <Button onClick={() => {
+                          <a href="#" className="table-action-btn" onClick={() => {
                               this.remove(row)}
-                            } bsStyle='danger'>Remove</Button>
+                            }>
+                              <i class="md md-close" />
+                            </a>
                         </div>
                     )
                 },
@@ -52,9 +54,7 @@ export default class CompanyList extends Component{
   render(){
     const COLUMNS = this.loadColumnNames();
     return (
-      <div className='mainContainer'>
           <DataTable database={'settings-companies'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
-      </div>
     );
   }
 }

@@ -223,126 +223,150 @@ export default class ServerEdit extends Component {
             ];
 
     return (
-          <div className='form'>
+      <div className='content-page'>
+        <div className="content">
+          <div className="container-fluid">
+            <div className='card-box'>
 
-            <FormGroup controlId="inputName">
-              <ControlLabel>Server Name</ControlLabel>
-              <FormControl  type="text" placeholder='Enter name' value={this.state.serverName} onChange={(e) => this.setState({ serverName: e.target.value })}/>
-            </FormGroup>
+              <h4 class="page-title m-b-20">Server Edit</h4>
 
-            <FormGroup controlId="selectCompany">
-              <ControlLabel>Select company</ControlLabel>
-                <FormControl value={this.state.companyName} onChange={(value) => this.setAny('companyName', value)} componentClass="select" placeholder="select" >
-                {
-                  Object.keys(this.state.companies)
-                        .map(c => <option key={c} value={this.state.companies[c].companyName}> {this.state.companies[c].companyName} </option> )
-                }
-                </FormControl>
-            </FormGroup>
+              <div className='form-group row'>
+                <ControlLabel className='col-2 col-form-label'>Server Name</ControlLabel>
+                <div className='col-10' >
+                  <FormControl type="text" placeholder='Enter name' value={this.state.serverName} onChange={(e) => this.setState({ serverName: e.target.value })}/>
+                </div>
+              </div>
 
-            <FormGroup controlId="selectCompany">
-              <ControlLabel>Select type</ControlLabel>
-                <FormControl value={this.state.type} onChange={(value) => this.setAny('type', value)} componentClass="select" placeholder="select" >
-                {
-                  Object.keys(this.state.types)
-                        .map(c => <option key={c} value={this.state.types[c].typeName}> {this.state.types[c].typeName} </option> )
-                }
-                </FormControl>
-            </FormGroup>
+              <div className='form-group row'>
+                <ControlLabel className='col-2 col-form-label'>Select company</ControlLabel>
+                <div className='col-10' >
+                  <FormControl value={this.state.companyName} onChange={(value) => this.setAny('companyName', value)} componentClass="select" placeholder="select" >
+                  {
+                    Object.keys(this.state.companies)
+                          .map(c => <option key={c} value={this.state.companies[c].companyName}> {this.state.companies[c].companyName} </option> )
+                  }
+                  </FormControl>
+                  </div>
+              </div>
 
-            <FormGroup controlId="selectCompany">
-              <ControlLabel>Select status</ControlLabel>
-                <FormControl value={this.state.status} onChange={(value) => this.setAny('status', value)} componentClass="select" placeholder="select" >
-                  <option key={1} value='ON'> ON </option>
-                  <option key={2} value='OFF'> OFF </option>
-                  <option key={3} value='TEST'> TEST </option>
-                </FormControl>
-            </FormGroup>
+              <div className='form-group row'>
+                <ControlLabel className='col-2 col-form-label'>Select type</ControlLabel>
+                  <div className='col-10' >
+                  <FormControl value={this.state.type} onChange={(value) => this.setAny('type', value)} componentClass="select" placeholder="select" >
+                  {
+                    Object.keys(this.state.types)
+                          .map(c => <option key={c} value={this.state.types[c].typeName}> {this.state.types[c].typeName} </option> )
+                  }
+                  </FormControl>
+                  </div>
+              </div>
 
-            <FormGroup controlId="inputFunction">
-              <ControlLabel>Function</ControlLabel>
-              <FormControl  placeholder='Enter function' value={this.state.serverFunction} onChange={(e) => this.setState({ serverFunction: e.target.value })} type="text" />
-            </FormGroup>
+              <div  className='form-group row'>
+                <ControlLabel className='col-2 col-form-label'>Select status</ControlLabel>
+                  <div className='col-10' >
+                    <FormControl value={this.state.status} onChange={(value) => this.setAny('status', value)} componentClass="select" placeholder="select" >
+                      <option key={1} value='ON'> ON </option>
+                      <option key={2} value='OFF'> OFF </option>
+                      <option key={3} value='TEST'> TEST </option>
+                    </FormControl>
+                  </div>
+              </div>
 
-            <FormGroup controlId="textareaDescription">
-              <ControlLabel>Description</ControlLabel>
-              <FormControl componentClass="textarea" placeholder='Enter describtion' value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} />
-            </FormGroup>
+              <div className='form-group row'>
+                <ControlLabel className='col-2 col-form-label'>Function</ControlLabel>
+                  <div className='col-10' >
+                <FormControl  placeholder='Enter function' value={this.state.serverFunction} onChange={(e) => this.setState({ serverFunction: e.target.value })} type="text" />
+                </div>
+              </div>
 
-            <FormGroup controlId="inputProcessor">
-              <ControlLabel>Processor</ControlLabel>
-              <FormControl type="text" placeholder='Enter processor' value={this.state.processor} onChange={(e) => this.setState({ processor: e.target.value })} />
-            </FormGroup>
+              <div className='form-group row'>
+                <ControlLabel className='col-2 col-form-label'>Description</ControlLabel>
+                  <div className='col-10' >
+                <FormControl componentClass="textarea" placeholder='Enter describtion' value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} />
+                </div>
+              </div>
 
-            <FormGroup controlId="textareaHDD">
-              <ControlLabel>HDD</ControlLabel>
-              <FormControl componentClass="textarea"  placeholder='Enter HDD' value={this.state.hdd} onChange={(e) => this.setState({ hdd: e.target.value })} />
-            </FormGroup>
+              <div controlId="inputName" className='form-group row'>
+                <ControlLabel className='col-2 col-form-label'>Processor</ControlLabel>
+                  <div className='col-10' >
+                <FormControl type="text" placeholder='Enter processor' value={this.state.processor} onChange={(e) => this.setState({ processor: e.target.value })} />
+                </div>
+              </div>
 
-            <FormGroup controlId="textareaHDD">
-              <ControlLabel>NICs</ControlLabel>
-                <ReactTable
-                  data={DATA_NIC}
-                  columns={COLUMNS_NIC}
-                  defaultPageSize={5}
-                  className="-striped -highlight"
-                  showPagination={false}
-                />
+              <div controlId="inputName" className='form-group row'>
+                <ControlLabel className='col-2 col-form-label'>HDD</ControlLabel>
+                  <div className='col-10' >
+                <FormControl componentClass="textarea"  placeholder='Enter HDD' value={this.state.hdd} onChange={(e) => this.setState({ hdd: e.target.value })} />
+                </div>
+              </div>
 
-                <AddNICModalForm serverId={this.state.id}/>
-            </FormGroup>
-
-            <FormGroup controlId="textareaHDD">
-              <ControlLabel>Location</ControlLabel>
-                {
-                  (this.state.placeID !== null && this.state.placeID !== "") &&
+              <FormGroup controlId="textareaHDD">
+                <ControlLabel>NICs</ControlLabel>
                   <ReactTable
-                    data={DATA_PLACES}
-                    columns={COLUMNS_PLACES}
-                    defaultPageSize={1}
+                    data={DATA_NIC}
+                    columns={COLUMNS_NIC}
+                    defaultPageSize={5}
+                    className="-highlight"
                     showPagination={false}
                   />
-              }
 
-                {(this.state.placeID === null || this.state.placeID === "") &&
-                  <div>
-                  <Button bsStyle="success" bsSize='small' onClick={() => this.setState({openEdit:true})}> Choose location of server </Button>
-                  </div>
+                  <AddNICModalForm serverId={this.state.id}/>
+              </FormGroup>
+
+              <FormGroup controlId="textareaHDD">
+                <ControlLabel>Location</ControlLabel>
+                  {
+                    (this.state.placeID !== null && this.state.placeID !== "") &&
+                    <ReactTable
+                      data={DATA_PLACES}
+                      columns={COLUMNS_PLACES}
+                      defaultPageSize={1}
+                      showPagination={false}
+                    />
                 }
 
-                <Modal bsSize='large' show={this.state.openEdit} onHide={()=>{this.setState({openEdit:false})}}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Locations</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <FormGroup controlId="selectplace">
-                      <ControlLabel>Select place</ControlLabel>
+                  {(this.state.placeID === null || this.state.placeID === "") &&
+                    <div>
+                    <Button bsStyle="success" bsSize='small' onClick={() => this.setState({openEdit:true})}> Choose location of server </Button>
+                    </div>
+                  }
 
-                        <Select
-                          options={this.state.places.map((place)=>{
-                            place.value=place.id;
-                            place.label=place.state + ', ' + place.city + ', ' + place.street + ', ' + place.room;
-                            return place;
-                          })}
-                          value={this.state.place}
-                          onChange={e =>{ this.setState({ placeID: e.id })}}
-                          />
+                  <Modal bsSize='large' show={this.state.openEdit} onHide={()=>{this.setState({openEdit:false})}}>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Locations</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <FormGroup controlId="selectplace">
+                        <ControlLabel>Select place</ControlLabel>
 
-                        <Button onClick={() => this.setState({openEdit:false})}> Close </Button>
+                          <Select
+                            options={this.state.places.map((place)=>{
+                              place.value=place.id;
+                              place.label=place.state + ', ' + place.city + ', ' + place.street + ', ' + place.room;
+                              return place;
+                            })}
+                            value={this.state.place}
+                            onChange={e =>{ this.setState({ placeID: e.id })}}
+                            />
 
-                    </FormGroup>
-                  </Modal.Body>
-                </Modal>
+                          <Button onClick={() => this.setState({openEdit:false})}> Close </Button>
 
-            </FormGroup>
+                      </FormGroup>
+                    </Modal.Body>
+                  </Modal>
 
-            <FormGroup controlId="textareaHDD">
-              <BackupTaskList serverID={parseInt(this.state.id)} />
-            </FormGroup>
+              </FormGroup>
 
-            <Button type="submit" onClick={this.editServer.bind(this)} bsStyle='warning'>Edit this server</Button>
+              <FormGroup controlId="textareaHDD">
+                <BackupTaskList serverID={parseInt(this.state.id)} />
+              </FormGroup>
 
+              <Button type="submit" onClick={this.editServer.bind(this)} bsStyle='warning'>Edit this server</Button>
+
+            </div>
           </div>
+        </div>
+      </div>
         );
   }
 }

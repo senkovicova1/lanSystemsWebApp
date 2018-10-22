@@ -37,15 +37,26 @@ export default class TypeEdit extends React.Component {
 
   render() {
     return (
-          <div className='form'>
-            <FormGroup controlId="formGoupInput">
-              <ControlLabel>Type Name</ControlLabel>
+      <div className='content-page'>
+        <div className="content">
+          <div className="container-fluid">
+            <div className='card-box'>
+
+              <h4 class="page-title m-b-20">Server Edit</h4>
+
+              <div className='form-group row'>
+                <ControlLabel className='col-3 col-form-label'>Type Name</ControlLabel>
+                <div className='col-9' >
               <FormControl type="text" placeholder='Enter name' value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })}/>
-            </FormGroup>
+              </div>
+            </div>
 
             <Link to={{ pathname: '/cmdb/types'}}>
               <Button type="submit" onClick={this.editType.bind(this)} bsStyle='warning'>Edit this type</Button>
             </Link>
+          </div>
+          </div>
+          </div>
           </div>
         );
   }

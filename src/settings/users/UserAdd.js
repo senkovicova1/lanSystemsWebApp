@@ -40,16 +40,20 @@ export default class StatusAdd extends Component {
 
   render() {
       return (
-      <div style={{padding:10}}>
-        <FormGroup bsSize="large" controlId="inputName">
-        <label>User name</label>
-          <FormControl type="text"
-            onChange={e => {
-              this.setState({ username: e.target.value });
-            }}
-           value={this.state.username}/>
-        </FormGroup>
-          <Button onClick={this.submit.bind(this)} bsStyle="primary">Add</Button>
+        <div className='content-page'>
+          <div className="content">
+            <div className="container-fluid">
+            <FormGroup bsSize="large" controlId="inputName">
+            <label><h2>User name</h2></label>
+              <FormControl type="text"
+                onChange={e => {
+                  this.setState({ username: e.target.value });
+                }}
+               value={this.state.username}/>
+            </FormGroup>
+              <Button onClick={this.submit.bind(this)} bsStyle="primary">+ Add</Button>
+          </div>
+        </div>
       </div>
     );
 }}
