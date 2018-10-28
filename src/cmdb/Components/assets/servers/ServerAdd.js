@@ -5,7 +5,8 @@ import AddNICModalForm from './AddNICModalForm';
 import BackupTaskList from '../backuptasks/BackupTaskList';
 import ReactTable from 'react-table';
 import { Link } from 'react-router-dom';
-import { Button, FormGroup, ControlLabel, FormControl, Modal } from 'react-bootstrap';
+import Modal from 'react-responsive-modal';
+import { Button, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 import Select from 'react-select';
 
 export default class ServerAdd extends React.Component {
@@ -13,10 +14,10 @@ export default class ServerAdd extends React.Component {
   constructor(props){
     super(props);
       this.state = {
-        companies : {},
+        companies : [],
         modalOpen : false,
         nics : {},
-        types : {},
+        types : [],
         statuses : {},
         places : [],
         lastServer : null,
@@ -48,12 +49,14 @@ export default class ServerAdd extends React.Component {
 
     this.ref2 = base.syncState(`settings-companies`, {
       context: this,
-      state: 'companies'
+      state: 'companies',
+      asArray: true
     });
 
     this.ref3 = base.syncState(`cmdb-types`, {
         context: this,
-        state: 'types'
+        state: 'types',
+        asArray: true
       });
 
     this.ref5 = base.bindToState(`cmdb-places`, {
@@ -71,7 +74,6 @@ export default class ServerAdd extends React.Component {
   }
 
   addServer(){
-    console.log(this.hdd.value);
     if (this.name.value.length < 1) return;
     const ID = this.state.lastServer.length>0?this.state.lastServer[0].id+1:0;
     firebase.database()
@@ -79,14 +81,14 @@ export default class ServerAdd extends React.Component {
             .set({
               id: ID,
               serverName : this.name.value,
-              companyName : this.company.value,
+              companyName : (this.company ? this.company.companyName : null),
               description: this.description.value,
               serverFunction: this.serverFunction.value,
               processor: this.processor.value,
               hdd: this.hdd.value,
-              type : this.type.value,
-              status : this.status.value,
-              placeID : (this.state.place !== null && this.state.place !== undefined) ? this.state.place.id : "",
+              type : (this.type ? this.type.typeName : null),
+              status : (this.status ? this.status.label : null),
+              placeID : (this.state.place !== null && this.state.place !== undefined) ? this.state.place.id : null,
             });
   }
 
@@ -198,6 +200,18 @@ export default class ServerAdd extends React.Component {
               },
             ];
 
+        const STATUSES = [
+          {
+            label: "ON",
+            value: 1
+          }, {
+            label: "OFF",
+            value: 2
+          }, {
+            label: "TEST",
+            value: 3
+          }
+        ];
     return (
       <div className='content-page'>
         <div className="content">
@@ -215,36 +229,42 @@ export default class ServerAdd extends React.Component {
 
                 <div className='form-group row'>
                   <ControlLabel className='col-2 col-form-label'>Select company</ControlLabel>
-                  <div className='col-10' >
-                      <FormControl componentClass="select" placeholder="select" inputRef={(input) => this.company = input}>
-                        {
-                          Object.keys(this.state.companies)
-                                .map(c => <option key={c} value={this.state.companies[c].companyName}> {this.state.companies[c].companyName} </option> )
-                        }
-                        </FormControl>
+                    <div className='col-10' >
+                        <Select
+                          options={(this.state.companies ? this.state.companies : []).map(company => {
+                            company.label = company.companyName;
+                            company.value = company.id;
+                            return company;
+                          })}
+                          value={this.company}
+                          onChange={e =>{ this.company = e }}
+                        />
                       </div>
                   </div>
 
                   <div className='form-group row'>
                     <ControlLabel className='col-2 col-form-label'>Select type</ControlLabel>
                       <div className='col-10' >
-                      <FormControl componentClass="select" placeholder="select" inputRef={(input) => this.type = input}>
-                        {
-                          Object.keys(this.state.types)
-                                .map(c => <option key={c} value={this.state.types[c].typeName}> {this.state.types[c].typeName} </option> )
-                        }
-                      </FormControl>
+                        <Select
+                          options={(this.state.types ? this.state.types : []).map(type => {
+                            type.label = type.typeName;
+                            type.value = type.id;
+                            return type;
+                          })}
+                          value={this.type}
+                          onChange={e =>{ this.type = e }}
+                        />
                     </div>
                 </div>
 
                 <div  className='form-group row'>
                   <ControlLabel className='col-2 col-form-label'>Select status</ControlLabel>
                     <div className='col-10' >
-                      <FormControl componentClass="select" placeholder="select" inputRef={(input) => this.status = input}>
-                        <option key={1} value='ON'> ON </option>
-                        <option key={2} value='OFF'> OFF </option>
-                        <option key={3} value='TEST'> TEST </option>
-                      </FormControl>
+                      <Select
+                        options={STATUSES}
+                        value={this.status}
+                        onChange={e =>{ this.status = e }}
+                      />
                     </div>
                 </div>
 
@@ -307,31 +327,32 @@ export default class ServerAdd extends React.Component {
                         </div>
                       }
 
-                      <Modal bsSize='large' show={this.state.openEdit} onHide={()=>{this.setState({openEdit:false})}}>
-                        <Modal.Header closeButton>
-                          <Modal.Title>Locations</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <FormGroup controlId="selectplace">
-                            <ControlLabel>Select place</ControlLabel>
+                      <div>
+                        <Modal
+                          open={this.state.openEdit}
+                          onClose={() => {}}
+                          center
+                          closeOnEsc
+                          closeOnOverlayClick
+                          >
+                            <FormGroup controlId="selectplace">
+                              <ControlLabel>Select place </ControlLabel>
 
-                              <Select
-                                options={this.state.places.map((place)=>{
-                                  place.value=place.id;
-                                  place.label=place.state + ', ' + place.city + ', ' + place.street + ', ' + place.room;
-                                  return place;
-                                })}
-                                value={this.state.place}
-                                onChange={e =>{ this.setState({ place: e })}}
-                                />
+                                <Select
+                                  options={this.state.places.map((place)=>{
+                                    place.value=place.id;
+                                    place.label=place.state + ', ' + place.city + ', ' + place.street + ', ' + place.room;
+                                    return place;
+                                  })}
+                                  value={this.state.place}
+                                  onChange={e =>{ this.setState({ place: e })}}
+                                  />
 
-                              <Button onClick={() => this.setState({openEdit:false})}> Close </Button>
-
-                          </FormGroup>
-                        </Modal.Body>
-                      </Modal>
-
-                  </FormGroup>
+                                <Button onClick={() => this.setState({openEdit:false})}> Close </Button>
+                            </FormGroup>
+                        </Modal>
+                      </div>
+                    </FormGroup>
 
                   <FormGroup>
                     <BackupTaskList serverID={SERVER_ID} />

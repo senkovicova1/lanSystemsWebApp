@@ -23,19 +23,20 @@ export default class TaskList extends Component{
 
   remove(row){
     firebase.database()
-            .ref(`tasks/${row.original.id}`)
+            .ref(`cmdb-tasks/${row.original.id}`)
             .remove();
   }
 
   loadAddButton(){
-    return (<div className="row m-b-10 m-l-5 m-r-5">
-      <div class="d-flex flex-row align-items-center">
-        <h4 className="page-title">Tasks</h4>
+    return (
+      <div className="row m-b-10 m-l-5 m-r-5">
+        <div class="d-flex flex-row align-items-center">
+          <h4 className="page-title">Tasks</h4>
+        </div>
+        <div class="p-2 ml-auto">
+            <TaskAddModal />
+        </div>
       </div>
-      <div class="p-2 ml-auto">
-          <TaskAddModal />
-      </div>
-    </div>
     );
   }
 
@@ -44,7 +45,6 @@ export default class TaskList extends Component{
         Header: 'Title',
         accessor: 'title',
         Cell : row => <div
-                style={{ backgroundColor: "#fafafa" }}
                 onClick={() => this.chosenTask(row.original)}
                 dangerouslySetInnerHTML={{
                     __html: row.original.title
@@ -90,8 +90,6 @@ export default class TaskList extends Component{
   chosenTask(task){
     this.setState({ task })
   }
-  //
-
 
   render(){
       const COLUMNS = this.loadColumnNames();
@@ -102,16 +100,16 @@ export default class TaskList extends Component{
           ( this.state.task !== null &&
             <div className='form-group row'>
               <div className='col-6' >
-                <DataTable chosenTask={this.chosenTask.bind(this)} database={'tasks'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
+                <DataTable chosenTask={this.chosenTask.bind(this)} database={'cmdb-tasks'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
               </div>
               <div className='col-6' >
-                <TaskEdit info={this.state.task} />
+                <TaskEdit info={this.state.task} close={() => {this.setState({ task : null }) }}/>
               </div>
            </div>  )
 
            ||
 
-           <DataTable chosenTask={this.chosenTask.bind(this)} database={'tasks'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
+           <DataTable chosenTask={this.chosenTask.bind(this)} database={'cmdb-tasks'} columns={COLUMNS} loadButton={this.loadAddButton.bind(this)} />
          }
        </div>
       );

@@ -4,7 +4,8 @@ import AddNICModalForm from './AddNICModalForm';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { Link } from 'react-router-dom';
-import { Button, FormGroup, ControlLabel, FormControl, Modal } from 'react-bootstrap';
+import Modal from 'react-responsive-modal';
+import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import Select from 'react-select';
 import BackupTaskList from '../backuptasks/BackupTaskList';
 
@@ -24,10 +25,12 @@ export default class ServerEdit extends Component {
         status : null,
         placeID : null,
 
-        companies: {},
+        chosenCompany : null,
+        chosenStatus : null,
+
+        companies: [],
         nics : {},
-        types : {},
-        statuses : {},
+        types : [],
         places : [],
 
         openEdit : false,
@@ -66,12 +69,14 @@ export default class ServerEdit extends Component {
 
     this.ref2 = base.syncState(`settings-companies`, {
       context: this,
-      state: 'companies'
+      state: 'companies',
+      asArray: true,
     });
 
       this.ref3 = base.syncState(`cmdb-types`, {
           context: this,
-          state: 'types'
+          state: 'types',
+          asArray: true,
         });
 
       this.ref5 = base.bindToState(`cmdb-places`, {
@@ -91,14 +96,14 @@ export default class ServerEdit extends Component {
   editServer(){
     let data={
       serverName : this.state.serverName,
-      companyName : this.state.companyName,
+      companyName : (this.state.chosenCompany ? this.state.chosenCompany.companyName : this.state.companyName),
       description: this.state.description,
       serverFunction: this.state.serverFunction,
       processor: this.state.processor,
       hdd: this.state.hdd,
-      type: this.state.type,
-      status: this.state.status,
-      placeID : this.state.placeID,
+      type: (this.state.chosenType ? this.state.chosenType.label : this.state.type),
+      status: (this.state.chosenStatus ? this.state.chosenStatus.label : this.state.status),
+      placeID : this.state.placeID || null,
     }
     base.update(`cmdb-servers/${this.state.id}`,{data});
 
@@ -109,6 +114,12 @@ export default class ServerEdit extends Component {
     let newState={};
     newState[key]=value.target.value;
     this.setState( newState);
+  }
+
+  setAnyFromSelect(key, value){
+    let newState={};
+    newState[key]=value;
+    this.setState(newState);
   }
 
   handleDeleteNIC(event){
@@ -141,8 +152,6 @@ export default class ServerEdit extends Component {
 
 
   render() {
-    console.log('aaa');
-    console.log(this.state.placeID);
       const DATA_NIC = Object
                     .values(this.state.nics)
                     .filter(val => val.serverID === this.state.id);
@@ -221,7 +230,18 @@ export default class ServerEdit extends Component {
                       },
               },
             ];
-
+      const STATUSES = [
+        {
+          label: "ON",
+          value: 1
+        }, {
+          label: "OFF",
+          value: 2
+        }, {
+          label: "TEST",
+          value: 3
+        }
+      ];
     return (
       <div className='content-page'>
         <div className="content">
@@ -240,35 +260,57 @@ export default class ServerEdit extends Component {
               <div className='form-group row'>
                 <ControlLabel className='col-2 col-form-label'>Select company</ControlLabel>
                 <div className='col-10' >
-                  <FormControl value={this.state.companyName} onChange={(value) => this.setAny('companyName', value)} componentClass="select" placeholder="select" >
-                  {
-                    Object.keys(this.state.companies)
-                          .map(c => <option key={c} value={this.state.companies[c].companyName}> {this.state.companies[c].companyName} </option> )
-                  }
-                  </FormControl>
+                  <Select
+                    options={(this.state.companies ? this.state.companies : []).map(company => {
+                      company.label = company.companyName;
+                      company.value = company.id;
+                      return company;
+                    })}
+                    value={
+                      this.state.chosenCompany || (this.state.companies ? this.state.companies : []).filter(company =>
+                        company.companyName === this.state.companyName)
+                    }
+                    onChange={(value) => this.setAnyFromSelect("chosenCompany", value)}
+                  />
                   </div>
               </div>
 
               <div className='form-group row'>
                 <ControlLabel className='col-2 col-form-label'>Select type</ControlLabel>
                   <div className='col-10' >
-                  <FormControl value={this.state.type} onChange={(value) => this.setAny('type', value)} componentClass="select" placeholder="select" >
+                    <Select
+                      options={(this.state.types ? this.state.types : []).map(type => {
+                        type.label = type.typeName;
+                        type.value = type.id;
+                        return type;
+                      })}
+                      value={
+                        this.state.chosenType || (this.state.types ? this.state.types : []).filter(t =>
+                          t.label === this.state.type
+                        )
+                      }
+                      onChange={(value) => this.setAnyFromSelect('chosenType', value)}
+                    />
+                  {/*          <FormControl value={this.state.type} onChange={(value) => this.setAny('type', value)} componentClass="select" placeholder="select" >
                   {
                     Object.keys(this.state.types)
                           .map(c => <option key={c} value={this.state.types[c].typeName}> {this.state.types[c].typeName} </option> )
                   }
-                  </FormControl>
+                  </FormControl>*/}
                   </div>
               </div>
-
               <div  className='form-group row'>
                 <ControlLabel className='col-2 col-form-label'>Select status</ControlLabel>
                   <div className='col-10' >
-                    <FormControl value={this.state.status} onChange={(value) => this.setAny('status', value)} componentClass="select" placeholder="select" >
-                      <option key={1} value='ON'> ON </option>
-                      <option key={2} value='OFF'> OFF </option>
-                      <option key={3} value='TEST'> TEST </option>
-                    </FormControl>
+                    <Select
+                      options={STATUSES}
+                      value={
+                        this.state.chosenStatus || STATUSES.filter(st =>
+                          st.label === this.state.status
+                        )
+                      }
+                      onChange={(value) => this.setAnyFromSelect('chosenStatus', value)}
+                    />
                   </div>
               </div>
 
@@ -316,26 +358,29 @@ export default class ServerEdit extends Component {
               <FormGroup controlId="textareaHDD">
                 <ControlLabel>Location</ControlLabel>
                   {
-                    (this.state.placeID !== null && this.state.placeID !== "") &&
+                    (this.state.placeID !== null && this.state.placeID !== "" && this.state.placeID !== undefined) &&
                     <ReactTable
                       data={DATA_PLACES}
                       columns={COLUMNS_PLACES}
                       defaultPageSize={1}
                       showPagination={false}
                     />
+
                 }
 
-                  {(this.state.placeID === null || this.state.placeID === "") &&
+                  {(this.state.placeID === null || this.state.placeID === ""  || this.state.placeID === undefined) &&
                     <div>
                     <Button bsStyle="success" bsSize='small' onClick={() => this.setState({openEdit:true})}> Choose location of server </Button>
                     </div>
                   }
 
-                  <Modal bsSize='large' show={this.state.openEdit} onHide={()=>{this.setState({openEdit:false})}}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Locations</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
+                  <Modal
+                    open={this.state.openEdit}
+                    onClose={() => this.setState({openEdit:false})}
+                    center
+                    closeOnEsc
+                    closeOnOverlayClick
+                    >
                       <FormGroup controlId="selectplace">
                         <ControlLabel>Select place</ControlLabel>
 
@@ -352,7 +397,6 @@ export default class ServerEdit extends Component {
                           <Button onClick={() => this.setState({openEdit:false})}> Close </Button>
 
                       </FormGroup>
-                    </Modal.Body>
                   </Modal>
 
               </FormGroup>

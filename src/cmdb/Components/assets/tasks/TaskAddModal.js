@@ -1,10 +1,24 @@
 import React from "react";
 import firebase from 'firebase';
-import AutoSuggest from 'react-bootstrap-autosuggest';
+import Select from 'react-select';
 import Modal from 'react-responsive-modal';
 import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-const STATUS_OPTIONS = ['NEW', 'In progress', 'Solved', 'On hold'];
+const STATUS_OPTIONS = [
+  {
+    label:'NEW',
+    value : 1
+  }, {
+    label:'In progress',
+    value : 2
+  }, {
+    label:'Solved',
+    value : 3
+  }, {
+    label:'On hold',
+    value : 4
+  }
+];
 
 export default class TasksAddModal extends React.Component {
 
@@ -13,6 +27,9 @@ export default class TasksAddModal extends React.Component {
     this.state = {
       open: false,
       users : [],
+      chosenSolves : null,
+      chosenBy : null,
+      chosenStatus : null
     }
 
     this.setModalOpen.bind(this);
@@ -21,7 +38,7 @@ export default class TasksAddModal extends React.Component {
     this.setAny.bind(this);
 
 
-    const USERS = firebase.database().ref(`users`);
+    const USERS = firebase.database().ref(`settings-users`);
     USERS.once('value')
           .then(snap =>
             {
@@ -42,17 +59,23 @@ export default class TasksAddModal extends React.Component {
     this.setState(newState);
   }
 
+  setAnyFromSelect(key, value){
+    let newState={};
+    newState[key]=value;
+    this.setState(newState);
+  }
+
   addTasks(){
     const ID = Date.now();
     firebase.database()
-            .ref(`tasks/${ID}`)
+            .ref(`cmdb-tasks/${ID}`)
             .set({
               id : ID,
               title : this.title.value || "",
               description : this.description.value || "",
-              status : this.state.chosenStatus || "",
-              by : this.state.chosenBy || "",
-              solves : this.state.chosenSolves || "",
+              status : (this.state.chosenStatus ? this.state.chosenStatus.label : ""),
+              by : (this.state.chosenBy ? this.state.chosenBy.name : ""),
+              solves : (this.state.chosenSolves ? this.state.chosenSolves.name : ""),
             });
 
     this.setModalOpen(false);
@@ -60,7 +83,14 @@ export default class TasksAddModal extends React.Component {
 
   render() {
 
-    const USERS_OPTIONS = Object.values(this.state.users).map(r => r.name);
+    const USERS_OPTIONS = Object.values(this.state.users).map(r => {
+      let user = {
+        name : r.username,
+        value : r.id,
+        label : r.username
+      }
+      return user
+    });
     return (
       <div>
         <Button bsStyle='success' className='DataTableAddButton' onClick={() => this.setModalOpen(true)}>+ Add Task</Button>
@@ -85,29 +115,29 @@ export default class TasksAddModal extends React.Component {
 
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Select status</ControlLabel>
-                <AutoSuggest
-                  datalist={STATUS_OPTIONS}
-                  placeholder={this.state.chosenStatus}
-                  onChange={(value) => this.setAny('chosenStatus', value)}
-                  />
+                  <Select
+                    options={STATUS_OPTIONS}
+                    value={this.state.chosenStatus}
+                    onChange={(value) => this.setAnyFromSelect('chosenStatus', value)}
+                    />
             </FormGroup>
 
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Made by</ControlLabel>
-                <AutoSuggest
-                  datalist={USERS_OPTIONS}
-                  placeholder={this.state.chosenBy}
-                  onChange={(value) => this.setAny('chosenBy', value)}
-                  />
+                  <Select
+                    options={USERS_OPTIONS}
+                    value={this.state.chosenBy}
+                    onChange={(value) => this.setAnyFromSelect('chosenBy', value)}
+                    />
             </FormGroup>
 
             <FormGroup controlId="formControlsSelect">
               <ControlLabel>Solved by</ControlLabel>
-                <AutoSuggest
-                  datalist={USERS_OPTIONS}
-                  placeholder={this.state.chosenSolves}
-                  onChange={(value) => this.setAny('chosenSolves', value)}
-                  />
+                  <Select
+                    options={USERS_OPTIONS}
+                    value={this.state.chosenSolves}
+                    onChange={(value) => this.setAnyFromSelect('chosenSolves', value)}
+                    />
             </FormGroup>
 
             <Button bsStyle='success' onClick={this.addTasks.bind(this)}>+ Add Task</Button>

@@ -208,6 +208,10 @@ select.form-control {
   height:  none !important;
 }
 
+.styles_modal__gNwvD{
+	width: 50%;
+}
+
 /*---------------------------------------------------------------*/
 .ReactTable {
   position: relative;

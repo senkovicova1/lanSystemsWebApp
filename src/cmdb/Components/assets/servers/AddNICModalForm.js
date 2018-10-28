@@ -94,7 +94,7 @@ export default class AddNICModalForm extends React.Component {
             </FormGroup>
 
 
-            <Button bsSize='large' bsStyle='success' onClick={this.addNIC.bind(this)}>+ Add NIC</Button>
+            <Button bsStyle='success' onClick={this.addNIC.bind(this)}>+ Add NIC</Button>
 
             <Button onClick={() => this.setModalOpen(false)}>Close</Button>
 
