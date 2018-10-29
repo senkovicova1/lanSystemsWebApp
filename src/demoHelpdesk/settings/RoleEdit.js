@@ -34,7 +34,8 @@ export default class RoleEdit extends Component {
 									<textarea class="form-control" rows="5" />
 								</div>
 							</div>
-							<h4 className="page-title m-b-20">ACL</h4>
+							<h4 className="page-title m-b-20">ACL
+							</h4>
 							<div class="d-flex p-2 bd-highlight p-l-0">
 								<div class="p-2 bd-highlight p-l-0">
 									<button
