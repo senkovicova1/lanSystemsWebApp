@@ -33,7 +33,7 @@ export default class TaskTop2 extends Component {
 					<div className="container-fluid">
 						<div className="row">
 							<div className="col-lg-12">
-								<div class="card-box">
+							<div class="card-box" style={{ maxWidth: 1284, margin: 'auto' }}>
 									<div class="row">
 										<div className="col-lg-12">
 											<h1># 142 Nefunguje klavesnica</h1>
@@ -111,13 +111,8 @@ export default class TaskTop2 extends Component {
 
 									<label class="">Popis</label>
 									<textarea class="form-control" rows="2" />
-								</div>
-
-								<div class="card-box">
 									<Subtasks />
 									<Items />
-								</div>
-								<div class="card-box">
 									<Comments />
 								</div>
 							</div>

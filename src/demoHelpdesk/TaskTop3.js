@@ -33,7 +33,7 @@ export default class TaskTop3 extends Component {
 					<div className="container-fluid">
 						<div className="row">
 							<div className="col-lg-12">
-								<div class="card-box">
+								<div class="card-box" style={{ maxWidth: 1284, margin: 'auto', background:"#F9F9F9" }}>
 									<div class="row">
 										<div className="col-lg-12">
 											<h1># 142 Nefunguje klavesnica</h1>
@@ -88,15 +88,6 @@ export default class TaskTop3 extends Component {
 											<div className="col-lg-6">
 												<div class="m-t-20">
 													<div class="form-group m-b-10 row">
-														<label className="col-3 col-form-label">
-															Mimo pracovných hodín
-														</label>
-														<div className="col-9">
-															<Select options={statuses} styles={selectStyle} />
-														</div>
-													</div>
-
-													<div class="form-group m-b-10 row">
 														<label className="col-3 col-form-label">Pripomienka</label>
 														<div className="col-9">
 															<Select options={statuses} styles={selectStyle} />
@@ -126,23 +117,23 @@ export default class TaskTop3 extends Component {
 															<Select options={statuses} styles={selectStyle} />
 														</div>
 													</div>
+													<div class="form-group m-b-10 row">
+														<label className="col-3 col-form-label">
+															Mimo pracovných hodín
+														</label>
+														<div className="col-9">
+															<Select options={statuses} styles={selectStyle} />
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 									<label class="">Popis</label>
 									<textarea class="form-control" rows="2" />
-								</div>
-								<div class="card-box">
-									{' '}
+
 									<Subtasks />
-								</div>
-								<div class="card-box">
-									{' '}
 									<Items />
-								</div>
-								<div class="card-box">
-									{' '}
 									<Comments />
 								</div>
 							</div>

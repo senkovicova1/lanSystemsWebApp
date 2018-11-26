@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { Button, Modal, Badge, InputGroup, Glyphicon, FormControl } from 'react-bootstrap';
 import Comments from './components/comments.js';
 import Subtasks from './components/subtasks.js';
+import Items from './components/items.js';
+
+const tableStyle = {
+	border: 'none',
+};
+
 
 export default class TasksRow extends Component {
 	constructor(props) {
@@ -78,75 +84,72 @@ export default class TasksRow extends Component {
 									<table class="table table-borderless">
 										<tbody>
 											<tr>
-												<td>
-													{' '}
+												<td style={tableStyle}>
 													<strong>Status: </strong>
 												</td>
-												<td>
-													{' '}
+												<td style={tableStyle}>
 													<span class="label label-pink">Opakovanie</span>
 												</td>
-												<td>
-													{' '}
+												<td style={tableStyle}>
 													<strong>Pripomienka: </strong>
 												</td>
-												<td>12:00 24.12.2018</td>
+												<td style={tableStyle}>12:00 24.12.2018</td>
 											</tr>
 											<tr>
-												<td>
+												<td style={tableStyle}>
 													<strong>Projekt: </strong>
 												</td>
-												<td>hotline@lansystems.sk</td>
-												<td>
+												<td style={tableStyle}>hotline@lansystems.sk</td>
+												<td style={tableStyle}>
 													{' '}
 													<strong>Deadline: </strong>
 												</td>
-												<td>12:00 24.12.2018</td>
+												<td style={tableStyle}>12:00 24.12.2018</td>
 											</tr>
 											<tr>
-												<td>
+												<td style={tableStyle}>
 													{' '}
 													<strong>Zadal: </strong>
 												</td>
-												<td>Branislav Šusta</td>
-												<td>
+												<td style={tableStyle}>Branislav Šusta</td>
+												<td style={tableStyle}>
 													{' '}
 													<strong>Opakovanie: </strong>
 												</td>
-												<td>None</td>
+												<td style={tableStyle}>None</td>
 											</tr>
 											<tr>
-												<td>
+												<td style={tableStyle}>
 													{' '}
 													<strong>Firma </strong>
 												</td>
-												<td>None</td>
+												<td style={tableStyle}>None</td>
 
-												<td>
+												<td style={tableStyle}>
 													<strong>Typ práce: </strong>
 												</td>
-												<td>Servis IT</td>
+												<td style={tableStyle}>Servis IT</td>
 											</tr>
 											<tr>
-												<td>
+												<td style={tableStyle}>
 													{' '}
 													<strong>Riesi </strong>
 												</td>
-												<td>None</td>
+												<td style={tableStyle}>None</td>
 
-												<td>
+												<td style={tableStyle}>
 													<strong>Pausál/Projekt </strong>
 												</td>
-												<td>Pausal</td>
+												<td style={tableStyle}>Pausal</td>
 											</tr>
-											<tr>
-												<td>
+											<tr >
+												<td style={tableStyle}>
 													{' '}
 													<strong>Práca mimo pracovných hodín</strong>
 												</td>
-												<td>Nie</td>
-												<td />
-												<td />
+												<td style={tableStyle}>Nie</td>
+												<td style={tableStyle}/>
+												<td style={tableStyle} />
 											</tr>
 										</tbody>
 									</table>
@@ -156,6 +159,7 @@ export default class TasksRow extends Component {
 							<label class="">Popis</label>
 							<textarea class="form-control" rows="2" />
 							<Subtasks />
+							<Items />
 							<Comments />
 						</div>
 					</div>

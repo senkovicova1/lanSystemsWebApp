@@ -42,12 +42,14 @@ export default class TaskSide extends Component {
 								</div>
 							</div>
 						</div>
-						<div className="row">
-							<div className="col-lg-8">
-								<div class="card-box">
-									<h1># 142 Nefunguje klavesnica</h1>
-									<hr />
+						<div class="card-box" style={{ margin: 'auto', padding: 0 }}>
+							<div className="row" style={{ margin: 0 }}>
+								<div className="col-lg-12" >
+									<h1 style={{ padding: 10 }}># 142 Nefunguje klavesnica</h1>
+									<hr style={{ marginBottom: 0 }} />
+								</div>
 
+								<div className="col-lg-8" style={{ padding:20 }}>
 									<div className="m-b-20">
 										<strong>Tagy: </strong>
 										<span class="label label-info m-r-5">Mimo pracovných hodín</span>
@@ -55,20 +57,12 @@ export default class TaskSide extends Component {
 									</div>
 									<label class="">Popis</label>
 									<textarea class="form-control" rows="2" />
-								</div>
-								<div class="card-box">
 									<Subtasks />
-								</div>
-								<div class="card-box">
 									<Items />
-								</div>
-								<div class="card-box">
 									<Comments />
 								</div>
-							</div>
 
-							<div className="col-lg-4">
-								<div class="card-box">
+								<div className="col-lg-4" style={{ background: '#F9F9F9', padding:20 }}>
 									<div class="form-group m-b-10">
 										<label>Status</label>
 										<Select options={statuses} styles={selectStyle} />

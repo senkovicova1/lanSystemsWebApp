@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Col } from 'react-bootstrap';
 
+const tableStyle = {
+	border: 'none',
+};
+
+const tableStyleCenter = {
+	textAlign: 'center',
+};
+
+const tableStyleCenterNoBorder = {
+	textAlign: 'center',
+	border: 'none',
+};
+
 export default class Items extends Component {
 	render() {
 		return (
@@ -9,34 +22,41 @@ export default class Items extends Component {
 				<div class="row">
 					<div class="col-md-12">
 						<div class="table-responsive">
-							<table class="table">
-								<thead>
+							<table class="table table-centered table-borderless table-hover mb-0">
+								<thead class="thead-light">
 									<tr>
-										<th>#</th>
-										<th width="70%">Fakturovatelne položky</th>
-										<th>Quantity</th>
-										<th>Unit Cost</th>
-										<th>Total</th>
+										<th  style={tableStyle} width="70%">Fakturovatelne položky</th>
+										<th style={tableStyle}>Quantity</th>
+										<th style={tableStyle}>Unit Cost</th>
+										<th style={tableStyle}>Total</th>
+										<th style={tableStyleCenterNoBorder}>Action</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td>1</td>
-										<td>LCD</td>
-										<td>1</td>
-										<td>$380</td>
-										<td>$380</td>
+										<td style={tableStyle}>LCD</td>
+										<td style={tableStyle}>1</td>
+										<td style={tableStyle}>$380</td>
+										<td style={tableStyle}>$380</td>
+										<td style={tableStyleCenter}>
+											<button class="btn btn-link waves-effect">
+												<i class="fa fa-times" />
+											</button>
+										</td>
 									</tr>
 									<tr>
-										<td>2</td>
-										<td>Mobile</td>
-										<td>5</td>
-										<td>$50</td>
-										<td>$250</td>
+										<td style={tableStyle}>Mobile</td>
+										<td style={tableStyle}>5</td>
+										<td style={tableStyle}>$50</td>
+										<td style={tableStyle}>$250</td>
+										<td style={tableStyleCenterNoBorder}>
+											<button class="btn btn-link waves-effect">
+												<i class="fa fa-times" />
+											</button>
+										</td>
 									</tr>
 									<tr>
-										<td />
-										<td>
+										<td style={tableStyle}>
 											<input
 												type="text"
 												class="form-control mb-2"
@@ -44,7 +64,7 @@ export default class Items extends Component {
 												placeholder="Name"
 											/>
 										</td>
-										<td>
+										<td style={tableStyle}>
 											<input
 												type="text"
 												class="form-control mb-2"
@@ -52,7 +72,7 @@ export default class Items extends Component {
 												placeholder="Pocet"
 											/>
 										</td>
-										<td>
+										<td style={tableStyle}>
 											<input
 												type="text"
 												class="form-control mb-2"
@@ -60,10 +80,10 @@ export default class Items extends Component {
 												placeholder="Cena/ks"
 											/>
 										</td>
-										<td>
-											<button class="btn btn-icon waves-effect waves-light btn-primary">
-												{' '}
-												<i class="fa fa-plus" />{' '}
+										<td style={tableStyle} />
+										<td style={tableStyleCenterNoBorder}>
+											<button class="btn btn-link waves-effect">
+												<i class="fa fa-plus" />
 											</button>
 										</td>
 									</tr>

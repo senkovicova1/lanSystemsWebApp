@@ -8979,4 +8979,15 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
   }
 }
 
+
+.form-control {
+  height: 38px;
+}
+
+.table-borderless th,
+.table-borderless td,
+.table-borderless thead th,
+.table-borderless tbody + tbody {
+  border: 0; }
+  
 /*# sourceMappingURL=../css/style.map */

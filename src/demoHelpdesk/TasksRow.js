@@ -52,7 +52,7 @@ export default class TasksRow2 extends Component {
 											<td>
 												{' '}
 												<Link className="" to={{ pathname: `/demoHelpdesk/taskTop` }}>
-													Nefunguje klavesnica{' '}
+													Task attributes top inline label
 												</Link>
 											</td>
 											<td>Branislav Šusta</td>
@@ -136,7 +136,7 @@ export default class TasksRow2 extends Component {
 											<td>
 												{' '}
 												<Link className="" to={{ pathname: `/demoHelpdesk/taskTop2` }}>
-													Task edit top v2{' '}
+													Task attributes top labels
 												</Link>
 											</td>
 											<td>Branislav Šusta</td>
