@@ -6,7 +6,7 @@ import Comments from './components/comments.js';
 import Subtasks from './components/subtasks.js';
 import Items from './components/items.js';
 
-export default class TaskSide extends Component {
+export default class TaskSide3 extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {

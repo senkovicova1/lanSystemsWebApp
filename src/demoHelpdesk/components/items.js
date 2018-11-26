@@ -2,39 +2,41 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Col } from 'react-bootstrap';
 
-
-const tableStyle = {
-	border: "none"
-  };
-
-export default class Subtasks extends Component {
+export default class Items extends Component {
 	render() {
 		return (
 			<div class="">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="table-responsive">
-							<table class="table" style={tableStyle}>
+							<table class="table">
 								<thead>
 									<tr>
-										<th style={tableStyle} width="70%">Práce</th>
-										<th style={tableStyle}>Hodiny</th>
-										<th style={tableStyle} />
+										<th>#</th>
+										<th width="70%">Fakturovatelne položky</th>
+										<th>Quantity</th>
+										<th>Unit Cost</th>
+										<th>Total</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td style={tableStyle}>Oprava klavesnice</td>
-										<td style={tableStyle}>1</td>
-										<td style={tableStyle}>
-											<button class="btn btn-icon waves-effect waves-light btn-primary">
-												{' '}
-												<i class="fa fa-close" />{' '}
-											</button>
-										</td>
+										<td>1</td>
+										<td>LCD</td>
+										<td>1</td>
+										<td>$380</td>
+										<td>$380</td>
 									</tr>
 									<tr>
-										<td style={tableStyle}>
+										<td>2</td>
+										<td>Mobile</td>
+										<td>5</td>
+										<td>$50</td>
+										<td>$250</td>
+									</tr>
+									<tr>
+										<td />
+										<td>
 											<input
 												type="text"
 												class="form-control mb-2"
@@ -42,15 +44,23 @@ export default class Subtasks extends Component {
 												placeholder="Name"
 											/>
 										</td>
-										<td style={tableStyle}>
+										<td>
 											<input
 												type="text"
 												class="form-control mb-2"
 												id="inlineFormInput"
-												placeholder=""
+												placeholder="Pocet"
 											/>
 										</td>
-										<td style={tableStyle}>
+										<td>
+											<input
+												type="text"
+												class="form-control mb-2"
+												id="inlineFormInput"
+												placeholder="Cena/ks"
+											/>
+										</td>
+										<td>
 											<button class="btn btn-icon waves-effect waves-light btn-primary">
 												{' '}
 												<i class="fa fa-plus" />{' '}
@@ -63,8 +73,10 @@ export default class Subtasks extends Component {
 						<div class="row justify-content-end">
 							<div class="col-md-3">
 								<p class="text-right m-b-0">
-									<b>Spolu:</b> 1 hodiny
+									<b>Sub-total:</b> 2930.00
 								</p>
+								<p class="text-right m-b-0">VAT: 20%</p>
+								<p class="text-right m-b-0">USD 2930.00</p>
 							</div>
 						</div>
 					</div>

@@ -3,6 +3,7 @@ import { Button, Modal, Badge, InputGroup, Glyphicon, FormControl } from 'react-
 import { Link } from 'react-router-dom';
 import Comments from './components/comments.js';
 import Subtasks from './components/subtasks.js';
+import Items from './components/items';
 
 export default class TaskSide extends Component {
 	constructor(props) {
@@ -32,50 +33,88 @@ export default class TaskSide extends Component {
 									</div>
 									<label class="">Popis</label>
 									<textarea class="form-control" rows="2" />
+								</div>
+								<div class="card-box">
+
 									<Subtasks />
+									<Items />
+								</div>
+
+								<div class="card-box">
+
 									<Comments />
 								</div>
 							</div>
 							<div className="col-lg-4">
 								<div class="card-box">
-									<p>
-										<strong>Status: </strong>
-										<span class="label label-pink">Opakovanie</span>
-									</p>
-									<p class="m-t-10">
-										<strong>Projekt: </strong>
-										hotline@lansystems.sk{' '}
-									</p>
-									<p class="m-t-10">
-										<strong>Typ práce: </strong>
-										none{' '}
-									</p>
-
-									<p>
-										<strong>Zadal: </strong>
-										hotline@lansystems.sk
-									</p>
-									<p class="m-t-10">
-										<strong>Firma: </strong>
-										LAN Systems s.r.o.{' '}
-									</p>
-									<p class="m-t-10">
-										<strong>Riesi: </strong>
-										hotline@lansystems.sk
-									</p>
-
-									<p>
-										<strong>Pripomienka: </strong>
-										none
-									</p>
-									<p class="m-t-10">
-										<strong>Deadline: </strong>
-										hotline@lansystems.sk{' '}
-									</p>
-									<p class="m-t-10">
-										<strong>Opakovanie: </strong>
-										none{' '}
-									</p>
+									<div class="table-responsive">
+										<table class="table">
+											<tbody>
+												<tr>
+													<td>
+														<strong>Status: </strong>
+													</td>
+													<td>
+														<span class="label label-pink">New</span>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<strong>Projekt: </strong>
+													</td>
+													<td>hotline@lansystems.sk</td>
+												</tr>
+												<tr>
+													<td>
+														<strong>Zadal: </strong>
+													</td>
+													<td>Branislav Šusta</td>
+												</tr>
+												<tr>
+													<td>
+														<strong>Projekt: </strong>
+													</td>
+													<td>hotline@lansystems.sk</td>
+												</tr>
+												<tr>
+													<td>
+														<strong>Riesi: </strong>
+													</td>
+													<td>Branislav Šusta</td>
+												</tr>
+												<tr>
+													<td>
+														<strong>Pripomienka: </strong>
+													</td>
+													<td>12:00 31.12.2018</td>
+												</tr>
+												<tr>
+													<td>
+														<strong>Deadline: </strong>
+													</td>
+													<td>12:00 31.12.2018</td>
+												</tr>
+												<tr>
+													<td>
+														<strong>Opakovanie: </strong>
+													</td>
+													<td>12:00 31.12.2018</td>
+												</tr>
+												<tr>
+													<td>
+														<strong>Pausal/Projekt: </strong>
+													</td>
+													<td>Pausal</td>
+												</tr>
+												<tr>
+													<td>
+														<strong>Práce mimo pracovných hodín: </strong>
+													</td>
+													<td>Nie</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>

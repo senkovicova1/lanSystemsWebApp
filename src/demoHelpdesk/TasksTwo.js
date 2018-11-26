@@ -74,55 +74,82 @@ export default class TasksRow extends Component {
 									<span class="label label-info m-r-5">Mimo pracovných hodín</span>
 									<span class="label label-success m-r-5">Telefonovať</span>
 								</div>
+								<div className="col-lg-12 m-t-20">
+									<table class="table table-borderless">
+										<tbody>
+											<tr>
+												<td>
+													{' '}
+													<strong>Status: </strong>
+												</td>
+												<td>
+													{' '}
+													<span class="label label-pink">Opakovanie</span>
+												</td>
+												<td>
+													{' '}
+													<strong>Pripomienka: </strong>
+												</td>
+												<td>12:00 24.12.2018</td>
+											</tr>
+											<tr>
+												<td>
+													<strong>Projekt: </strong>
+												</td>
+												<td>hotline@lansystems.sk</td>
+												<td>
+													{' '}
+													<strong>Deadline: </strong>
+												</td>
+												<td>12:00 24.12.2018</td>
+											</tr>
+											<tr>
+												<td>
+													{' '}
+													<strong>Zadal: </strong>
+												</td>
+												<td>Branislav Šusta</td>
+												<td>
+													{' '}
+													<strong>Opakovanie: </strong>
+												</td>
+												<td>None</td>
+											</tr>
+											<tr>
+												<td>
+													{' '}
+													<strong>Firma </strong>
+												</td>
+												<td>None</td>
 
-								<div className="col-lg-4">
-									<div class="m-t-20">
-										<p>
-											<strong>Status: </strong>
-											<span class="label label-pink">Opakovanie</span>
-										</p>
-										<p class="m-t-10">
-											<strong>Projekt: </strong>
-											hotline@lansystems.sk{' '}
-										</p>
-										<p class="m-t-10">
-											<strong>Typ práce: </strong>
-											none{' '}
-										</p>
-									</div>
-								</div>
-								<div className="col-lg-4">
-									<div class="m-t-20">
-										<p>
-											<strong>Zadal: </strong>
-											hotline@lansystems.sk
-										</p>
-										<p class="m-t-10">
-											<strong>Firma: </strong>
-											LAN Systems s.r.o.{' '}
-										</p>
-										<p class="m-t-10">
-											<strong>Riesi: </strong>
-											hotline@lansystems.sk
-										</p>
-									</div>
-								</div>
+												<td>
+													<strong>Typ práce: </strong>
+												</td>
+												<td>Servis IT</td>
+											</tr>
+											<tr>
+												<td>
+													{' '}
+													<strong>Riesi </strong>
+												</td>
+												<td>None</td>
 
-								<div className="col-lg-4">
-									<div class="m-t-20">
-										<p>
-											<strong>Pripomienka: </strong>
-											none
-										</p>
-										<p class="m-t-10">
-											<strong>Deadline: </strong>
-											hotline@lansystems.sk{' '}
-										</p>
-										<p class="m-t-10">
-											<strong>Opakovanie: </strong>
-											none{' '}
-										</p>
-									</div>
+												<td>
+													<strong>Pausál/Projekt </strong>
+												</td>
+												<td>Pausal</td>
+											</tr>
+											<tr>
+												<td>
+													{' '}
+													<strong>Práca mimo pracovných hodín</strong>
+												</td>
+												<td>Nie</td>
+												<td />
+												<td />
+											</tr>
+										</tbody>
+									</table>
 								</div>
 							</div>
 

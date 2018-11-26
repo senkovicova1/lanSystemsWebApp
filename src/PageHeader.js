@@ -48,8 +48,13 @@ export default class PageHeader extends Component{
               <Glyphicon glyph="cog" className="headerIcons" />
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <MenuItem onClick={()=>this.props.history.push(this.getLocation()+'/settings/companies')}>Companies</MenuItem>
-              <MenuItem onClick={()=>this.props.history.push(this.getLocation()+'/settings/users')}>Users</MenuItem>
+              <MenuItem onClick={()=>this.props.history.push('/demoHelpdesk/settings/companies')}>Companies</MenuItem>
+              <MenuItem onClick={()=>this.props.history.push('/demoHelpdesk/settings/users')}>Users</MenuItem>
+              <MenuItem onClick={()=>this.props.history.push('/demoHelpdesk/settings/statuses')}>Statuses</MenuItem>
+              <MenuItem onClick={()=>this.props.history.push('/demoHelpdesk/settings/types')}>Types</MenuItem>
+              <MenuItem onClick={()=>this.props.history.push('/demoHelpdesk/settings/roles')}>Roles</MenuItem>
+              <MenuItem onClick={()=>this.props.history.push('/demoHelpdesk/settings/units')}>Units</MenuItem>
+              <MenuItem onClick={()=>this.props.history.push('/demoHelpdesk/settings/projects')}>projects</MenuItem>
             </Dropdown.Menu>
           </Dropdown>
         </Nav>

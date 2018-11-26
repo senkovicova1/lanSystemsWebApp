@@ -44,59 +44,6 @@ export default class Sidebar extends Component {
 								</Link>
 							</li>
 						</ul>
-
-						<li className="text-muted menu-title">Active projects</li>
-						<ul className="sidebar-menu">
-							<li>
-								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
-									hotline@lansystems.sk
-								</Link>
-								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
-									Mertel CRM
-								</Link>
-							</li>
-						</ul>
-						<li className="text-muted menu-title">Archived projects</li>
-						<ul className="sidebar-menu" />
-						<li className="text-muted menu-title">Settings</li>
-						<ul className="sidebar-menu">
-							<li>
-								<Link className="" to={{ pathname: `/demoHelpdesk/settings/users` }}>
-									Users
-								</Link>
-							</li>
-							<li>
-								<Link className="" to={{ pathname: `/demoHelpdesk/settings/companies` }}>
-									Companies
-								</Link>
-							</li>
-							<li>
-								<Link className="" to={{ pathname: `/demoHelpdesk/settings/statuses` }}>
-									Status
-								</Link>
-							</li>
-							<li>
-								<Link className="" to={{ pathname: `/demoHelpdesk/settings/types` }}>
-									Typ práce
-								</Link>
-							</li>
-							<li>
-								<Link className="" to={{ pathname: `/demoHelpdesk/settings/roles` }}>
-									User roles
-								</Link>
-							</li>
-							<li>
-								<Link className="" to={{ pathname: `/demoHelpdesk/settings/units` }}>
-									Jednotky
-								</Link>
-							</li>
-							<li>
-								<Link className="" to={{ pathname: `/demoHelpdesk/settings/projects` }}>
-									Projects
-
-								</Link>
-							</li>
-						</ul>
 					</div>
 				</div>
 			</div>

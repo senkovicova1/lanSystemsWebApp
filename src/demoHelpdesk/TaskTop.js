@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import Comments from './components/comments.js';
 import Subtasks from './components/subtasks.js';
+import Items from './components/items.js';
 
 export default class TaskTop extends Component {
 	constructor(props) {
@@ -95,7 +96,9 @@ export default class TaskTop extends Component {
 
 									<label class="">Popis</label>
 									<textarea class="form-control" rows="2" />
+									<p></p>
 									<Subtasks />
+									<Items />
 									<Comments />
 								</div>
 							</div>

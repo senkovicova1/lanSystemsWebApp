@@ -9,6 +9,7 @@ import TaskTop3 from './TaskTop3';
 import TaskTop4 from './TaskTop4';
 import TaskSide from './TaskSide';
 import TaskSide2 from './TaskSide2';
+import TaskSide3 from './TaskSide3';
 import TaskSideLeft from './TaskSideLeft';
 import CompaniesList from './settings/CompaniesList';
 import CompanyEdit from './settings/CompanyEdit';
@@ -39,6 +40,7 @@ export default class Navigation extends Component {
 					<Route exact path="/demoHelpdesk/taskTop4" component={TaskTop4} />
 					<Route exact path="/demoHelpdesk/taskSide" component={TaskSide} />
 					<Route exact path="/demoHelpdesk/taskSide2" component={TaskSide2} />
+					<Route exact path="/demoHelpdesk/taskSide3" component={TaskSide3} />
 					<Route exact path="/demoHelpdesk/taskSideLeft" component={TaskSideLeft} />
 					<Route exact path="/demoHelpdesk/settings/companies" component={CompaniesList} />
 					<Route exact path="/demoHelpdesk/settings/companyEdit" component={CompanyEdit} />

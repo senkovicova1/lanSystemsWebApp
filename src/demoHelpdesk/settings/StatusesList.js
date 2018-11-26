@@ -14,7 +14,7 @@ export default class RolesList extends Component {
 			<div className="content-page">
 				<div className="content">
 					<div className="container-fluid">
-						<h4 className="page-title">Roles</h4>
+						<h4 className="page-title">Statuses</h4>
 						<div className="row m-t-10 m-b-10 m-l-5 m-r-5">
 							<div class="d-flex flex-row align-items-center">
 							<div className="p2">
