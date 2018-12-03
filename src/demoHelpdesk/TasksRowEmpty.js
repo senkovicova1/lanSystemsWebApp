@@ -82,25 +82,10 @@ export default class TasksRow2 extends Component {
 
 									<tbody>
 										<tr class="">
-											<td>
-												<div class="checkbox checkbox-primary checkbox-single m-r-15">
-													<input id="checkbox2" type="checkbox" checked="" />
-													<label for="checkbox2" />
-												</div>
-											</td>
-											<td>152</td>
-											<td>New</td>
-											<td>
-												{' '}
-												<Link className="" to={{ pathname: `/demoHelpdesk/taskTop3` }} style={{color:"#1976d2"}}>
-													Task top two collums whit inline labels and grey background
-												</Link>
-											</td>
-											<td>Branislav Šusta</td>
-											<td>LAN Systems s.r.o.</td>
-											<td>Patrik Patoprsty</td>
-											<td>15.04 2.10.2018</td>
-											<td>15.05 2.11.2018</td>
+											<td />
+											<td />
+											<td />
+											<td style={{ color: 'red' }}>Vyhľadávaniu nezodpovedajú žiadne úlohy.</td>
 										</tr>
 									</tbody>
 								</table>

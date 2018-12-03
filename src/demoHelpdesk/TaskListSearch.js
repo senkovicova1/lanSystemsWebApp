@@ -12,10 +12,9 @@ import {
 	Dropdown,
 } from 'react-bootstrap';
 import TasksBoard from './TasksBoard';
-import TasksRow from './TasksRow';
+import TasksRowEmpty from './TasksRowEmpty';
 import Filter from './Filter';
 import TasksTwo from './TasksTwo';
-import { Link } from 'react-router-dom';
 
 const sortTypes = [{ id: 0, name: 'Name' }, { id: 1, name: 'Created' }, { id: 2, name: 'Deadline' }];
 
@@ -40,10 +39,9 @@ export default class TaskListContainer extends Component {
 						<div className="row">
 							<div className="col-sm-6">
 								<h4 className="page-title" style={{ fontSize: 24 }}>
-									All Tasks
+									Global Search
 								</h4>
 							</div>
-							<div class="col-sm-6" />
 						</div>
 						<div className="row m-t-10 m-b-10">
 							<div class="d-flex flex-row align-items-center">
@@ -57,7 +55,7 @@ export default class TaskListContainer extends Component {
 								</div>
 								<div class="p-2">
 									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Search task name" />
+										<input type="text" class="form-control" placeholder="Search string" />
 										<div class="input-group-append">
 											<button class="btn btn-white" type="button">
 												<i class="fa fa-search" />
@@ -66,13 +64,7 @@ export default class TaskListContainer extends Component {
 									</div>
 								</div>
 								<div class="p-2">
-									<Link
-										className=""
-										to={{ pathname: `/demoHelpdesk/TaskListSearch` }}
-										style={{ color: '#1976d2' }}
-									>
-										Global search
-									</Link>
+									<p className="m-0">Global search</p>
 								</div>
 								<div className="p-2">
 									<div
@@ -162,7 +154,7 @@ export default class TaskListContainer extends Component {
 
 						{this.state.taskListType === 'option2' && (
 							<div class={'' + (this.state.filterView ? 'col-xl-9' : 'col-xl-12')}>
-								<TasksRow />{' '}
+								<TasksRowEmpty />{' '}
 							</div>
 						)}
 

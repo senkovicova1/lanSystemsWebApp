@@ -28,116 +28,144 @@ export default class TaskTop3 extends Component {
 		};
 
 		return (
-			<div className="content-page">
-				<div className="content">
-					<div className="container-fluid">
-						<div className="row">
-							<div className="col-lg-12">
-								<div class="card-box" style={{ maxWidth: 1284, margin: 'auto', 
-							 }}>
-									<div class="row">
-										<div className="col-lg-12">
-											<h1># 142 Nefunguje klavesnica</h1>
-											<hr />
-										</div>
-										<div className="col-lg-12">
-											<strong>Tagy: </strong>
-											<span class="label label-info m-r-5">Mimo pracovných hodín</span>
-											<span class="label label-success m-r-5">Telefonovať</span>
-										</div>
-										<div className="col-lg-12 p-0">
-											<div className="col-lg-6">
-												<div class="m-t-20">
-													<div class="form-group m-b-10 row">
-														<label className="col-4 col-form-label">Status</label>
-														<div className="col-8">
-															<Select options={statuses} styles={selectStyle} />
-														</div>
-													</div>
-													<div class="form-group m-b-10 row">
-														<label className="col-4 col-form-label">Projekt</label>
-														<div className="col-8">
-															<Select options={statuses} styles={selectStyle} />
-														</div>
-													</div>
-													<div class="form-group m-b-10 row">
-														<label className="col-4 col-form-label">Zadal</label>
-														<div className="col-8">
-															<Select options={statuses} styles={selectStyle} />
-														</div>
-													</div>
-													<div class="form-group m-b-10 row">
-														<label className="col-4 col-form-label">Firma</label>
-														<div className="col-8">
-															<Select options={statuses} styles={selectStyle} />
-														</div>
-													</div>
-													<div class="form-group m-b-10 row">
-														<label className="col-4 col-form-label">Riesi</label>
-														<div className="col-8">
-															<Select options={statuses} styles={selectStyle} />
-														</div>
-													</div>
-													<div class="form-group m-b-10 row">
-														<label className="col-4 col-form-label">Typ prace</label>
-														<div className="col-8">
-															<Select options={statuses} styles={selectStyle} />
-														</div>
-													</div>
+			<div>
+				<div className="row" style={{ marginLeft: 240 }}>
+					<div className="col-lg-12">
+						<div
+							class="card-box"
+							style={{
+								maxWidth: 1284,
+								margin: 'auto',
+								background: '#F9F9F9',
+								marginTop: 50,
+								paddingTop: 0,
+							}}
+						>
+							<div class="d-flex flex-row">
+								<div class="p-2 align-self-center" style={{  }}>
+									{' '}
+									<button type="button" class="btn btn-link waves-effect" style={{ paddingLeft: 0 }}>
+										<i
+											class="fas fa-arrow-left"
+											style={{
+												color: '#4a81d4',
+												fontSize: '1.2em',
+											}}
+										/>
+									</button>
+								</div>
+								<div class="p-2">
+									<h1># 143 Nefunguje klavesnica</h1>
+								</div>
+								<div class="ml-auto p-2 align-self-center">
+									{' '}
+									<button type="button" class="btn btn-link waves-effect">
+										<i
+											class="fas fa-print"
+											style={{
+												color: '#4a81d4',
+												fontSize: '1.2em',
+											}}
+										/>
+									</button>
+								</div>		
+							</div>
+				
+							<div class="row">
+								<div className="col-lg-12">
+									<strong>Tagy: </strong>
+									<span class="label label-info m-r-5">Mimo pracovných hodín</span>
+									<span class="label label-success m-r-5">Telefonovať</span>
+								</div>
+								<div className="col-lg-12 p-0">
+									<div className="col-lg-6">
+										<div class="m-t-20">
+											<div class="form-group m-b-10 row">
+												<label className="col-4 col-form-label">Status</label>
+												<div className="col-8">
+													<Select options={statuses} styles={selectStyle} />
 												</div>
 											</div>
-											<div className="col-lg-6">
-												<div class="m-t-20">
-													<div class="form-group m-b-10 row">
-														<label className="col-4 col-form-label">Pripomienka</label>
-														<div className="col-8">
-															<Select options={statuses} styles={selectStyle} />
-														</div>
-													</div>
-													<div class="form-group m-b-10 row">
-														<label className="col-4 col-form-label">Deadline</label>
-														<div className="col-8">
-															<Select options={statuses} styles={selectStyle} />
-														</div>
-													</div>
-													<div class="form-group m-b-10 row">
-														<label className="col-4 col-form-label">Opakovanie</label>
-														<div className="col-8">
-															<Select options={statuses} styles={selectStyle} />
-														</div>
-													</div>
-													<div class="form-group m-b-10 row">
-														<label className="col-4 col-form-label">Pausal/Projekt</label>
-														<div className="col-8">
-															<Select options={statuses} styles={selectStyle} />
-														</div>
-													</div>
-													<div class="form-group m-b-10 row">
-														<label className="col-4 col-form-label">Pausal</label>
-														<div className="col-8">
-															<Select options={statuses} styles={selectStyle} />
-														</div>
-													</div>
-													<div class="form-group m-b-10 row">
-														<label className="col-4 col-form-label">
-															Mimo pracovných hodín
-														</label>
-														<div className="col-8">
-															<Select options={statuses} styles={selectStyle} />
-														</div>
-													</div>
+											<div class="form-group m-b-10 row">
+												<label className="col-4 col-form-label">Projekt</label>
+												<div className="col-8">
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+											</div>
+											<div class="form-group m-b-10 row">
+												<label className="col-4 col-form-label">Zadal</label>
+												<div className="col-8">
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+											</div>
+											<div class="form-group m-b-10 row">
+												<label className="col-4 col-form-label">Firma</label>
+												<div className="col-8">
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+											</div>
+											<div class="form-group m-b-10 row">
+												<label className="col-4 col-form-label">Riesi</label>
+												<div className="col-8">
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+											</div>
+											<div class="form-group m-b-10 row">
+												<label className="col-4 col-form-label">Typ prace</label>
+												<div className="col-8">
+													<Select options={statuses} styles={selectStyle} />
 												</div>
 											</div>
 										</div>
 									</div>
-									<label class="">Popis</label>
-									<textarea class="form-control" rows="2" />
-
-									<Subtasks />
-									<Items />
-									<Comments />
+									<div className="col-lg-6">
+										<div class="m-t-20">
+											<div class="form-group m-b-10 row">
+												<label className="col-4 col-form-label">Pripomienka</label>
+												<div className="col-8">
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+											</div>
+											<div class="form-group m-b-10 row">
+												<label className="col-4 col-form-label">Deadline</label>
+												<div className="col-8">
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+											</div>
+											<div class="form-group m-b-10 row">
+												<label className="col-4 col-form-label">Opakovanie</label>
+												<div className="col-8">
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+											</div>
+											<div class="form-group m-b-10 row">
+												<label className="col-4 col-form-label">Pausal/Projekt</label>
+												<div className="col-8">
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+											</div>
+											<div class="form-group m-b-10 row">
+												<label className="col-4 col-form-label">Pausal</label>
+												<div className="col-8">
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+											</div>
+											<div class="form-group m-b-10 row">
+												<label className="col-4 col-form-label">Mimo pracovných hodín</label>
+												<div className="col-8">
+													<Select options={statuses} styles={selectStyle} />
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
+							<label class="">Popis</label>
+							<textarea class="form-control" rows="2" />
+
+							<Subtasks />
+							<Items />
+							<Comments />
 						</div>
 					</div>
 				</div>

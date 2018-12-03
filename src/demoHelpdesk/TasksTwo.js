@@ -4,6 +4,7 @@ import Comments from './components/comments.js';
 import Subtasks from './components/subtasks.js';
 import Items from './components/items.js';
 import TasksTwoEdit from './TasksTwoEdit';
+import TaskTop3 from './TaskTop3';
 
 const tableStyle = {
 	border: 'none',
