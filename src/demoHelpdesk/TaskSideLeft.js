@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import Comments from './components/comments.js';
 import Subtasks from './components/subtasks.js';
+import Items from './components/items.js';
 
 export default class TaskSideLeft extends Component {
 	constructor(props) {
@@ -42,7 +43,7 @@ export default class TaskSideLeft extends Component {
 							</div>
 						</div>
 						<div className="row">
-							<div className="col-lg-5">
+							<div className="col-lg-4">
 								<div class="card-box">
 									<h1># 142 Nefunguje klavesnica</h1>
 									<hr />
@@ -89,9 +90,10 @@ export default class TaskSideLeft extends Component {
 										<Select options={statuses} styles={selectStyle} />
 									</div>
 									<Subtasks />
+									<Items />
 								</div>
 							</div>
-							<div className="col-lg-7">
+							<div className="col-lg-8">
 								<div class="card-box">
 							
 									<Comments />

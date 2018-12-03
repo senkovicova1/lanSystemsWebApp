@@ -6,7 +6,7 @@ import Comments from './components/comments.js';
 import Subtasks from './components/subtasks.js';
 import Items from './components/items.js';
 
-export default class TaskSide3 extends Component {
+export default class TaskSideLeft2 extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -43,26 +43,9 @@ export default class TaskSide3 extends Component {
 							</div>
 						</div>
 						<div className="row">
-							<div className="col-lg-9">
-								<div class="card-box">
-									<h1># 142 Nefunguje klavesnica</h1>
-									<hr />
-
-									<div className="m-b-20">
-										<strong>Tagy: </strong>
-										<span class="label label-info m-r-5">Mimo pracovných hodín</span>
-										<span class="label label-success m-r-5">Telefonovať</span>
-									</div>
-									<label class="">Popis</label>
-									<textarea class="form-control" rows="2" />
-									<Subtasks />
-									<Items />
-									<Comments />
-								</div>
-							</div>
-
 							<div className="col-lg-3">
 								<div class="card-box">
+							
 									<div class="form-group m-b-10">
 										<label>Status</label>
 										<Select options={statuses} styles={selectStyle} />
@@ -95,14 +78,25 @@ export default class TaskSide3 extends Component {
 										<label>Opakovanie </label>
 										<Select options={statuses} styles={selectStyle} />
 									</div>
-									<div class="form-group m-b-10">
-										<label>Paušal/projekt</label>
-										<Select options={statuses} styles={selectStyle} />
+								</div>
+							</div>
+							<div className="col-lg-9">
+								<div class="card-box">
+								<h1># 142 Nefunguje klavesnica</h1>
+									<hr />
+
+									<div className="m-b-20">
+										<strong>Tagy: </strong>
+										<span class="label label-info m-r-5">Mimo pracovných hodín</span>
+										<span class="label label-success m-r-5">Telefonovať</span>
 									</div>
 									<div class="form-group m-b-10">
-										<label>Mimo pracovných hodín </label>
-										<Select options={statuses} styles={selectStyle} />
+										<label class="">Popis</label>
+										<textarea class="form-control" rows="2" />
 									</div>
+									<Subtasks />
+									<Items />
+									<Comments />
 								</div>
 							</div>
 						</div>

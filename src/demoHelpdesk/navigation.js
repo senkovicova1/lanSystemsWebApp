@@ -7,9 +7,11 @@ import TaskTop from './TaskTop';
 import TaskTop2 from './TaskTop2';
 import TaskTop3 from './TaskTop3';
 import TaskTop4 from './TaskTop4';
+import TaskSideLeft2 from './TaskSideLeft2';
 import TaskSide from './TaskSide';
 import TaskSide2 from './TaskSide2';
 import TaskSide3 from './TaskSide3';
+import TasksTwoEditRow from './TasksTwoEditRow';
 import TaskSideLeft from './TaskSideLeft';
 import CompaniesList from './settings/CompaniesList';
 import CompanyEdit from './settings/CompanyEdit';
@@ -41,7 +43,9 @@ export default class Navigation extends Component {
 					<Route exact path="/demoHelpdesk/taskSide" component={TaskSide} />
 					<Route exact path="/demoHelpdesk/taskSide2" component={TaskSide2} />
 					<Route exact path="/demoHelpdesk/taskSide3" component={TaskSide3} />
+					<Route exact path="/demoHelpdesk/tasksTwoEditRow" component={TasksTwoEditRow} />
 					<Route exact path="/demoHelpdesk/taskSideLeft" component={TaskSideLeft} />
+					<Route exact path="/demoHelpdesk/taskSideLeft2" component={TaskSideLeft2} />
 					<Route exact path="/demoHelpdesk/settings/companies" component={CompaniesList} />
 					<Route exact path="/demoHelpdesk/settings/companyEdit" component={CompanyEdit} />
 					<Route exact path="/demoHelpdesk/settings/users" component={UsersList} />

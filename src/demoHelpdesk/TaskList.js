@@ -87,10 +87,10 @@ export default class TaskListContainer extends Component {
 						</div>
 						<div className="row m-t-10 m-b-10">
 							<div class="d-flex flex-row align-items-center">
-								<div className="p2">
+								<div className="p2" style={{ marginLeft: 10 }}>
 									<button class="btn btn-success waves-effect waves-light btn-sm" onClick={() => this.setState({ filterView: !this.state.filterView })}>Filter</button>
 								</div>
-								<div class="p-2">
+								<div class="p-2" >
 									<div class="input-group">
 										<input type="text" class="form-control" placeholder="Search" />
 										<div class="input-group-append">
@@ -104,11 +104,7 @@ export default class TaskListContainer extends Component {
 									<p className="m-0">Global search</p>
 								</div>
 								<div className="p-2">
-									<div className="checkbox form-check-inline" style={{ marginLeft: 30, marginRight: 30 }}>
-										<input id="checkbox0" type="checkbox" />
-										<label for="checkbox0">My Task</label>
-									</div>
-									<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
+									<div className="checkbox form-check-inline" style={{ marginLeft: 38,marginRight: 30 }}>
 										<input id="checkbox0" type="checkbox" />
 										<label for="checkbox0">NEW</label>
 									</div>

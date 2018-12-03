@@ -33,7 +33,8 @@ export default class TaskTop3 extends Component {
 					<div className="container-fluid">
 						<div className="row">
 							<div className="col-lg-12">
-								<div class="card-box" style={{ maxWidth: 1284, margin: 'auto', background:"#F9F9F9" }}>
+								<div class="card-box" style={{ maxWidth: 1284, margin: 'auto', 
+							 }}>
 									<div class="row">
 										<div className="col-lg-12">
 											<h1># 142 Nefunguje klavesnica</h1>
@@ -48,38 +49,38 @@ export default class TaskTop3 extends Component {
 											<div className="col-lg-6">
 												<div class="m-t-20">
 													<div class="form-group m-b-10 row">
-														<label className="col-3 col-form-label">Status</label>
-														<div className="col-9">
+														<label className="col-4 col-form-label">Status</label>
+														<div className="col-8">
 															<Select options={statuses} styles={selectStyle} />
 														</div>
 													</div>
 													<div class="form-group m-b-10 row">
-														<label className="col-3 col-form-label">Projekt</label>
-														<div className="col-9">
+														<label className="col-4 col-form-label">Projekt</label>
+														<div className="col-8">
 															<Select options={statuses} styles={selectStyle} />
 														</div>
 													</div>
 													<div class="form-group m-b-10 row">
-														<label className="col-3 col-form-label">Zadal</label>
-														<div className="col-9">
+														<label className="col-4 col-form-label">Zadal</label>
+														<div className="col-8">
 															<Select options={statuses} styles={selectStyle} />
 														</div>
 													</div>
 													<div class="form-group m-b-10 row">
-														<label className="col-3 col-form-label">Firma</label>
-														<div className="col-9">
+														<label className="col-4 col-form-label">Firma</label>
+														<div className="col-8">
 															<Select options={statuses} styles={selectStyle} />
 														</div>
 													</div>
 													<div class="form-group m-b-10 row">
-														<label className="col-3 col-form-label">Riesi</label>
-														<div className="col-9">
+														<label className="col-4 col-form-label">Riesi</label>
+														<div className="col-8">
 															<Select options={statuses} styles={selectStyle} />
 														</div>
 													</div>
 													<div class="form-group m-b-10 row">
-														<label className="col-3 col-form-label">Typ prace</label>
-														<div className="col-9">
+														<label className="col-4 col-form-label">Typ prace</label>
+														<div className="col-8">
 															<Select options={statuses} styles={selectStyle} />
 														</div>
 													</div>
@@ -88,40 +89,40 @@ export default class TaskTop3 extends Component {
 											<div className="col-lg-6">
 												<div class="m-t-20">
 													<div class="form-group m-b-10 row">
-														<label className="col-3 col-form-label">Pripomienka</label>
-														<div className="col-9">
+														<label className="col-4 col-form-label">Pripomienka</label>
+														<div className="col-8">
 															<Select options={statuses} styles={selectStyle} />
 														</div>
 													</div>
 													<div class="form-group m-b-10 row">
-														<label className="col-3 col-form-label">Deadline</label>
-														<div className="col-9">
+														<label className="col-4 col-form-label">Deadline</label>
+														<div className="col-8">
 															<Select options={statuses} styles={selectStyle} />
 														</div>
 													</div>
 													<div class="form-group m-b-10 row">
-														<label className="col-3 col-form-label">Opakovanie</label>
-														<div className="col-9">
+														<label className="col-4 col-form-label">Opakovanie</label>
+														<div className="col-8">
 															<Select options={statuses} styles={selectStyle} />
 														</div>
 													</div>
 													<div class="form-group m-b-10 row">
-														<label className="col-3 col-form-label">Pausal/Projekt</label>
-														<div className="col-9">
+														<label className="col-4 col-form-label">Pausal/Projekt</label>
+														<div className="col-8">
 															<Select options={statuses} styles={selectStyle} />
 														</div>
 													</div>
 													<div class="form-group m-b-10 row">
-														<label className="col-3 col-form-label">Pausal</label>
-														<div className="col-9">
+														<label className="col-4 col-form-label">Pausal</label>
+														<div className="col-8">
 															<Select options={statuses} styles={selectStyle} />
 														</div>
 													</div>
 													<div class="form-group m-b-10 row">
-														<label className="col-3 col-form-label">
+														<label className="col-4 col-form-label">
 															Mimo pracovných hodín
 														</label>
-														<div className="col-9">
+														<div className="col-8">
 															<Select options={statuses} styles={selectStyle} />
 														</div>
 													</div>

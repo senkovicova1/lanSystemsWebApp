@@ -5,6 +5,10 @@ import Comments from './components/comments.js';
 import Subtasks from './components/subtasks.js';
 import Items from './components/items';
 
+const tableStyle = {
+	border: 'none',
+};
+
 export default class TaskSide extends Component {
 	constructor(props) {
 		super(props);
@@ -33,15 +37,8 @@ export default class TaskSide extends Component {
 									</div>
 									<label class="">Popis</label>
 									<textarea class="form-control" rows="2" />
-								</div>
-								<div class="card-box">
-
 									<Subtasks />
 									<Items />
-								</div>
-
-								<div class="card-box">
-
 									<Comments />
 								</div>
 							</div>
@@ -51,66 +48,66 @@ export default class TaskSide extends Component {
 										<table class="table">
 											<tbody>
 												<tr>
-													<td>
+													<td style={tableStyle}>
 														<strong>Status: </strong>
 													</td>
-													<td>
+													<td style={tableStyle}>
 														<span class="label label-pink">New</span>
 													</td>
 												</tr>
 												<tr>
-													<td>
+													<td style={tableStyle}>
 														<strong>Projekt: </strong>
 													</td>
-													<td>hotline@lansystems.sk</td>
+													<td style={tableStyle}>hotline@lansystems.sk</td>
 												</tr>
 												<tr>
-													<td>
+													<td style={tableStyle}>
 														<strong>Zadal: </strong>
 													</td>
-													<td>Branislav Šusta</td>
+													<td style={tableStyle}>Branislav Šusta</td>
 												</tr>
 												<tr>
-													<td>
+													<td style={tableStyle}>
 														<strong>Projekt: </strong>
 													</td>
-													<td>hotline@lansystems.sk</td>
+													<td style={tableStyle}>hotline@lansystems.sk</td>
 												</tr>
 												<tr>
-													<td>
+													<td style={tableStyle}>
 														<strong>Riesi: </strong>
 													</td>
-													<td>Branislav Šusta</td>
+													<td style={tableStyle}>Branislav Šusta</td>
 												</tr>
 												<tr>
-													<td>
+													<td style={tableStyle}>
 														<strong>Pripomienka: </strong>
 													</td>
-													<td>12:00 31.12.2018</td>
+													<td style={tableStyle}>12:00 31.12.2018</td>
 												</tr>
 												<tr>
-													<td>
+													<td style={tableStyle}>
 														<strong>Deadline: </strong>
 													</td>
-													<td>12:00 31.12.2018</td>
+													<td style={tableStyle}>12:00 31.12.2018</td>
 												</tr>
 												<tr>
-													<td>
+													<td style={tableStyle}>
 														<strong>Opakovanie: </strong>
 													</td>
-													<td>12:00 31.12.2018</td>
+													<td style={tableStyle}>12:00 31.12.2018</td>
 												</tr>
 												<tr>
-													<td>
+													<td style={tableStyle}>
 														<strong>Pausal/Projekt: </strong>
 													</td>
-													<td>Pausal</td>
+													<td style={tableStyle}>Pausal</td>
 												</tr>
 												<tr>
-													<td>
+													<td style={tableStyle}>
 														<strong>Práce mimo pracovných hodín: </strong>
 													</td>
-													<td>Nie</td>
+													<td style={tableStyle}>Nie</td>
 												</tr>
 											</tbody>
 										</table>
