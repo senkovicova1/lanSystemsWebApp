@@ -22,8 +22,34 @@ export default class Filter extends Component {
 		];
 
 		const selectStyle = {
-			control: styles => ({ ...styles, backgroundColor: 'white' }),
-		}
+			control: base => ({
+				...base,
+				minHeight: 30,
+				backgroundColor: 'white',
+			}),
+			dropdownIndicator: base => ({
+				...base,
+				padding: 4,
+			}),
+			clearIndicator: base => ({
+				...base,
+				padding: 4,
+			}),
+			multiValue: base => ({
+				...base,
+				backgroundColor: 'white',
+			}),
+			valueContainer: base => ({
+				...base,
+				padding: '0px 6px',
+			}),
+			input: base => ({
+				...base,
+				margin: 0,
+				padding: 0,
+				backgroundColor: 'white',
+			}),
+		};
 		return (
 			<div className="card" style={{ height: '100%', background: 'white' }}>
 				<div class="button-list" style={{ margin: 10 }} >
@@ -69,6 +95,7 @@ export default class Filter extends Component {
 								class="form-control mb-2"
 								id="inlineFormInput"
 								placeholder="Od"
+								style={{height:30}}
 							/>
 
 						</div>
@@ -76,9 +103,10 @@ export default class Filter extends Component {
 							<label></label>
 							<input
 								type="text"
-								class="form-control mb-2"
+								class="form-control mb-2 mt-2"
 								id="inlineFormInput"
 								placeholder="Od"
+								style={{height:30}}
 							/>
 						</div>
 					</div>
@@ -92,6 +120,7 @@ export default class Filter extends Component {
 								class="form-control mb-2"
 								id="inlineFormInput"
 								placeholder="Od"
+								style={{height:30}}
 							/>
 
 						</div>
@@ -99,9 +128,10 @@ export default class Filter extends Component {
 							<label></label>
 							<input
 								type="text"
-								class="form-control mb-2"
+								class="form-control mb-2 mt-1"
 								id="inlineFormInput"
 								placeholder="Od"
+								style={{height:30}}
 							/>
 						</div>
 					</div>
@@ -115,6 +145,7 @@ export default class Filter extends Component {
 								class="form-control mb-2"
 								id="inlineFormInput"
 								placeholder="Od"
+								style={{height:30}}
 							/>
 
 						</div>
@@ -122,9 +153,10 @@ export default class Filter extends Component {
 							<label></label>
 							<input
 								type="text"
-								class="form-control mb-2"
+								class="form-control mb-2 mt-1"
 								id="inlineFormInput"
 								placeholder="Od"
+								style={{height:30}}
 							/>
 						</div>
 					</div>
@@ -138,6 +170,7 @@ export default class Filter extends Component {
 								class="form-control mb-2"
 								id="inlineFormInput"
 								placeholder="Od"
+								style={{height:30}}
 							/>
 
 						</div>
@@ -145,9 +178,10 @@ export default class Filter extends Component {
 							<label></label>
 							<input
 								type="text"
-								class="form-control mb-2"
+								class="form-control mb-2 mt-1"
 								id="inlineFormInput"
 								placeholder="Od"
+								style={{height:30}}
 							/>
 						</div>
 					</div>

@@ -62,6 +62,7 @@ export default class Items extends Component {
 												class="form-control mb-2"
 												id="inlineFormInput"
 												placeholder="Name"
+												style={{height:30}}
 											/>
 										</td>
 										<td style={tableStyle}>
@@ -70,6 +71,7 @@ export default class Items extends Component {
 												class="form-control mb-2"
 												id="inlineFormInput"
 												placeholder="Pocet"
+												style={{height:30}}
 											/>
 										</td>
 										<td style={tableStyle}>
@@ -78,6 +80,7 @@ export default class Items extends Component {
 												class="form-control mb-2"
 												id="inlineFormInput"
 												placeholder="Cena/ks"
+												style={{height:30}}
 											/>
 										</td>
 										<td style={tableStyle} />

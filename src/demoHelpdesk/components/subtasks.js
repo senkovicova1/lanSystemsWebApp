@@ -47,6 +47,7 @@ export default class Subtasks extends Component {
 												class="form-control mb-2"
 												id="inlineFormInput"
 												placeholder="Name"
+												style={{height:30}}
 											/>
 										</td>
 										<td style={tableStyle}>
@@ -55,6 +56,7 @@ export default class Subtasks extends Component {
 												class="form-control mb-2"
 												id="inlineFormInput"
 												placeholder=""
+												style={{height:30}}
 											/>
 										</td>
 										<td style={tableStyleCenterNoBorder}>

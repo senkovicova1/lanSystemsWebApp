@@ -24,7 +24,33 @@ export default class TaskTop3 extends Component {
 		];
 
 		const selectStyle = {
-			control: styles => ({ ...styles, backgroundColor: 'white' }),
+			control: base => ({
+				...base,
+				minHeight: 30,
+				backgroundColor: 'white',
+			}),
+			dropdownIndicator: base => ({
+				...base,
+				padding: 4,
+			}),
+			clearIndicator: base => ({
+				...base,
+				padding: 4,
+			}),
+			multiValue: base => ({
+				...base,
+				backgroundColor: 'white',
+			}),
+			valueContainer: base => ({
+				...base,
+				padding: '0px 6px',
+			}),
+			input: base => ({
+				...base,
+				margin: 0,
+				padding: 0,
+				backgroundColor: 'white',
+			}),
 		};
 
 		return (
@@ -42,7 +68,7 @@ export default class TaskTop3 extends Component {
 							}}
 						>
 							<div class="d-flex flex-row">
-								<div class="p-2 align-self-center" style={{  }}>
+								<div class="p-2 align-self-center" style={{}}>
 									{' '}
 									<button type="button" class="btn btn-link waves-effect" style={{ paddingLeft: 0 }}>
 										<i
@@ -68,9 +94,9 @@ export default class TaskTop3 extends Component {
 											}}
 										/>
 									</button>
-								</div>		
+								</div>
 							</div>
-				
+					
 							<div class="row">
 								<div className="col-lg-12">
 									<strong>Tagy: </strong>
@@ -161,7 +187,7 @@ export default class TaskTop3 extends Component {
 								</div>
 							</div>
 							<label class="">Popis</label>
-							<textarea class="form-control" rows="2" />
+							<textarea class="form-control" rows="1" />
 
 							<Subtasks />
 							<Items />

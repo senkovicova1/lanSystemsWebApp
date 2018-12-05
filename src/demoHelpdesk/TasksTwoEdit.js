@@ -27,18 +27,69 @@ export default class TasksTwoEdit extends Component {
 		];
 
 		const selectStyle = {
-			control: styles => ({ ...styles, backgroundColor: 'white' }),
+			control: base => ({
+				...base,
+				minHeight: 30,
+				backgroundColor: 'white',
+			}),
+			dropdownIndicator: base => ({
+				...base,
+				padding: 4,
+			}),
+			clearIndicator: base => ({
+				...base,
+				padding: 4,
+			}),
+			multiValue: base => ({
+				...base,
+				backgroundColor: 'white',
+			}),
+			valueContainer: base => ({
+				...base,
+				padding: '0px 6px',
+			}),
+			input: base => ({
+				...base,
+				margin: 0,
+				padding: 0,
+				backgroundColor: 'white',
+			}),
 		};
 		return (
 			<div>
 				<div className="row" style={{}}>
 					<div className="col-lg-12">
 						<div class="card-box" style={{ maxWidth: 1284, margin: 'auto', background: '#F9F9F9' }}>
-							<div class="row">
-								<div className="col-lg-12">
-									<h1># 142 Nefunguje klavesnica</h1>
-									<hr />
+						<div class="d-flex flex-row">
+								<div class="p-2 align-self-center" style={{}}>
+									{' '}
+									<button type="button" class="btn btn-link waves-effect" style={{ paddingLeft: 0 }}>
+										<i
+											class="fas fa-arrow-left"
+											style={{
+												color: '#4a81d4',
+												fontSize: '1.2em',
+											}}
+										/>
+									</button>
 								</div>
+								<div class="p-2">
+									<h1># 143 Nefunguje klavesnica</h1>
+								</div>
+								<div class="ml-auto p-2 align-self-center">
+									{' '}
+									<button type="button" class="btn btn-link waves-effect">
+										<i
+											class="fas fa-print"
+											style={{
+												color: '#4a81d4',
+												fontSize: '1.2em',
+											}}
+										/>
+									</button>
+								</div>
+							</div>
+							<div class="row">
 								<div className="col-lg-12">
 									<strong>Tagy: </strong>
 									<span class="label label-info m-r-5">Mimo pracovných hodín</span>
