@@ -66,13 +66,16 @@ export default class Sidebar extends Component {
 									Riešiť
 								</Link>
 								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
-									Všetky úlohy
+								    Odložené
 								</Link>
 								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
-									Messages
+									Zatvorené
 								</Link>
 								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
-									Alerts
+									Zadané
+								</Link>
+								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+									Opakujúce
 								</Link>
 							</li>
 						</ul>

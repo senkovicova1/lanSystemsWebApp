@@ -171,13 +171,13 @@ export default class TaskTop3 extends Component {
 												</div>
 											</div>
 											<div class="form-group m-b-10 row">
-												<label className="col-4 col-form-label">Pausal</label>
+												<label className="col-4 col-form-label">Hodiny</label>
 												<div className="col-8">
 													<Select options={statuses} styles={selectStyle} />
 												</div>
 											</div>
 											<div class="form-group m-b-10 row">
-												<label className="col-4 col-form-label">Mimo pracovných hodín</label>
+												<label className="col-4 col-form-label">Po pracovnej dobe</label>
 												<div className="col-8">
 													<Select options={statuses} styles={selectStyle} />
 												</div>

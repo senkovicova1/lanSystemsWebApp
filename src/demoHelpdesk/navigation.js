@@ -8,6 +8,7 @@ import TaskTop from './TaskTop';
 import TaskTop2 from './TaskTop2';
 import TaskTop3 from './TaskTop3';
 import TaskTop4 from './TaskTop4';
+import TaskTopChiptask from './TaskTopChiptask';
 import TaskSideLeft2 from './TaskSideLeft2';
 import TaskSide from './TaskSide';
 import TaskSide2 from './TaskSide2';
@@ -41,6 +42,7 @@ export default class Navigation extends Component {
 					<Route exact path="/demoHelpdesk/taskTop2" component={TaskTop2} />
 					<Route exact path="/demoHelpdesk/taskTop3" component={TaskTop3} />
 					<Route exact path="/demoHelpdesk/taskTop4" component={TaskTop4} />
+					<Route exact path="/demoHelpdesk/TaskTopChiptask" component={TaskTopChiptask} />
 					<Route exact path="/demoHelpdesk/taskSide" component={TaskSide} />
 					<Route exact path="/demoHelpdesk/taskSide2" component={TaskSide2} />
 					<Route exact path="/demoHelpdesk/taskSide3" component={TaskSide3} />

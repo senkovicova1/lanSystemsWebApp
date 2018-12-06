@@ -54,13 +54,16 @@ export default class TaskSideLeft extends Component {
 										<span class="label label-success m-r-5">Telefonovať</span>
 									</div>
 									<div class="form-group m-b-10">
-									<label class="">Popis</label>
-									<textarea class="form-control" rows="2" />
-									</div>
-									<div class="form-group m-b-10">
 										<label>Status</label>
 										<Select options={statuses} styles={selectStyle} />
 									</div>
+									<div class="form-group m-b-10">
+										<label class="">Popis</label>
+										<textarea class="form-control" rows="2" />
+									</div>
+									
+									<Subtasks />
+
 									<div class="form-group m-b-10">
 										<label>Projekt</label>
 										<Select options={statuses} styles={selectStyle} />
@@ -89,13 +92,11 @@ export default class TaskSideLeft extends Component {
 										<label>Opakovanie </label>
 										<Select options={statuses} styles={selectStyle} />
 									</div>
-									<Subtasks />
 									<Items />
 								</div>
 							</div>
 							<div className="col-lg-8">
 								<div class="card-box">
-							
 									<Comments />
 								</div>
 							</div>

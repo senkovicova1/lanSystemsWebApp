@@ -8,20 +8,20 @@ export default class Comments extends Component {
 		return (
 			<div class="row">
 				<div class="col-sm-12">
-					<ul class="nav nav-tabs tabs" style={{ boxShadow: 'none', padding: 0 }}>
-						<li class="nav-item tab">
-							<a href="#home-2" data-toggle="tab" aria-expanded="false" class="nav-link active show">
+					<ul class="nav nav-tabs tabs" style={{ boxShadow: 'none', padding: 0, background: 'none' }}>
+						<li class="nav-item tab" style={{ background: 'none'}} >
+							<a href="#home-2" data-toggle="tab" aria-expanded="false" class="nav-link active show" style={{ background: 'none' }}>
 								Add comment
 							</a>
 						</li>
-						<li class="nav-item tab">
+						<li class="nav-item tab" style={{ background: 'none'}}>
 							<a href="#profile-2" data-toggle="tab" aria-expanded="true" class="nav-link">
 								Add mail
 							</a>
 						</li>
 					</ul>
 
-					<div class="tab-content" style={{ boxShadow: 'none', padding: 0 }}>
+					<div class="tab-content" style={{ boxShadow: 'none', padding: 0, background: 'none' }}>
 						<div class="tab-pane active" id="home-2">
 							<textarea class="form-control m-b-10" rows="2" />
 							<div class="checkbox form-check-inline" style={{ marginLeft:20 }}>
@@ -35,11 +35,8 @@ export default class Comments extends Component {
 							<button class="btn btn-success waves-effect waves-light btn-sm">Send</button>
 						</div>
 					</div>
-
-					<hr />
-					<div class="">
-
-						<div class="media m-b-30">
+					<div class="" style={{borderTop:"1px solid rgba(54, 64, 74, 0.05)", borderBottom:"1px solid rgba(54, 64, 74, 0.05)"}}>
+						<div class="media m-b-30 m-t-30">
 							<img
 								class="d-flex mr-3 rounded-circle thumb-sm"
 								src={avatar}
