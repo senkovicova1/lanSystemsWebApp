@@ -49,10 +49,10 @@ export default class TaskListContainer extends Component {
 							<div class="d-flex flex-row align-items-center">
 								<div className="p2" style={{ marginLeft: 10 }}>
 									<button
-										class="btn btn-success waves-effect waves-light btn-sm"
+										class="btn btn-primary waves-effect waves-light btn-sm"
 										onClick={() => this.setState({ filterView: !this.state.filterView })}
 									>
-										Filter
+									<i class="fa fa-filter"></i>
 									</button>
 								</div>
 								<div class="p-2">
