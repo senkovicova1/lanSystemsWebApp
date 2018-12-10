@@ -28,28 +28,19 @@ export default class Sidebar extends Component {
 			<div className="left side-menu">
 				<div className="sidebar-inner slimscrollleft">
 					<div id="sidebar-menu">
-					<li className="menu-title" style={{ paddingBottom:'0px !important' }} >
+						<li className="menu-title" style={{ paddingBottom: '0px !important' }}>
 							Project
 							<span class="pull-right">
 								<i class="fa fa-plus" />
 							</span>
 						</li>
-						<li className="menu-title" style={{ paddingTop:'0px !important' }}>
+						<li className="menu-title" style={{ paddingTop: '0px !important' }}>
 							<button
 								type="button"
 								class="btn btn-outline-secondary btn-rounded waves-effect"
 								style={{ width: 210, textAlign: 'left' }}
 							>
 								<i class="fa fa-folder-open" /> DASHBOARD
-							</button>
-						</li>
-						<li className="menu-title">
-							<button
-								type="button"
-								class="btn btn-outline-secondary btn-rounded waves-effect"
-								style={{ width: 210, textAlign: 'left' }}
-							>
-								<i class="fa fa-plus" /> NEW TASK
 							</button>
 						</li>
 						<hr />
@@ -66,7 +57,7 @@ export default class Sidebar extends Component {
 									Riešiť
 								</Link>
 								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
-								    Odložené
+									Odložené
 								</Link>
 								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
 									Zatvorené

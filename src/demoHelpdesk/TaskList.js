@@ -43,60 +43,88 @@ export default class TaskListContainer extends Component {
 									All Tasks
 								</h4>
 							</div>
-							<div class="col-sm-6" />
 						</div>
-						<div className="row m-t-10 m-b-10">
-							<div class="d-flex flex-row align-items-center">
-								<div className="p2" style={{ marginLeft: 10 }}>
-									<button
-										class="btn btn-primary waves-effect waves-light btn-sm"
-										onClick={() => this.setState({ filterView: !this.state.filterView })}
-									>
-									<i class="fa fa-filter"></i>
+
+						<div class="d-flex flex-row align-items-center">
+						{this.state.filterView && (
+							<div className="p2" style={{}}>
+								<div class="button-list" style={{marginRight:10 }}>
+									<button type="button" class="btn btn-primary btn-xs waves-effect waves-light">
+										Apply
+									</button>
+									<button type="button" class="btn btn-primary waves-effect waves-light btn-xs">
+										Save
+									</button>
+									<button type="button" class="btn btn-primary waves-effect waves-light btn-xs">
+										Delete
 									</button>
 								</div>
-								<div class="p-2">
-									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Search task name" />
-										<div class="input-group-append">
-											<button class="btn btn-white" type="button">
-												<i class="fa fa-search" />
-											</button>
-										</div>
-									</div>
-								</div>
-								<div class="p-2">
-									<Link
-										className=""
-										to={{ pathname: `/demoHelpdesk/TaskListSearch` }}
-										style={{ color: '#1976d2' }}
-									>
-										Global search
-									</Link>
-								</div>
-								<div className="p-2">
-									<div
-										className="checkbox form-check-inline"
-										style={{ marginLeft: 38, marginRight: 30 }}
-									>
-										<input id="checkbox0" type="checkbox" />
-										<label for="checkbox0">NEW</label>
-									</div>
-									<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
-										<input id="checkbox0" type="checkbox" />
-										<label for="checkbox0">OPEN</label>
-									</div>
-									<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
-										<input id="checkbox0" type="checkbox" />
-										<label for="checkbox0">PENDING</label>
-									</div>
-									<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
-										<input id="checkbox0" type="checkbox" />
-										<label for="checkbox0">CLOSED</label>
+							</div>
+						)}
+
+							<div className="p2" style={{}}>
+								<button
+									class="btn btn-primary waves-effect waves-light btn-xs"
+									onClick={() => this.setState({ filterView: !this.state.filterView })}
+								>
+									<i class="fa fa-filter" />
+								</button>
+							</div>
+							<div class="p-2">
+								<div class="input-group">
+									<input
+										type="text"
+										class="form-control"
+										placeholder="Search task name"
+										style={{ width: 200 }}
+									/>
+									<div class="input-group-append">
+										<button class="btn btn-white" type="button">
+											<i class="fa fa-search" />
+										</button>
 									</div>
 								</div>
 							</div>
-
+							<div class="p-2">
+								<Link
+									className=""
+									to={{ pathname: `/demoHelpdesk/TaskListSearch` }}
+									style={{ color: '#1976d2' }}
+								>
+									Global search
+								</Link>
+							</div>
+							<div class="p-2 align-items-center">
+								<button type="button" class="btn btn-primary btn-xs waves-effect waves-light">
+									<i class="mdi mdi-close" /> Filtrovanie zapnuté
+								</button>
+							</div>
+							<div class="p-2 align-items-center">
+								<p style={{ marginBottom: 0, marginTop: 5 }}>Počet taskov: 10 (0,47 sekúnd)</p>
+							</div>
+							{/* 
+										<div className="p-2">
+											<div
+												className="checkbox form-check-inline"
+												style={{ marginLeft: 38, marginRight: 30 }}
+											>
+												<input id="checkbox0" type="checkbox" />
+												<label for="checkbox0">NEW</label>
+											</div>
+											<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
+												<input id="checkbox0" type="checkbox" />
+												<label for="checkbox0">OPEN</label>
+											</div>
+											<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
+												<input id="checkbox0" type="checkbox" />
+												<label for="checkbox0">PENDING</label>
+											</div>
+											<div className="checkbox form-check-inline" style={{ marginRight: 30 }}>
+												<input id="checkbox0" type="checkbox" />
+												<label for="checkbox0">CLOSED</label>
+											</div>
+										</div>
+										*/}
 							<div class="p-2 ml-auto">
 								<div class="btn-group btn-group-toggle" data-toggle="buttons">
 									<label
@@ -149,11 +177,10 @@ export default class TaskListContainer extends Component {
 										<i class="fa fa-columns" />
 									</label>
 								</div>
-							</div>						
+							</div>
 						</div>
-						<p style={{color:"#808080",fontSize:"12px", marginTop:"-10px"}}>Počet taskov: 10 (0,47 sekúnd)</p>
 					</div>
-			
+
 					<div class="row m-0">
 						{this.state.filterView && (
 							<div className="col-xl-3">

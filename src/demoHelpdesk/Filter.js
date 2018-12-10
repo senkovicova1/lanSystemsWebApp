@@ -51,13 +51,7 @@ export default class Filter extends Component {
 			}),
 		};
 		return (
-			<div className="card" style={{ height: '100%', background: 'white' }}>
-				<div class="button-list" style={{ margin: 10 }} >
-					<button type="button" class="btn btn-primary waves-effect waves-light btn-sm">Apply</button>
-					<button type="button" class="btn btn-primary waves-effect waves-light btn-sm">Save</button>
-					<button type="button" class="btn btn-primary waves-effect waves-light btn-sm">Delete</button>
-					<button type="button" class="btn btn-primary waves-effect waves-light btn-sm">Reset</button>
-				</div>
+			<div className="card" style={{ height: '100%', background: 'white' }}>			
 				<div class="form-group" style={{ margin: 10 }} >
 					<label>Status</label>
 					<Select options={statuses} styles={selectStyle} />
