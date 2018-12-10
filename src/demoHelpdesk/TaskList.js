@@ -149,10 +149,11 @@ export default class TaskListContainer extends Component {
 										<i class="fa fa-columns" />
 									</label>
 								</div>
-							</div>
+							</div>						
 						</div>
+						<p style={{color:"#808080",fontSize:"12px", marginTop:"-10px"}}>Počet taskov: 10 (0,47 sekúnd)</p>
 					</div>
-
+			
 					<div class="row m-0">
 						{this.state.filterView && (
 							<div className="col-xl-3">

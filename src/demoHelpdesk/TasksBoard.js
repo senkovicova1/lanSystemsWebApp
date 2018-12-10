@@ -15,7 +15,7 @@ export default class TasksBoard extends Component {
 		return (
 			<div className="row">
 				<div className="col-lg-3">
-					<div className="task-box">
+					<div className="task-box" style={{ marginTop: '0' }}>
 						<div className="task-box-heading" style={{ backgroundColor: '#1976d2' }}>
 							<h4 className="text-white header-title m-t-0">New</h4>
 						</div>
@@ -61,7 +61,7 @@ export default class TasksBoard extends Component {
 				</div>
 
 				<div className="col-lg-3">
-					<div className="task-box">
+					<div className="task-box" style={{ marginTop: '0' }}>
 						<div className="task-box-heading" style={{ backgroundColor: '#32CD32' }}>
 							<h4 className="text-white header-title m-t-0">Open</h4>
 						</div>
@@ -106,7 +106,7 @@ export default class TasksBoard extends Component {
 				</div>
 
 				<div className="col-lg-3">
-					<div className="task-box">
+					<div className="task-box" style={{ marginTop: '0' }}>
 						<div className="task-box-heading" style={{ backgroundColor: '#F5A623' }}>
 							<h4 className="text-white header-title m-t-0">Pending</h4>
 						</div>
@@ -151,7 +151,7 @@ export default class TasksBoard extends Component {
 				</div>
 
 				<div className="col-lg-3">
-					<div className="task-box">
+					<div className="task-box" style={{ marginTop: '0' }}>
 						<div className="task-box-heading" style={{ backgroundColor: '#A9A9A9' }}>
 							<h4 className="text-white header-title m-t-0">Closed</h4>
 						</div>
