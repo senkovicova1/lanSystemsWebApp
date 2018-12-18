@@ -109,7 +109,7 @@ export default class TaskTop3 extends Component {
 											<div class="form-group m-b-10 row">
 												<label className="col-4 col-form-label">Status</label>
 												<div className="col-8">
-													<Select options={statuses} styles={selectStyle} />
+													<Select options={statuses} styles={selectStyle} isMulti/>
 												</div>
 											</div>
 											<div class="form-group m-b-10 row">
