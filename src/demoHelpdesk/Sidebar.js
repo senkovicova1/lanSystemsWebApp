@@ -40,14 +40,14 @@ export default class Sidebar extends Component {
 								class="btn btn-outline-secondary btn-rounded waves-effect"
 								style={{ width: 210, textAlign: 'left' }}
 							>
-								<i class="fa fa-folder-open" /> DASHBOARD
+								<i class="fa fa-folder-open" /> ALL PROJECTS
 							</button>
 						</li>
 						<hr />
 						<li className="menu-title">
 							FILTERS
 							<span class="pull-right">
-								<i class="fa fa-plus" />
+								EDIT
 							</span>
 						</li>
 
@@ -71,6 +71,7 @@ export default class Sidebar extends Component {
 							</li>
 						</ul>
 						<hr />
+						{/* 
 						<li className="menu-title">
 							Vykazy
 							<span class="pull-right">
@@ -102,7 +103,7 @@ export default class Sidebar extends Component {
 							</li>
 						</ul>
 						<hr />
-						{/* 
+				
 						<ul className="sidebar-menu">
 							<li className="menu-title">
 								<i class="fa fa-cog" /> Settings
