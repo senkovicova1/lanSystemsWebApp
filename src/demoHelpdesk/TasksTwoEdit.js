@@ -100,17 +100,24 @@ export default class TasksTwoEdit extends Component {
 			<div>
 				<div className="row" style={{}}>
 					<div className="col-lg-12">
-						<div class="card-box p-t-0" style={{ maxWidth: 1284, margin: 'auto', background: '#F9F9F9', borderRadius: 0, padding: "none" }}>
+						<div class="card-box p-t-0" style={{ maxWidth: 1284, background: '#F9F9F9', borderRadius: 0, padding: "none" }}>
 							<div class="d-flex flex-row">
 								<div class="align-self-center" style={{}}>
 
 									<h1># 143 Nefunguje klavesnica</h1>
 
 								</div>
-
-								<div class="ml-auto  align-self-center">
+								<div class="ml-auto p-2 align-self-center">
 									{' '}
-								
+									<button type="button" class="btn btn-link waves-effect">
+										<i
+											class="fas fa-trash"
+											style={{
+												color: '#4a81d4',
+												fontSize: '1.2em',
+											}}
+										/>
+									</button>
 								</div>
 							</div>
 							<div class="row">
@@ -119,39 +126,39 @@ export default class TasksTwoEdit extends Component {
 							<div class="row">
 								<div className="col-lg-12">
 									<strong>Tagy: </strong>
-									<span class="label label-info m-r-5">Mimo pracovných hodín</span>
+									<span class="label label-info m-r-5">Po pracovných hodínach</span>
 									<span class="label label-success m-r-5">Telefonovať</span>
 								</div>
 								<div className="col-lg-12 p-0">
 									<div className="col-lg-6">
 										<div class="m-t-20">
 											<div class="form-group m-b-0 row">
-												<label className="col-4 col-form-label">Status</label>
-												<div className="col-8">
+												<label className="col-5 col-form-label">Status</label>
+												<div className="col-7">
 													<Select options={statuses} styles={selectStyle} />
 												</div>
 											</div>
 											<div class="form-group m-b-0 row">
-												<label className="col-4 col-form-label">Projekt</label>
-												<div className="col-8">
+												<label className="col-5 col-form-label">Projekt</label>
+												<div className="col-7">
 													<Select options={projects} styles={selectStyle} />
 												</div>
 											</div>
 											<div class="form-group m-b-0 row">
-												<label className="col-4 col-form-label">Zadal</label>
-												<div className="col-8">
+												<label className="col-5 col-form-label">Zadal</label>
+												<div className="col-7">
 													<Select options={users} styles={selectStyle} />
 												</div>
 											</div>
 											<div class="form-group m-b-0 row">
-												<label className="col-4 col-form-label">Firma</label>
-												<div className="col-8">
+												<label className="col-5 col-form-label">Firma</label>
+												<div className="col-7">
 													<Select options={companies} styles={selectStyle} />
 												</div>
 											</div>
 											<div class="form-group m-b-0 row">
-												<label className="col-4 col-form-label">Riesi</label>
-												<div className="col-8">
+												<label className="col-5 col-form-label">Riesi</label>
+												<div className="col-7">
 													<Select options={users} styles={selectStyle} />
 												</div>
 											</div>
@@ -160,33 +167,33 @@ export default class TasksTwoEdit extends Component {
 									<div className="col-lg-6">
 										<div class="m-t-20">
 											<div class="form-group m-b-0 row">
-												<label className="col-4 col-form-label">Pripomienka</label>
-												<div className="col-8">
+												<label className="col-5 col-form-label">Pripomienka</label>
+												<div className="col-7">
 													<Select options={times} styles={selectStyle} />
 												</div>
 											</div>
 											<div class="form-group m-b-0 row">
-												<label className="col-4 col-form-label">Deadline</label>
-												<div className="col-8">
+												<label className="col-5 col-form-label">Deadline</label>
+												<div className="col-7">
 													<Select options={times} styles={selectStyle} />
 												</div>
 											</div>
 											<div class="form-group m-b-0 row">
-												<label className="col-4 col-form-label">Opakovanie</label>
-												<div className="col-8">
+												<label className="col-5 col-form-label">Opakovanie</label>
+												<div className="col-7">
 													<Select options={repeat} styles={selectStyle} />
 												</div>
 											</div>
 
 											<div class="form-group m-b-0 row">
-												<label className="col-4 col-form-label">Typ</label>
-												<div className="col-8">
+												<label className="col-5 col-form-label">Typ</label>
+												<div className="col-7">
 													<Select options={types} styles={selectStyle} />
 												</div>
 											</div>
 											<div class="form-group m-b-0 row">
-												<label className="col-4 col-form-label">Mimo pracovných hodín</label>
-												<div className="col-8">
+												<label className="col-5 col-form-label">Mimo pracovných hodín</label>
+												<div className="col-7">
 													<Select options={sla} styles={selectStyle} />
 												</div>
 											</div>
@@ -194,8 +201,8 @@ export default class TasksTwoEdit extends Component {
 									</div>
 								</div>
 							</div>
-							<label class="">Popis</label>
-							<input type="text" id="simpleinput" class="form-control"/>
+							<label class="m-t-5">Popis</label>
+							<input type="text" id="simpleinput" class="form-control" />
 
 							<Subtasks />
 							<Items />

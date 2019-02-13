@@ -25,6 +25,7 @@ export default class Items extends Component {
 							<table class="table table-centered table-borderless table-hover mb-0">
 								<thead class="thead-light">
 									<tr>
+										<th style={tableStyle} width="5%">#</th>
 										<th style={tableStyle} width="70%">Material</th>
 										<th style={tableStyle}>Pocet</th>
 										<th style={tableStyle}>Nakup/ks</th>
@@ -35,6 +36,7 @@ export default class Items extends Component {
 								</thead>
 								<tbody>
 									<tr>
+										<th style={tableStyle} width="5%">1</th>
 										<td style={tableStyle}>LCD</td>
 										<td style={tableStyle}>1</td>
 										<td style={tableStyle}>300</td>
@@ -47,6 +49,7 @@ export default class Items extends Component {
 										</td>
 									</tr>
 									<tr>
+										<th style={tableStyle} width="5%"></th>
 										<td style={tableStyle}>
 											<input
 												type="text"
@@ -106,7 +109,7 @@ export default class Items extends Component {
 								<p class="text-right m-b-0">
 									<b>Sub-total:</b> 2930.00
 								</p>
-					
+
 							</div>
 						</div>
 					</div>

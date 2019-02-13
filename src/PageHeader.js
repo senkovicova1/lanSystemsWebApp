@@ -46,7 +46,7 @@ export default class PageHeader extends Component {
 				</div>
 
 				<div class="d-flex bd-highlight">
-				{/*
+					{/*
 					<div class="p-2 align-self-center">
 						<div class="input-group" style={{ width: 300, height: 30 }}>
 							<input
@@ -64,9 +64,9 @@ export default class PageHeader extends Component {
 					</div>
 					 */}
 					<div class="p-2 align-self-center">
-						<Link className="" to={{ pathname: `/demoHelpdesk/TaskListSearch` }} style={{ color: 'white' }}>
-							<i class="fa fa-plus mr-1" />
-							  Task
+						<Link className="" to={{ pathname: `/demoHelpdesk/reports` }} style={{ color: 'white' }}>
+							<i class="fa fa-file-pdf mr-1" />
+							Vykazy
 						</Link>
 					</div>
 					<div class="ml-auto p-2 align-self-center">

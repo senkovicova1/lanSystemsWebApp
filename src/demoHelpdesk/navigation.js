@@ -29,6 +29,8 @@ import UnitsList from './settings/UnitsList';
 import UnitEdit from './settings/UnitEdit';
 import StatusesList from './settings/StatusesList';
 import StatusEdit from './settings/StatusEdit';
+import Reports from './Reports';
+
 
 export default class Navigation extends Component {
 	render() {
@@ -63,6 +65,7 @@ export default class Navigation extends Component {
 					<Route exact path="/demoHelpdesk/settings/typeEdit" component={TypeEdit} />
 					<Route exact path="/demoHelpdesk/settings/units" component={UnitsList} />
 					<Route exact path="/demoHelpdesk/settings/unitEdit" component={UnitEdit} />
+					<Route exact path="/demoHelpdesk/Reports" component={Reports} />
 				</div>
 			</div>
 		);

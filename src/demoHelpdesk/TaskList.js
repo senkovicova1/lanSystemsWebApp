@@ -39,7 +39,7 @@ export default class TaskListContainer extends Component {
 				<div className="content" style={{ paddingTop: 0 }}>
 
 					<div className="container-fluid">
-						{/* 
+						{/*
 						<div className="row">
 							<div className="col-sm-6">
 								<h4 className="page-title" style={{ fontSize: 24 }}>
@@ -98,43 +98,55 @@ export default class TaskListContainer extends Component {
 									Global search
 								</Link>
 							</div>
-							<div class="p-2">
-								<Link
-									className=""
-									to={{ pathname: `/demoHelpdesk/TaskListSearch` }}
-									style={{ color: '#1976d2' }}
-								>
-									COPY
-								</Link>
+							<div class="ml-auto p-2 align-self-center">
+								{' '}
+								<button type="button" class="btn btn-link waves-effect">
+									<i
+										class="fas fa-copy"
+										style={{
+											color: '#4a81d4',
+											fontSize: '1.2em',
+										}}
+									/>
+									<span style={{
+										color: '#4a81d4',
+										fontSize: '1.2em',
+									}}> COPY</span>
+								</button>
 							</div>
-							<div class="p-2">
-								<Link
-									className=""
-									to={{ pathname: `/demoHelpdesk/TaskListSearch` }}
-									style={{ color: '#1976d2' }}
-								>
-									DELETE
-								</Link>
+							<div class="">
+								{' '}
+								<button type="button" class="btn btn-link waves-effect">
+									<i
+										class="fas fa-print"
+										style={{
+											color: '#4a81d4',
+											fontSize: '1.2em',
+										}}
+									/>
+									<span style={{
+										color: '#4a81d4',
+										fontSize: '1.2em',
+									}}> SERVISNY LIST</span>
+								</button>
 							</div>
-							<div class="p-2">
-								<Link
-									className=""
-									to={{ pathname: `/demoHelpdesk/TaskListSearch` }}
-									style={{ color: '#1976d2' }}
-								>
-									PRINT SERVISNY LIST
-								</Link>
+							<div class="">
+								{' '}
+								<button type="button" class="btn btn-link waves-effect">
+									<i
+										class="fas fa-print"
+										style={{
+											color: '#4a81d4',
+											fontSize: '1.2em',
+										}}
+									/>
+									<span style={{
+										color: '#4a81d4',
+										fontSize: '1.2em',
+									}}> CENOVA PONUKA</span>
+								</button>
 							</div>
-							<div class="p-2">
-								<Link
-									className=""
-									to={{ pathname: `/demoHelpdesk/TaskListSearch` }}
-									style={{ color: '#1976d2' }}
-								>
-									PRINT CENOVA PONUKA
-								</Link>
-							</div>
-							<div class="p-2 ml-auto">
+							<div class="">
 								<div class="btn-group btn-group-toggle" data-toggle="buttons">
 									<label
 										class={
