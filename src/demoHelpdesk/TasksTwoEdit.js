@@ -123,8 +123,12 @@ export default class TasksTwoEdit extends Component {
 							<div class="row">
 
 							</div>
-							<div class="row">
-								<div className="col-lg-12">
+							<div class="row" >
+								<div className="col-lg-12 p-10 d-flex flex-row">
+									<p className="text-muted">Created by Branislav Šusta at 15:12 15.2.2019</p>
+									<p className="text-muted ml-auto">Status changed at 15:12 15.2.2019</p>
+								</div>
+								<div className="col-lg-12 p-10">
 									<strong>Tagy: </strong>
 									<span class="label label-info m-r-5">Po pracovných hodínach</span>
 									<span class="label label-success m-r-5">Telefonovať</span>
@@ -173,7 +177,7 @@ export default class TasksTwoEdit extends Component {
 												</div>
 											</div>
 											<div class="form-group m-b-0 row">
-												<label className="col-5 col-form-label">Deadline</label>
+												<label className="col-5 col-form-label">Pripomienka</label>
 												<div className="col-7">
 													<Select options={times} styles={selectStyle} />
 												</div>

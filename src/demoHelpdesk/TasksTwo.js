@@ -25,8 +25,6 @@ export default class TasksRow extends Component {
 			<div>
 				<div className="row p-0" style={{ background: "white" }}>
 					<div className="col-lg-4 p-0">
-
-
 						<ul className="sortable-list taskList list-unstyled " id="upcoming" >
 							<li className="" style={{ border: "none", borderBottom: "1px solid #ddd", borderRadius: 0 }}>
 								<div className="checkbox checkbox-primary m-b-0">
