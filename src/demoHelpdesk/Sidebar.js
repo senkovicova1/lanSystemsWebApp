@@ -105,11 +105,13 @@ export default class Sidebar extends Component {
 								</NavLink>
 							</NavItem>
 						</Nav>
-						<TabContent activeTab={this.state.activeTab}>
+						<TabContent activeTab={this.state.activeTab} style={{ padding: 20 }}>
 							<TabPane tabId="1">
 								<Nav vertical>
 									<NavItem>
-										<NavLink href="#">Riesit</NavLink>
+										<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
+											Riešiť
+								</Link>
 									</NavItem>
 									<NavItem>
 										<NavLink href="#">Odlozene</NavLink>
@@ -124,6 +126,15 @@ export default class Sidebar extends Component {
 							</TabPane>
 							<TabPane tabId="2">
 								<Nav vertical>
+								<NavItem>
+								<div class="btn-group mb-2">
+                                                <button type="button" class="btn btn-light btn-xs">Apply</button>
+                                                <button type="button" class="btn btn-light btn-xs">Save</button>
+                                                <button type="button" class="btn btn-light btn-xs">Reset</button>
+												<button type="button" class="btn btn-light btn-xs">Delete</button>
+                                            </div>
+									</NavItem>
+
 									<NavItem>
 										<div class="form-group mb-3">
 											<label for="example-input-small">Status</label>
@@ -148,7 +159,26 @@ export default class Sidebar extends Component {
 											<Select options={statuses} styles={selectStyle} />
 										</div>
 									</NavItem>
+									<NavItem>
+										<div class="form-group mb-3">
+											<label for="example-input-small">Status date</label>
+											<div class="row">
+												<div class="col-sm-6">
+													<input type="text" id="datetime-datepicker" class="form-control form-control-sm active" placeholder="Od" readonly="readonly" />
+												</div>
 
+												<div class="col-sm-6">
+													<input type="text" id="datetime-datepicker" class="form-control form-control-sm active" placeholder="Do" readonly="readonly" />
+												</div>
+											</div>
+										</div>
+									</NavItem>
+									<NavItem>
+										<div class="form-group mb-3">
+											<label for="example-input-small">Typ práce</label>
+											<Select options={statuses} styles={selectStyle} />
+										</div>
+									</NavItem>
 								</Nav>
 							</TabPane>
 						</TabContent>
