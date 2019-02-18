@@ -31,7 +31,6 @@ export default class TasksRow extends Component {
 									<input type="checkbox" aria-label="Single checkbox Two" />
 									<label>#142 Nefunguje klavesnica</label>
 								</div>
-
 								<div className="m-t-5">
 									<p className="pull-right text-muted m-b-0 font-13">
 										<span class="label label-info">NEW</span>

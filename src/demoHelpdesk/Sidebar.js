@@ -1,28 +1,72 @@
 import React, { Component } from 'react';
-import { Button, Modal, Badge, InputGroup, Glyphicon, FormControl, ListGroupItem } from 'react-bootstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
+import classnames from 'classnames';
 
 export default class Sidebar extends Component {
 	constructor(props) {
 		super(props);
+		this.toggle = this.toggle.bind(this);
 		this.state = {
 			openAddStatusModal: false,
 			openAddTaskModal: false,
 			isColumn: false,
 			search: '',
+			activeTab: '1',
 		};
 	}
+
+	toggle(tab) {
+		if (this.state.activeTab !== tab) {
+			this.setState({
+				activeTab: tab
+			});
+		}
+	}
+
 	render() {
 		const projects = [
 			{ value: 'hotline@lansystems.sk', label: 'hotline@lansystems.sk' },
 			{ value: 'Mertel CRM', label: 'Mertel CRM' },
 			{ value: 'All', label: 'All' },
 		];
-
+		const statuses = [
+			{ value: 'new', label: 'New' },
+			{ value: 'open', label: 'Open' },
+			{ value: 'open', label: 'Pending' },
+			{ value: 'pending', label: 'Closed' },
+		];
 		const selectStyle = {
-			control: styles => ({ ...styles, backgroundColor: 'white', maxHeight: 30 }),
+			control: base => ({
+				...base,
+				minHeight: 30,
+				backgroundColor: 'white',
+			}),
+			dropdownIndicator: base => ({
+				...base,
+				padding: 4,
+			}),
+			clearIndicator: base => ({
+				...base,
+				padding: 4,
+			}),
+			multiValue: base => ({
+				...base,
+				backgroundColor: 'white',
+			}),
+			valueContainer: base => ({
+				...base,
+				padding: '0px 6px',
+			}),
+			input: base => ({
+				...base,
+				margin: 0,
+				padding: 0,
+				backgroundColor: 'white',
+			}),
 		};
+
 
 		return (
 			<div className="left side-menu">
@@ -43,34 +87,73 @@ export default class Sidebar extends Component {
 								<i class="fa fa-folder-open" /> ALL PROJECTS
 							</button>
 						</li>
-						<hr />
-						<li className="menu-title">
-							FILTERS
-							<span class="pull-right">
-								EDIT
-							</span>
-						</li>
+						<Nav tabs>
+							<NavItem>
+								<NavLink
+									className={classnames({ active: this.state.activeTab === '1' })}
+									onClick={() => { this.toggle('1'); }}
+								>
+									FILTERS
+								</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink
+									className={classnames({ active: this.state.activeTab === '2' })}
+									onClick={() => { this.toggle('2'); }}
+								>
+									EDIT
+								</NavLink>
+							</NavItem>
+						</Nav>
+						<TabContent activeTab={this.state.activeTab}>
+							<TabPane tabId="1">
+								<Nav vertical>
+									<NavItem>
+										<NavLink href="#">Riesit</NavLink>
+									</NavItem>
+									<NavItem>
+										<NavLink href="#">Odlozene</NavLink>
+									</NavItem>
+									<NavItem>
+										<NavLink href="#">Zadane</NavLink>
+									</NavItem>
+									<NavItem>
+										<NavLink href="#">All task</NavLink>
+									</NavItem>
+								</Nav>
+							</TabPane>
+							<TabPane tabId="2">
+								<Nav vertical>
+									<NavItem>
+										<div class="form-group mb-3">
+											<label for="example-input-small">Status</label>
+											<Select options={statuses} styles={selectStyle} />
+										</div>
+									</NavItem>
+									<NavItem>
+										<div class="form-group mb-3">
+											<label for="example-input-small">Zadal</label>
+											<Select options={statuses} styles={selectStyle} />
+										</div>
+									</NavItem>
+									<NavItem>
+										<div class="form-group mb-3">
+											<label for="example-input-small">Firma</label>
+											<Select options={statuses} styles={selectStyle} />
+										</div>
+									</NavItem>
+									<NavItem>
+										<div class="form-group mb-3">
+											<label for="example-input-small">Riesi</label>
+											<Select options={statuses} styles={selectStyle} />
+										</div>
+									</NavItem>
 
-						<ul className="sidebar-menu">
-							<li>
-								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
-									Riešiť
-								</Link>
-								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
-									Odložené
-								</Link>
-								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
-									Zatvorené
-								</Link>
-								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
-									Zadané
-								</Link>
-								<Link className="" to={{ pathname: `/demoHelpdesk/taskList` }}>
-									Opakujúce
-								</Link>
-							</li>
-						</ul>
-						<hr />
+								</Nav>
+							</TabPane>
+						</TabContent>
+
+
 						{/* 
 						<li className="menu-title">
 							Vykazy
@@ -118,7 +201,7 @@ export default class Sidebar extends Component {
 						*/}
 					</div>
 				</div>
-			</div>
+			</div >
 		);
 	}
 }
