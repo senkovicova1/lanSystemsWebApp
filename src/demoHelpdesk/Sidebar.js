@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import classnames from 'classnames';
@@ -24,6 +24,7 @@ export default class Sidebar extends Component {
 			});
 		}
 	}
+
 
 	render() {
 		const projects = [
@@ -72,21 +73,30 @@ export default class Sidebar extends Component {
 			<div className="left side-menu">
 				<div className="sidebar-inner slimscrollleft">
 					<div id="sidebar-menu">
+
 						<li className="menu-title" style={{ paddingBottom: '0px !important' }}>
 							Project
 							<span class="pull-right">
 								<i class="fa fa-plus" />
 							</span>
 						</li>
-						<li className="menu-title" style={{ paddingTop: '0px !important' }}>
-							<button
-								type="button"
-								class="btn btn-outline-secondary btn-rounded waves-effect"
-								style={{ width: 210, textAlign: 'left' }}
-							>
-								<i class="fa fa-folder-open" /> ALL PROJECTS
+						<UncontrolledDropdown size="sm" style={{ paddingTop: '0px !important', paddingLeft:20, backgroundColor:"white" }}>
+							<DropdownToggle caret style={{backgroundColor:"white", border:"none", padding:0}}>
+								<button
+									type="button"
+									class="btn btn-outline-secondary btn-rounded waves-effect"
+									style={{ textAlign: 'left', width: 200 }}
+								>
+									<i class="fa fa-folder-open" /> ALL PROJECTS
 							</button>
-						</li>
+							</DropdownToggle>
+							<DropdownMenu>
+								<DropdownItem>Cenove ponuky</DropdownItem>
+                                <DropdownItem>hotline@lansystems.sk</DropdownItem>
+								<DropdownItem>Orchestra</DropdownItem>
+							</DropdownMenu>
+						</UncontrolledDropdown>
+
 						<Nav tabs>
 							<NavItem>
 								<NavLink
@@ -126,13 +136,13 @@ export default class Sidebar extends Component {
 							</TabPane>
 							<TabPane tabId="2">
 								<Nav vertical>
-								<NavItem>
-								<div class="btn-group mb-2">
-                                                <button type="button" class="btn btn-light btn-xs">Apply</button>
-                                                <button type="button" class="btn btn-light btn-xs">Save</button>
-                                                <button type="button" class="btn btn-light btn-xs">Reset</button>
-												<button type="button" class="btn btn-light btn-xs">Delete</button>
-                                            </div>
+									<NavItem>
+										<div class="btn-group mb-2">
+											<button type="button" class="btn btn-light btn-xs">Apply</button>
+											<button type="button" class="btn btn-light btn-xs">Save</button>
+											<button type="button" class="btn btn-light btn-xs">Reset</button>
+											<button type="button" class="btn btn-light btn-xs">Delete</button>
+										</div>
 									</NavItem>
 
 									<NavItem>

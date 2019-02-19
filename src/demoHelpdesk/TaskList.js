@@ -98,21 +98,6 @@ export default class TaskListContainer extends Component {
 									Global search
 								</Link>
 							</div>
-							<div class="p-2">
-								<button type="button" class="btn btn-link waves-effect">
-									<i
-										class="fas fa-copy"
-										style={{
-											color: '#4a81d4',
-											fontSize: '1.2em',
-										}}
-									/>
-									<span style={{
-										color: '#4a81d4',
-										fontSize: '1.2em',
-									}}> COPY</span>
-								</button>
-							</div>
 							<div class="ml-auto p-2 align-self-center">
 								{' '}
 								<button type="button" class="btn btn-link waves-effect">
