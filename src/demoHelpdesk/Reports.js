@@ -24,7 +24,59 @@ export default class Reports extends Component {
 				<div className="content" style={{ paddingTop: 0 }}>
 
 					<div className="container-fluid">
+						<div class="d-flex flex-row align-items-center">
 
+
+							<div class="p-2">
+								{' '}
+								<button type="button" class="btn btn-link waves-effect">
+									<i
+										class="fa fa-file-pdf"
+										style={{
+											color: '#4a81d4',
+											fontSize: '1.2em',
+										}}
+									/>
+									<span style={{
+										color: '#4a81d4',
+										fontSize: '1.2em',
+									}}> Export</span>
+								</button>
+							</div>
+							<div class="">
+								{' '}
+								<button type="button" class="btn btn-link waves-effect">
+									<i
+										class="fas fa-print"
+										style={{
+											color: '#4a81d4',
+											fontSize: '1.2em',
+										}}
+									/>
+									<span style={{
+										color: '#4a81d4',
+										fontSize: '1.2em',
+									}}> Print</span>
+								</button>
+							</div>
+							<div class="">
+								{' '}
+								<button type="button" class="btn btn-link waves-effect">
+									<i
+										class="fas fa-sync"
+										style={{
+											color: '#4a81d4',
+											fontSize: '1.2em',
+										}}
+									/>
+									<span style={{
+										color: '#4a81d4',
+										fontSize: '1.2em',
+									}}> Aktualizovať ceny podla cenníka</span>
+								</button>
+							</div>
+
+						</div>
 						<div className="row">
 							<div class="col-md-12">
 								<div class="card-box">
@@ -32,7 +84,7 @@ export default class Reports extends Component {
 
 									<h4>Obdobie: od 1.1.2019 do 31.1.2019</h4>
 									<hr />
-									<h2>Služby</h2>
+									<h3>Služby v rámci paušálu</h3>
 									<div class="table-responsive">
 										<table class="table table-hover mails m-0">
 											<thead>
@@ -151,89 +203,102 @@ export default class Reports extends Component {
 											</tbody>
 										</table>
 
-										<h2>Material</h2>
-										<div class="table-responsive">
-											<table class="table table-hover mails m-0">
-												<thead>
-													<tr>
-														<th>
-															ID
-												<span class="tableArrow">
-																<i class="fa fa-arrow-down" />
-															</span>
-														</th>
-														<th style={{ width: '35%' }}>
-															Name{' '}
-															<span class="tableArrow">
-																<i class="fa fa-arrow-down" />
-															</span>
-														</th>
-														<th>
-															{' '}
-															Cena/Mn.
-															<span class="tableArrow">
-																<i class="fa fa-arrow-down" />
-															</span>
-														</th>
-														<th>
-															Mn.
-															<span class="tableArrow">
-																<i class="fa fa-arrow-down" />
-															</span>
-														</th>
-														<th>
-															Jednotka
-															<span class="tableArrow">
-																<i class="fa fa-arrow-down" />
-															</span>
-														</th>
+										<p className="m-0">Spolu zlava bez DPH: 105 EUR</p>
+										<p className="m-0">Spolu cena bez DPH: 105 EUR</p>
+										<p className="m-0">Spolu cena s DPH: 126 EUR</p>
+										<hr />
+										<h3>Služby nad rámec paušálu</h3>
+										<hr />
+										<h3>Projektové služby </h3>
+										<hr />
+										<h3>Material</h3>
 
-														<th>
-															Zlava
-															<span class="tableArrow">
-																<i class="fa fa-arrow-down" />
-															</span>
-														</th>
-														<th>
-															Spolu
-															<span class="tableArrow">
-																<i class="fa fa-arrow-down" />
-															</span>
-														</th>
-													</tr>
-												</thead>
 
-												<tbody>
-													<tr class="">
-														<td>152</td>
-														<td>
-															{' '}
-															<Link className="" to={{ pathname: `/demoHelpdesk/taskTop3` }} style={{ color: "#1976d2" }}>
-																Tlaciaren
+										<table class="table table-hover mails m-0">
+											<thead>
+												<tr>
+
+													<th>
+														ID
+
+													</th>
+													<th style={{ width: '20%' }}>
+														Name{' '}
+
+													</th>
+
+													<th>
+														{' '}
+														Zadal{' '}
+
+													</th>
+													<th>
+														Riesi{' '}
+
+													</th>
+													<th>
+														Closed{' '}
+
+													</th>
+													<th>
+														Material
+													</th>
+													<th>
+														Mn.
+													</th>
+													<th>
+														Jednotka
+													</th>
+													<th >
+														Cena/Mn.
+													</th>
+													<th>
+														Cena spolu
+													</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												<tr class="">
+													<td>152</td>
+
+													<td>
+														{' '}
+														<Link className="" to={{ pathname: `/demoHelpdesk/taskTop3` }} style={{ color: "#1976d2" }}>
+															Nasadenie novej tlaciarne
 												</Link>
-														</td>
-														<td>10</td>
-														<td>1</td>
-														<td>ks</td>
-														<td>0</td>
-														<td>10</td>
-													</tr>
+													</td>
 
-												</tbody>
-											</table>
-										</div>
+													<td>Janko Mrkvicka</td>
+													<td>Patrik Patoprsty</td>
+													<td>2.10.2018</td>
+													<td>
+														<p className="m-b-0">Tlaciaren</p>
+														<p className="m-b-0">USB Kabel</p>
+													</td>
+													<td>
+														<p className="m-b-0">1</p>
+														<p className="m-b-0">1</p>
+													</td>
+													<td>
+														<p className="m-b-0">ks</p>
+														<p className="m-b-0">ks</p>
+													</td>
+													<td>
+														<p className="m-b-0">100</p>
+														<p className="m-b-0">5</p>
+													</td>
+													<td>
+														<p className="m-b-0">100</p>
+														<p className="m-b-0">5</p>
+													</td>
+												</tr>
 
-										<div class="d-flex justify-content-between">
-											<div class="p-2">
-												<p>Page 1 of 0 ｜ Task number: 0 </p>
-											</div>
-											<div class="p-2">
-												<p>1</p>
-											</div>
-											<div class="p-2">
-												<p>Items per page: 20</p>
-											</div>
-										</div>
+
+											</tbody>
+										</table>
+										<p className="m-0">Spolu cena bez DPH: 105 EUR</p>
+										<p className="m-0">Spolu cena s DPH: 126 EUR</p>
 									</div>
 								</div>
 							</div>
