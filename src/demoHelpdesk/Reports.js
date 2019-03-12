@@ -80,11 +80,11 @@ export default class Reports extends Component {
 						<div className="row">
 							<div class="col-md-12">
 								<div class="card-box">
-									<h1>Výkaz prác pre firmu LAN Systems s.r.o.</h1>
+									<h1>Výkaz prác</h1>
 
-									<h4>Obdobie: od 1.1.2019 do 31.1.2019</h4>
+
 									<hr />
-									<h3>Služby v rámci paušálu</h3>
+									<h3>Služby</h3>
 									<div class="table-responsive">
 										<table class="table table-hover mails m-0">
 											<thead>
@@ -98,6 +98,10 @@ export default class Reports extends Component {
 														Name{' '}
 
 													</th>
+													<th style={{ width: '20%' }}>
+														Typ
+
+													</th>
 
 													<th>
 														{' '}
@@ -109,8 +113,11 @@ export default class Reports extends Component {
 
 													</th>
 													<th>
-														Closed{' '}
+														Status
 
+													</th>
+													<th>
+														Status date
 													</th>
 													<th>
 														Služby
@@ -140,9 +147,10 @@ export default class Reports extends Component {
 															Nasadenie novej tlaciarne
 												</Link>
 													</td>
-
+													<td>Servisný list</td>
 													<td>Janko Mrkvicka</td>
 													<td>Patrik Patoprsty</td>
+													<td>Closed</td>
 													<td>2.10.2018</td>
 													<td>
 														<p className="m-b-0">Instalacia tlaciarne</p>
@@ -174,9 +182,10 @@ export default class Reports extends Component {
 															Nasadenie novej tlaciarne
 												</Link>
 													</td>
-
+													<td>Servisný list</td>
 													<td>Janko Mrkvicka</td>
 													<td>Patrik Patoprsty</td>
+													<td>Closed</td>
 													<td>2.10.2018</td>
 													<td>
 														<p className="m-b-0">Instalacia tlaciarne</p>
@@ -207,10 +216,6 @@ export default class Reports extends Component {
 										<p className="m-0">Spolu cena bez DPH: 105 EUR</p>
 										<p className="m-0">Spolu cena s DPH: 126 EUR</p>
 										<hr />
-										<h3>Služby nad rámec paušálu</h3>
-										<hr />
-										<h3>Projektové služby </h3>
-										<hr />
 										<h3>Material</h3>
 
 
@@ -226,7 +231,7 @@ export default class Reports extends Component {
 														Name{' '}
 
 													</th>
-
+													<td>Typ</td>
 													<th>
 														{' '}
 														Zadal{' '}
@@ -237,7 +242,11 @@ export default class Reports extends Component {
 
 													</th>
 													<th>
-														Closed{' '}
+														Status{' '}
+
+													</th>
+													<th>
+														Status date{' '}
 
 													</th>
 													<th>
@@ -268,9 +277,10 @@ export default class Reports extends Component {
 															Nasadenie novej tlaciarne
 												</Link>
 													</td>
-
+													<td>Servisný list</td>
 													<td>Janko Mrkvicka</td>
 													<td>Patrik Patoprsty</td>
+													<td>Closed</td>
 													<td>2.10.2018</td>
 													<td>
 														<p className="m-b-0">Tlaciaren</p>
